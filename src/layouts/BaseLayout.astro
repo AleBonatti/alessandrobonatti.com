@@ -7,6 +7,7 @@ import { Font } from 'astro:assets';
 import '../styles/global.css';
 import { DEFAULT_LOCALE, LANG_STORAGE_KEY, LOCALES, homePath, type Locale } from '../i18n/locales';
 import { profile } from '../data/profile';
+import { PRODUCTION_SITE, isProductionSite } from '../lib/deploy';
 
 interface Props {
   locale: Locale;
@@ -18,10 +19,13 @@ interface Props {
   noindex?: boolean;
 }
 
-const { locale, title, description, detectLanguage = false, noindex = false } = Astro.props;
+const { locale, title, description, detectLanguage = false } = Astro.props;
 
-// Astro.site comes from `site` in astro.config.mjs; Astro.url is this page's URL.
-const site = Astro.site ?? new URL('https://alessandrobonatti.com');
+// Astro.site comes from `site` in astro.config.mjs (SITE_URL env var); Astro.url is this page's URL.
+const site = Astro.site ?? new URL(PRODUCTION_SITE);
+// Staging builds (e.g. dev.alessandrobonatti.com) stay out of search engines and analytics.
+const production = isProductionSite(site);
+const noindex = Astro.props.noindex === true || !production;
 const canonical = new URL(Astro.url.pathname, site).href;
 const alternates = LOCALES.map((l) => ({ hreflang: l, href: new URL(homePath(l), site).href }));
 const ogLocale: Record<Locale, string> = { en: 'en_US', it: 'it_IT', sv: 'sv_SE' };
@@ -105,20 +109,26 @@ const iubendaConfig = {
       window._iub = _iub;
       _iub.csConfiguration = iubendaConfig;
     </script>
-    <script is:inline src={`https://cs.iubenda.com/autoblocking/${profile.iubenda.autoblockingId}.js`}></script>
+    <script is:inline src={`https://cs.iubenda.com/autoblocking/${profile.iubenda.siteId}.js`}></script>
     <script is:inline src="https://cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
 
-    {/* Google Analytics 4 (held by iubenda autoblocking until consent). */}
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${profile.gaMeasurementId}`}></script>
-    <script is:inline define:vars={{ gaId: profile.gaMeasurementId }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', gaId);
-    </script>
+    {/* Google Analytics 4 (held by iubenda autoblocking until consent). Production only. */}
+    {
+      production && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${profile.gaMeasurementId}`} />
+          <script is:inline define:vars={{ gaId: profile.gaMeasurementId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', gaId);
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <div class="site">

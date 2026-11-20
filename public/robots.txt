@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /print/
-
-Sitemap: https://alessandrobonatti.com/sitemap-index.xml

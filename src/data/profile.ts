@@ -11,7 +11,7 @@ interface Profile {
   github: { url: string; label: string };
   social: ReadonlyArray<{ id: 'linkedin' | 'github' | 'whatsapp' | 'telegram'; label: string; url: string }>;
   partnerUrl: string;
-  iubenda: { siteId: number; cookiePolicyId: number; autoblockingId: number };
+  iubenda: { siteId: number; cookiePolicyId: number };
   gaMeasurementId: string;
 }
 
@@ -33,8 +33,6 @@ export const profile = {
   iubenda: {
     siteId: 3941646,
     cookiePolicyId: 72689656,
-    // NOTE: copied as-is from the live site. It differs from siteId: please verify in the iubenda dashboard.
-    autoblockingId: 3941325,
   },
   gaMeasurementId: 'G-496QCT7X7S',
 } as const satisfies Profile;

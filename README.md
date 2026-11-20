@@ -12,6 +12,7 @@ TypeScript and one React island, in English, Italian and Swedish, plus generated
 | `npm run check`   | Type-check `.astro`, `.ts` and `.tsx` files                          |
 | `npm run build`   | `check` → static build into `dist/` → PDFs into `dist/cv/`           |
 | `npm run pdf`     | Re-generate PDFs only (needs an existing `dist/`)                    |
+| `npm run favicons`| Redraw the "AB" favicons into `public/favicon/` (needs `dist/`; commit the result) |
 | `npm run preview` | Serve `dist/` locally (runs in background: `npx astro preview stop`) |
 
 Print layout while developing: open http://localhost:4321/print/en/ in the dev server.
@@ -32,8 +33,12 @@ src/
   pages/[...lang]/index.astro    ← home page → /, /it/, /sv/
   pages/print/[lang].astro       ← A4 print layout → rendered to PDF
   pages/404.astro
+  lib/deploy.ts                  ← production vs staging (from SITE_URL)
+  pages/robots.txt.ts            ← robots.txt endpoint (blocks everything on staging)
 scripts/generate-pdf.ts          ← post-build: print pages → dist/cv/*.pdf (Playwright)
-public/                          ← copied verbatim: favicons, robots.txt, .htaccess
+scripts/generate-favicons.ts     ← one-off: draws the AB badge favicons
+scripts/lib/serve-dist.ts        ← lets Playwright load dist/ without a web server
+public/                          ← copied verbatim: favicons, .htaccess files
 ```
 
 ## Editing content
@@ -75,10 +80,18 @@ rebuilt with the HTML every time, so they can't go stale.
 
 ## Deploy (GitHub Actions)
 
-`.github/workflows/deploy.yml`: every push/PR builds (type check + site + PDFs); pushes to `main`
-then `rsync` `dist/` to the server over SSH.
+`.github/workflows/deploy.yml`: every push/PR builds (type check + site + PDFs), then pushes are
+deployed with `rsync` over SSH:
 
-Repository secrets (Settings → Secrets and variables → Actions):
+| Branch    | GitHub environment | URL                                 | Build                                   |
+| --------- | ------------------ | ----------------------------------- | --------------------------------------- |
+| `develop` | `staging`          | https://dev.alessandrobonatti.com   | `noindex`, no GA, robots.txt blocks all |
+| `main`    | `production`       | https://alessandrobonatti.com       | indexed, GA                             |
+
+The build target comes from the `SITE_URL` env var (default: production), so locally
+`SITE_URL=https://dev.alessandrobonatti.com npm run build` reproduces the staging build.
+
+Repository secrets (Settings → Secrets and variables → Actions), shared by both environments:
 
 | Secret               | Value                                                             |
 | -------------------- | ----------------------------------------------------------------- |
@@ -87,16 +100,23 @@ Repository secrets (Settings → Secrets and variables → Actions):
 | `DEPLOY_PORT`        | SSH port (optional, default 22)                                   |
 | `DEPLOY_SSH_KEY`     | private key (its public half in the user's `authorized_keys`)     |
 | `DEPLOY_KNOWN_HOSTS` | output of `ssh-keyscan -p <port> <host>` (pins the server's key)  |
-| `DEPLOY_PATH`        | **dedicated** directory, e.g. `/var/www/alessandrobonatti.com/public_html` |
 
-⚠️ `rsync --delete` makes `DEPLOY_PATH` an exact mirror of `dist/`: never point it at the old
-Laravel folder or any directory containing other files. Create a new one and switch the virtual
-host's `DocumentRoot` to it.
+Environment secret (Settings → Environments → `staging` / `production` → Add secret), different in each:
+
+| Secret        | Value                                                                    |
+| ------------- | ------------------------------------------------------------------------ |
+| `DEPLOY_PATH` | the folder served by that (sub)domain, e.g. `domains/alessandrobonatti.com/public_html/dev` |
+
+An environment secret overrides a repository secret with the same name.
+
+⚠️ `rsync --delete` makes `DEPLOY_PATH` an exact mirror of `dist/`: anything else in it is deleted,
+except `/.well-known/` and `/dev/` (excluded in the workflow, so a staging folder nested inside the
+production one survives). Back up the old site before the first production deploy.
 
 ### Server config
 
-Apache: `public/.htaccess` (HTTPS, www→apex, caching, compression, 404, security headers).
-Requires `AllowOverride All`, `mod_rewrite`, `mod_headers`, `mod_deflate`.
+Apache or LiteSpeed (Hostinger): `public/.htaccess` (HTTPS, www→apex, caching, compression, 404,
+security headers) and `public/_astro/.htaccess` (long-term caching of hashed assets).
 
 nginx equivalent:
 

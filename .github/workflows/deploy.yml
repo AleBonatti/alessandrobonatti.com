@@ -1,10 +1,13 @@
 name: Build & deploy
 
 # build:  every push and pull request (type check + build + PDFs), so broken content never reaches main unnoticed.
-# deploy: only pushes to main (or a manual run), after a successful build.
+# deploy: after a successful build, pushes (or manual runs) on
+#           develop → "staging"    environment → https://dev.alessandrobonatti.com (noindex, no analytics)
+#           main    → "production" environment → https://alessandrobonatti.com
+#         Each GitHub environment has its own DEPLOY_PATH secret (see README).
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
   workflow_dispatch:
 
@@ -19,6 +22,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Read by astro.config.mjs. Anything other than the production URL builds a staging site.
+      SITE_URL: ${{ github.ref_name == 'main' && 'https://alessandrobonatti.com' || 'https://dev.alessandrobonatti.com' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -51,11 +57,13 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && (github.ref_name == 'main' || github.ref_name == 'develop')
     runs-on: ubuntu-latest
+    # Environment secrets override repository secrets with the same name: DEPLOY_PATH differs per
+    # environment, the SSH secrets can stay at repository level.
     environment:
-      name: production
-      url: https://alessandrobonatti.com
+      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+      url: ${{ github.ref_name == 'main' && 'https://alessandrobonatti.com' || 'https://dev.alessandrobonatti.com' }}
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -73,7 +81,12 @@ jobs:
           printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
 
       # --delete removes files that no longer exist in the build (e.g. old hashed assets).
-      # DEPLOY_PATH must be a directory dedicated to this site: anything else in it is deleted.
+      # DEPLOY_PATH must be a directory dedicated to this site: anything else in it is deleted,
+      # EXCEPT excluded paths (rsync never deletes excluded files):
+      #   /.well-known/  SSL certificate validation files the hosting panel may place there;
+      #   /dev/          the staging site, in case the host nests the subdomain folder
+      #                  inside the main public_html (Hostinger's default layout).
+      # Keep the build itself free of these names.
       - name: Upload with rsync
         env:
           HOST: ${{ secrets.DEPLOY_HOST }}
@@ -82,5 +95,6 @@ jobs:
           TARGET: ${{ secrets.DEPLOY_PATH }}
         run: |
           rsync -rlvz --delete --checksum \
+            --exclude='/.well-known/' --exclude='/dev/' \
             -e "ssh -i ~/.ssh/deploy_key -p ${PORT:-22} -o StrictHostKeyChecking=yes" \
             dist/ "$USER@$HOST:${TARGET%/}/"

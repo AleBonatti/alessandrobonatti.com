@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "pdf": "node scripts/generate-pdf.ts"
+    "pdf": "node scripts/generate-pdf.ts",
+    "favicons": "node scripts/generate-favicons.ts"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.9",

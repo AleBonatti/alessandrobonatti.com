@@ -40,6 +40,61 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
   </div>
 </header>
 
+<script>
+  /*
+   * Scroll spy: underline the menu link of the section being read.
+   *
+   * A plain <script> in an .astro file (no is:inline) is processed by Astro: it's TypeScript,
+   * bundled and deduplicated, and loaded as a deferred module, so the DOM is ready when it runs.
+   *
+   * Rule: the active section is the last one (in page order) whose top edge has crossed a line
+   * one third down the visible area below the sticky header. Sections without a menu entry
+   * (languages, education, tidbits) keep the previous entry active. At the very bottom of the
+   * page the last entry wins, since "contact" may be too short to ever reach the line.
+   */
+  const header = document.querySelector<HTMLElement>('.header');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.header .nav a[href^="#"]')];
+  const targets = links
+    .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+    .filter((t): t is { link: HTMLAnchorElement; section: HTMLElement } => t.section !== null);
+
+  let current: HTMLAnchorElement | null = null;
+  let scheduled = false;
+
+  function update(): void {
+    scheduled = false;
+    const headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+    const line = headerBottom + (window.innerHeight - headerBottom) / 3;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+    let active: HTMLAnchorElement | null = null;
+    if (atBottom) {
+      active = targets.at(-1)?.link ?? null;
+    } else {
+      for (const { link, section } of targets) {
+        if (section.getBoundingClientRect().top <= line) active = link;
+      }
+    }
+
+    if (active === current) return;
+    current?.removeAttribute('aria-current');
+    // aria-current="location" tells screen readers which in-page section this link points to.
+    active?.setAttribute('aria-current', 'location');
+    current = active;
+  }
+
+  // Batch scroll/resize events to at most one update per animation frame.
+  function schedule(): void {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  update();
+</script>
+
 <style>
   .header {
     position: sticky;
@@ -105,7 +160,9 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
     transform-origin: left;
     transition: transform 0.35s var(--ease-out);
   }
-  .nav a:hover::after {
+  /* Hover, and the section currently on screen (aria-current is set by the script below). */
+  .nav a:hover::after,
+  .nav a[aria-current]::after {
     transform: scaleX(1);
   }
 

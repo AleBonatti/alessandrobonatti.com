@@ -2,11 +2,15 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import { PRODUCTION_SITE } from './src/lib/deploy.ts';
 
 // https://astro.build/config
 export default defineConfig({
-  // Absolute URL of the production site: used for canonical/hreflang URLs and the sitemap.
-  site: 'https://alessandrobonatti.com',
+  // Absolute URL of the site: used for canonical/hreflang URLs, og:url, the sitemap and robots.txt.
+  // Production by default; CI sets SITE_URL=https://dev.alessandrobonatti.com for staging builds,
+  // which also turns on noindex and turns off analytics (see src/lib/deploy.ts).
+  // The config file runs in Node, so process.env is available here.
+  site: process.env.SITE_URL || PRODUCTION_SITE,
 
   // Emit /it/index.html rather than /it.html, so URLs end with a slash on any static host.
   trailingSlash: 'always',
