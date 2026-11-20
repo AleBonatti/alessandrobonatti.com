@@ -1,0 +1,129 @@
+---
+/**
+ * HTML shell shared by every public page: <head> (SEO, hreflang, fonts, consent, analytics),
+ * scroll progress bar and the .site wrapper.
+ */
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import { DEFAULT_LOCALE, LANG_STORAGE_KEY, LOCALES, homePath, type Locale } from '../i18n/locales';
+import { profile } from '../data/profile';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  /** Redirect to the visitor's preferred language. Only the English home page enables it. */
+  detectLanguage?: boolean;
+  /** Keep the page out of search results (e.g. the 404 page). */
+  noindex?: boolean;
+}
+
+const { locale, title, description, detectLanguage = false, noindex = false } = Astro.props;
+
+// Astro.site comes from `site` in astro.config.mjs; Astro.url is this page's URL.
+const site = Astro.site ?? new URL('https://alessandrobonatti.com');
+const canonical = new URL(Astro.url.pathname, site).href;
+const alternates = LOCALES.map((l) => ({ hreflang: l, href: new URL(homePath(l), site).href }));
+const ogLocale: Record<Locale, string> = { en: 'en_US', it: 'it_IT', sv: 'sv_SE' };
+
+const iubendaConfig = {
+  siteId: profile.iubenda.siteId,
+  cookiePolicyId: profile.iubenda.cookiePolicyId,
+  lang: locale,
+  storage: { useSiteId: true },
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {
+      /* Browser-language detection, only on the default-language home page ("/").
+         Runs before anything renders: if the visitor has no saved choice and prefers a
+         language we support, jump to its URL. An explicit choice (saved by the language
+         switcher) always wins. Pages /it/ and /sv/ never redirect: an explicit URL is respected. */
+      detectLanguage && locale === DEFAULT_LOCALE && (
+        <script is:inline define:vars={{ locales: LOCALES, storageKey: LANG_STORAGE_KEY, fallback: DEFAULT_LOCALE }}>
+          (function () {
+            var target = null;
+            try {
+              target = localStorage.getItem(storageKey);
+            } catch (e) {}
+            if (locales.indexOf(target) === -1) {
+              target = null;
+              var prefs = navigator.languages || [navigator.language];
+              for (var i = 0; i < prefs.length; i++) {
+                var code = String(prefs[i] || '').slice(0, 2).toLowerCase();
+                if (locales.indexOf(code) !== -1) { target = code; break; }
+              }
+            }
+            if (target && target !== fallback) location.replace('/' + target + '/' + location.hash);
+          })();
+        </script>
+      )
+    }
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonical} />
+          {alternates.map((a) => (
+            <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
+        </>
+      )
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale[locale]} />
+    <meta name="theme-color" content="#000000" />
+
+    <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+
+    {/* Self-hosted fonts (see `fonts` in astro.config.mjs). Preload only what's above the fold. */}
+    <Font cssVariable="--font-sans" preload={[{ weight: 800, style: 'normal' }, { weight: 400, style: 'normal' }]} />
+    <Font cssVariable="--font-serif" preload={[{ style: 'italic' }]} />
+    <Font cssVariable="--font-mono" />
+
+    {/* iubenda cookie consent. The autoblocking script must come before any tracker so it can hold them until consent. */}
+    <script is:inline define:vars={{ iubendaConfig }}>
+      var _iub = window._iub || [];
+      window._iub = _iub;
+      _iub.csConfiguration = iubendaConfig;
+    </script>
+    <script is:inline src={`https://cs.iubenda.com/autoblocking/${profile.iubenda.autoblockingId}.js`}></script>
+    <script is:inline src="https://cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+
+    {/* Google Analytics 4 (held by iubenda autoblocking until consent). */}
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${profile.gaMeasurementId}`}></script>
+    <script is:inline define:vars={{ gaId: profile.gaMeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </head>
+  <body>
+    <div class="site">
+      <div class="progress" aria-hidden="true"></div>
+      <slot />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+# Svenskt innehåll: UTKAST översatt från engelska, behöver granskas av en infödd talare.
+# Inline-markering: ==markering==  **fetstil**  _serif kursiv_  [länktext](https://url)
+
+meta:
+  title: Alessandro Bonatti — Fullstackutvecklare
+  description: Alessandro Bonatti — Fullstackutvecklare baserad i Malmö, Sverige.
+
+nav:
+  label: Sektioner
+  about: Om mig
+  skills: Kompetenser
+  experience: Erfarenhet
+  showcase: Projekt
+  passions: Passioner
+  contact: Säg hej!
+
+languageSwitcher:
+  label: Språk
+
+hero:
+  role: Fullstackutvecklare
+  basedIn: baserad i
+  location: Malmö — Sverige
+  cvButton: Ladda ner CV
+  portraitAlt: Alessandro Bonatti
+
+about:
+  title: Om mig
+  lead: Hej, jag heter Alessandro,
+  statement: en fullstackutvecklare med ==över 25 års erfarenhet== inom branschen.
+  paragraphs:
+    - Jag började min karriär 1999 som anställd, en roll jag hade i 13 år, innan jag gick över till att frilansa och grundade min egen byrå, som jag framgångsrikt drev i ytterligare 13 år.
+    - Under den här resan har jag fått ==bred erfarenhet av webbutveckling==, arbetat med många olika tekniker och tagit mig an projekt av varierande komplexitet. Min kompetens sträcker sig från frontend till backend, med ==starkt fokus på skalbara, underhållbara och högpresterande lösningar==.
+    - Sedan jag flyttade till Malmö i oktober 2025 arbetar jag som ==konsult inom mjukvaruutveckling== och har fått värdefull erfarenhet av den svenska arbetsmiljön.
+    - Den här erfarenheten har breddat mitt perspektiv på samarbete, kommunikation och modern mjukvaruutveckling, samtidigt som jag har kunnat utveckla mina tekniska färdigheter och anpassa mig till en ny arbetskultur.
+
+skills:
+  title: Kompetenser
+  groups:
+    - letter: A
+      tags: HTML · CSS · VUEJS
+      title: Webbfrontend
+      description: De senaste åren har jag försökt fylla de luckor som skilde mig från att vara en komplett och självständig utvecklare, genom att fördjupa mina kunskaper inom frontendutveckling och Typescript, särskilt ==ramverken Vue.js och React tillsammans med Tailwind CSS==. Jag har även erfarenhet av SEO-frågor samt användbarhet och tillgänglighet.
+      tiles:
+        - { name: Vue, icon: vue }
+        - { name: React, icon: react }
+        - { name: Typescript, icon: typescript }
+        - { name: TailwindCss, icon: tailwind }
+        - { name: Next.js, icon: next }
+        - { name: Figma, icon: figma }
+        - { name: S.E.O. }
+        - { name: Tillgänglighet }
+        - { name: Användbarhet }
+    - letter: B
+      tags: POSTGRESQL · NODE · TYPESCRIPT
+      title: Webbbackend — API
+      description: Jag började min yrkeskarriär som .NET-utvecklare i en Microsoft-miljö och gick sedan, inom några år, över till open source-världen och dess filosofi. Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**Typescript** och **Node.js**==, med ==Fastify== för backendutveckling. Jag har också lång erfarenhet av ==PHP/Laravel-ekosystemet==, som under flera år har varit en viktig del av min yrkesresa.
+      tiles:
+        - { name: Node.js, icon: node }
+        - { name: Typescript, icon: typescript }
+        - { name: DrizzleOrm, icon: drizzle }
+        - { name: Postgresql, icon: postgresql }
+        - { name: Php, icon: php }
+        - { name: Laravel, icon: laravel }
+        - { name: MySQL, icon: mysql }
+        - { name: Vercel, icon: vercel }
+        - { name: Python, icon: python }
+        - { name: MS SQL Server, icon: mssql }
+    - letter: C
+      tags: WEBB · SERVER · DRIFT
+      title: Server & verktyg
+      description: Jag kan konfigurera en skalbar Linux-webbserver baserad på PHP och MySQL, inklusive ett backupsystem. Jag har utvecklat och använt olika typer av API:er. Jag kan arbeta självständigt, men är också van vid att arbeta i team av olika storlek. ==Jag har byggt mitt eget CMS från grunden==, som jag använder som bas för de flesta av mina projekt.
+      tiles:
+        - { name: CI / CD, icon: cicd }
+        - { name: Linuxserver, icon: linux }
+        - { name: Digital Ocean, icon: digitalocean }
+        - { name: GitKraken, icon: gitkraken }
+        - { name: GitHub, icon: github }
+        - { name: Claude AI, icon: claude }
+        - { name: Aws, icon: aws }
+        - { name: Docker, icon: docker }
+        - { name: NPM, icon: npm }
+        - { name: VS Code, icon: vscode }
+
+languages:
+  title: Språk
+  items:
+    - { name: Italienska, code: IT, level: MODERSMÅL, detail: Förstaspråk }
+    - { name: Engelska, code: EN, level: C2, detail: Flytande }
+    - { name: Svenska, code: SV, level: A2, detail: Studerar aktivt }
+
+experience:
+  title: Erfarenhet
+  jobs:
+    - years: 2025 — 2026
+      company: Elva11
+      role: Fullstackutvecklare
+      location: Malmö, Sverige
+      description: Arbetar som ==konsult== i flera kunduppdrag, bidrar till fullstackprojekt inom webbutveckling och anpassar mig till olika tekniker, team och affärskrav.
+    - years: 2023 — 2025
+      company: e-Project
+      role: Fullstackutvecklare
+      location: Parma, Italien
+      description: Trött på det tuffa frilanslivet i Italien bestämde jag mig för att gå tillbaka till ==heltidsprogrammering==. De nya möjligheterna som AI för med sig har blivit mitt största intresse.
+    - years: 2011 — 2023
+      company: Methlab
+      role: Delägare och medgrundare
+      location: Fidenza, Italien
+      description: Jag var med och grundade och drev ==min egen webbyrå==, med ansvar för design, utveckling och förvaltning av webbplatser och applikationer. Jag specialiserade mig som fullstackutvecklare och arbetade med både frontend och backend.
+    - years: 2001 — 2011
+      company: e-Project
+      role: Fullstackutvecklare
+      location: Parma, Italien
+      description: Jag började med att utveckla enkla webbplatser och gick gradvis över till mer komplexa projekt, bland annat affärssystem och e-handelsplattformar. Jag fokuserade på intuitiva användargränssnitt och ==avancerade funktioner==, i projekt inom många olika branscher, samtidigt som jag ständigt utvecklade mina tekniska färdigheter.
+    - years: 1999 — 2001
+      company: FirstPoint
+      role: Webbutvecklare
+      location: Fidenza, Italien
+      description: Mitt första jobb inom webbutveckling, där jag skapade och underhöll webbplatser med fokus på HTML, CSS och JavaScript. Jag samarbetade med designers och andra utvecklare för att leverera ==effektiva och funktionella lösningar== anpassade efter kundernas behov.
+
+showcase:
+  title: Projekt
+  intro: Jag har utvecklat dussintals projekt, ==från webbplatser till affärssystem, API:er och betalsystem==. Varje projekt har varit ett tillfälle att anta nya utmaningar och förfina mina färdigheter. De flesta av projekten är skyddade av inloggning, men jag visar dem gärna ==vid ett separat möte==, där jag presenterar ==de lösningar som tagits fram==, min ==utvecklingsmetodik== och ==teknikerna som använts== för att nå målen.
+  labels:
+    project: PROJEKT
+    role: MIN ROLL
+    tech: BAKOM KULISSERNA
+  projects:
+    - context: SOM UTVECKLARE PÅ METHLAB
+      name: parmafluid.com
+      url: https://parmafluid.com
+      description: Företagswebbplats. Skräddarsydd katalogstruktur, dataimport från en gammal MsSql-databas, nyhetsarkiv, eget CMS, innehållshantering på 5 språk, integration med extern nyhetsbrevstjänst.
+      role: Backendutveckling — Server- och driftsättningshantering
+      tech: [Laravel, Mysql]
+    - context: SOM ANSTÄLLD PÅ E-PROJECT
+      name: pieffeci.com
+      url: https://pieffeci.com
+      description: Företagswebbplats. Skräddarsydd katalog; nyheter, certifieringar och formulär; eget CMS.
+      role: Backendutveckling — Server- och driftsättningshantering
+      tech: [Laravel, MySql]
+    - context: EGET ARBETE
+      name: SeppiaCms
+      url: https://pieffeci.com/login
+      description: Mitt eget CMS, utvecklat under många år och anpassningsbart till de flesta behov. Det ligger bakom inloggning, men jag visar gärna alla dess funktioner.
+      role: UI/UX — Fullstackutveckling — Server- och driftsättningshantering — löpande underhåll
+      tech: [VueJs, TailwindCSS, Laravel, Mysql]
+    - context: SOM UTVECKLARE PÅ METHLAB
+      name: lamamita.it
+      url: https://lamamita.com
+      description: E-handel för B2C och B2B. Onlinebetalningar, skräddarsydd produktsökning och filter, eget CMS, stöd för 4 språk. Skräddarsydd integration av externa dataflöden. Egna system för kundlojalitet och önskelistor.
+      role: Backendutveckling — Server- och driftsättningshantering
+      tech: [Laravel, MySql, Betalintegration med Stripe och Paypal]
+    - context: SOM ANSTÄLLD PÅ E-PROJECT
+      name: crm.termest.it
+      url: https://crm.termest.it
+      description: Affärssystem för B2C. API-koppling till företagets webbplatser. Hantering av ordrar och kunder. Det ligger bakom inloggning, men jag visar gärna alla dess funktioner.
+      role: Fullstackutveckling — Server- och driftsättningshantering
+      tech: [Tailwind CSS, VueJs, Laravel, MySql, Datahantering via API]
+
+education:
+  title: Utbildning
+  items:
+    - years: 1996 — 1999
+      title: Universitetsstudier i kommunikationsvetenskap
+      detail: Ej avslutade — Università di Parma
+      location: Parma, Italien
+      description: Min passion för den otroliga nya uppfinningen som kallades "internet" fick mig att ==utforska webbutveckling på egen hand==. Fascinerad av dess möjligheter började jag lära mig självständigt och lade grunden för min framtida karriär inom området.
+    - years: 1991 — 1996
+      title: Tekniskt gymnasium med inriktning på datavetenskap
+      detail: Examen med betyg 51/60 — I.T.I.S. Berenini
+      location: Fidenza, Italien
+      description: Under den här perioden lärde jag mig grunderna i programmering, i en tid då internet ännu inte var utbrett. Den erfarenheten gav mig en stark ==grund i problemlösning== och algoritmiskt tänkande, som jag senare har tillämpat inom webbutveckling.
+  note:
+    title: "Självlärd webbutvecklare:"
+    text: i början av 2000-talet ingick webbutveckling ännu inte i skolornas läroplaner. Därför gav jag mig in på en resa av självstudier och lärde mig tekniker och programmeringsspråk på egen hand för att hänga med i branschens utveckling.
+
+passions:
+  title: Passioner
+  items:
+    - icon: mountain
+      text: Bergen och skogarna är min tillflykt, platser där jag hittar ==balansen mellan natur och frihet==. Jag älskar att uppleva bergen på alla sätt, från vandring till mountainbike, från skidåkning till klättring. Jag älskar snö, dimma och kallt klimat; och jag vet redan att det jag kommer att sakna mest i Sverige är Alperna.
+    - icon: dice
+      text: Sedan barndomen har jag också varit passionerad för datorspel och rollspel, både digitala och bordsrollspel. Jag tror att de hjälper till att ==stimulera kreativiteten==, det kritiska tänkandet och samarbetsförmågan. Jag gillar tv-serier, film och nördkultur i allmänhet.
+    - icon: globe
+      text: Jag är en ==passionerad resenär== som dras till både Fjärran Östern och Höga Norden — fascinerad av Japans kultur och filosofi lika mycket som av Skandinaviens minimalism, natur och innovation. Att resa hjälper mig att växa, lära mig och uppleva världen ur olika perspektiv.
+
+tidbits:
+  title: Smått och gott
+  statement: Född den _17/01/1976_ är jag en självständig person med många års erfarenhet och en stark vilja att ständigt utmana mig själv. Jag tar mig an varje ny utmaning med entusiasm och lust att utvecklas, alltid öppen för nya möjligheter att lära och bli bättre.
+  paragraphs:
+    - Jag har **körkort för både bil och motorcykel** och är van vid att klara mig självständigt och anpassa mig till olika miljöer. Jag ser fram emot att flytta till Skandinavien för att ge mig in på nya professionella och personliga äventyr, och tar med mig mitt **initiativ, min pålitlighet och mitt engagemang** för att aktivt bidra till nya projekt.
+    - Jag inleder detta spännande nya kapitel i livet tillsammans med min partner — både i kärlek och i arbete — Carmen. Hon är den mest begåvade utvecklaren jag känner. [Ta en titt på hennes arbete!](https://carmenghirardi.com)
+
+contact:
+  title: Säg hej!
+  location: Malmö, Sverige
+
+footer:
+  rights: Alla rättigheter förbehållna
+  cookiePolicy: cookiepolicy
+
+print:
+  contacts: Kontakt
+  downloadNote: Den interaktiva versionen av detta CV finns på

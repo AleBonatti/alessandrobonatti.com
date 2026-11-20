@@ -1,0 +1,54 @@
+---
+/**
+ * The home page, in every language.
+ *
+ * `[...lang]` is a *rest* route parameter: unlike `[lang]` it may also be empty (undefined),
+ * so this single file produces "/" (English), "/it/" and "/sv/".
+ * In a static build, getStaticPaths() tells Astro which URLs to pre-render.
+ */
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/sections/Hero.astro';
+import About from '../../components/sections/About.astro';
+import Skills from '../../components/sections/Skills.astro';
+import Languages from '../../components/sections/Languages.astro';
+import Experience from '../../components/sections/Experience.astro';
+import Showcase from '../../components/sections/Showcase.astro';
+import Education from '../../components/sections/Education.astro';
+import Passions from '../../components/sections/Passions.astro';
+import Tidbits from '../../components/sections/Tidbits.astro';
+import Contact from '../../components/sections/Contact.astro';
+import Footer from '../../components/sections/Footer.astro';
+import { getSiteContent } from '../../lib/content';
+import { DEFAULT_LOCALE, LOCALES } from '../../i18n/locales';
+
+export const getStaticPaths = (() =>
+  LOCALES.map((locale) => ({
+    params: { lang: locale === DEFAULT_LOCALE ? undefined : locale },
+    props: { locale },
+  }))) satisfies GetStaticPaths;
+
+// Derive the Props type from what getStaticPaths returns: no duplication, no `any`.
+// Declaring a type named `Props` is enough for Astro to type `Astro.props` with it.
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { locale } = Astro.props;
+const t = await getSiteContent(locale);
+---
+
+<BaseLayout locale={locale} title={t.meta.title} description={t.meta.description} detectLanguage>
+  <Header locale={locale} t={t} />
+  <main>
+    <Hero locale={locale} t={t} />
+    <About t={t} />
+    <Skills t={t} />
+    <Languages t={t} />
+    <Experience t={t} />
+    <Showcase t={t} />
+    <Education t={t} />
+    <Passions t={t} />
+    <Tidbits t={t} />
+    <Contact t={t} />
+  </main>
+  <Footer t={t} />
+</BaseLayout>

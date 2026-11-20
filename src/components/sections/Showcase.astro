@@ -1,0 +1,146 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import Rich from '../Rich.astro';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { showcase } = Astro.props.t;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section id="showcase">
+  <div class="container">
+    <SectionHeader num="04" title={showcase.title} />
+    <Rich text={showcase.intro} class="rv intro" />
+    <div class="grid">
+      {
+        showcase.projects.map((p, i) => (
+          <article class="card rv">
+            <div class="mono top">
+              <span>{p.context}</span>
+              <span class="muted">{pad(i + 1)}</span>
+            </div>
+            <div>
+              <div class="mono muted label">{showcase.labels.project}</div>
+              <a class="plink" href={p.url} target="_blank" rel="noopener">
+                <span class="pname">{p.name}</span> <span class="ar" aria-hidden="true">↗</span>
+              </a>
+              <p class="muted pdesc">{p.description}</p>
+            </div>
+            <div>
+              <div class="mono muted label">{showcase.labels.role}</div>
+              <div class="prole">{p.role}</div>
+            </div>
+            <div class="tech">
+              <div class="mono muted label">{showcase.labels.tech}</div>
+              <div class="chips">
+                {p.tech.map((c) => <span class="chip mono">{c}</span>)}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    margin: 0 0 72px;
+    max-width: 980px;
+    font-size: clamp(20px, 1.9vw, 26px);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--black);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    transition: background-color 0.35s ease, color 0.35s ease, translate 0.35s var(--ease-out);
+  }
+  /* `translate` instead of `transform`: see Languages.astro. */
+  .card:hover {
+    background: var(--black);
+    color: var(--white);
+    translate: 0 -6px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+  .muted {
+    color: var(--grey-mid);
+  }
+  .card:hover .muted {
+    color: var(--grey-on-dark);
+  }
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+  }
+  .plink {
+    color: inherit;
+    text-decoration: none;
+  }
+  .plink:hover {
+    color: inherit;
+  }
+  .pname {
+    font-weight: 800;
+    font-size: 34px;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    transition: color 0.3s ease;
+  }
+  .card:hover .pname {
+    color: var(--yellow);
+  }
+  .ar {
+    display: inline-block;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+  }
+  .plink:hover .ar {
+    transform: translate(4px, -4px);
+  }
+  .pdesc {
+    margin: 14px 0 0;
+    color: var(--grey-dark);
+    font-size: 16px;
+  }
+  .prole {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .tech {
+    margin-top: auto;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    border: 1px solid #c9c9c5;
+    padding: 5px 10px;
+    font-size: 12px;
+    transition: border-color 0.3s ease;
+  }
+  .card:hover .chip {
+    border-color: #555;
+  }
+</style>

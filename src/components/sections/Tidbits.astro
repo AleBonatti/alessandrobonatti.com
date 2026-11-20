@@ -1,0 +1,44 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import Rich from '../Rich.astro';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { tidbits } = Astro.props.t;
+---
+
+<section id="tidbits">
+  <div class="container">
+    <SectionHeader num="07" title={tidbits.title} tone="yellow" />
+    <Rich text={tidbits.statement} class="rv statement" />
+    <div class="rv cols">
+      {tidbits.paragraphs.map((p) => <Rich text={p} class="para" />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    background: var(--yellow);
+  }
+  .statement {
+    margin: 0 0 56px;
+    max-width: 1080px;
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    gap: 28px 64px;
+    font-size: 18px;
+  }
+  .para {
+    margin: 0;
+  }
+</style>

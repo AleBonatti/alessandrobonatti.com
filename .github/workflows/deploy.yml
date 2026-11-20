@@ -1,0 +1,86 @@
+name: Build & deploy
+
+# build:  every push and pull request (type check + build + PDFs), so broken content never reaches main unnoticed.
+# deploy: only pushes to main (or a manual run), after a successful build.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two deploys at once; a newer push waits for the running one.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Playwright's Chromium renders the PDFs. Cache the browser download between runs.
+      - name: Get Playwright version
+        id: pw
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
+      - run: npx playwright install --with-deps chromium
+
+      # astro check → astro build → PDF generation (see package.json "build").
+      - run: npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          include-hidden-files: true # keep .htaccess
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://alessandrobonatti.com
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      # --delete removes files that no longer exist in the build (e.g. old hashed assets).
+      # DEPLOY_PATH must be a directory dedicated to this site: anything else in it is deleted.
+      - name: Upload with rsync
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER: ${{ secrets.DEPLOY_USER }}
+          PORT: ${{ secrets.DEPLOY_PORT }}
+          TARGET: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          rsync -rlvz --delete --checksum \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT:-22} -o StrictHostKeyChecking=yes" \
+            dist/ "$USER@$HOST:${TARGET%/}/"

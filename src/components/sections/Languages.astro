@@ -1,0 +1,84 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { languages } = Astro.props.t;
+---
+
+<section id="languages">
+  <div class="container">
+    <SectionHeader title={languages.title} />
+    <div class="grid">
+      {
+        languages.items.map((l) => (
+          <div class="lang rv">
+            <div class="top">
+              <span class="serif-i name">{l.name}</span>
+              <span class="mono code">{l.code}</span>
+            </div>
+            <div>
+              <div class="level">{l.level}</div>
+              <div class="detail">{l.detail}</div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    /* Not a nav target in the design. */
+    scroll-margin-top: 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 20px;
+  }
+  .lang {
+    background: var(--white);
+    border: 1px solid var(--black);
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: translate 0.35s var(--ease-out), background-color 0.3s ease;
+  }
+  /* `translate` (not `transform`): the .rv reveal animation owns `transform`, and an
+     animation would override a hover transform. The two properties compose instead. */
+  .lang:hover {
+    translate: 0 -6px;
+    background: var(--yellow);
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .name {
+    font-size: 38px;
+    line-height: 1;
+  }
+  .code {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--grey-dark);
+  }
+  .level {
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+  }
+  .detail {
+    color: var(--grey-mid);
+    font-size: 15px;
+  }
+</style>

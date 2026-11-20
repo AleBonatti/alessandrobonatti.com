@@ -1,0 +1,397 @@
+---
+/**
+ * Print / PDF version of the CV: same content collection as the site, A4 layout.
+ * Not linked anywhere and excluded from the sitemap/robots: it exists only so that
+ * scripts/generate-pdf.ts can render it to dist/cv/*.pdf after each build.
+ * Open /print/en/ in the dev server to iterate on the layout.
+ */
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { Font, Image } from 'astro:assets';
+import '../../styles/global.css';
+import portrait from '../../assets/portrait.png';
+import Rich from '../../components/Rich.astro';
+import { getSiteContent } from '../../lib/content';
+import { LOCALES, homePath } from '../../i18n/locales';
+import { profile } from '../../data/profile';
+
+export const getStaticPaths = (() => LOCALES.map((locale) => ({ params: { lang: locale }, props: { locale } }))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { locale } = Astro.props;
+const t = await getSiteContent(locale);
+
+const siteUrl = new URL(homePath(locale), Astro.site ?? 'https://alessandrobonatti.com').href;
+const siteLabel = siteUrl.replace(/^https:\/\//, '').replace(/\/$/, '');
+const linkedin = profile.social.find((s) => s.id === 'linkedin');
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{t.meta.title}</title>
+    <Font cssVariable="--font-sans" />
+    <Font cssVariable="--font-serif" />
+    <Font cssVariable="--font-mono" />
+  </head>
+  <body>
+    <div class="cv">
+      <header class="top">
+        <div class="id">
+          <p class="mono kicker">{t.hero.role} · {t.hero.basedIn} {t.hero.location}</p>
+          <h1>{profile.name.first} <span class="serif-i">{profile.name.last}</span></h1>
+          <ul class="mono contacts" aria-label={t.print.contacts}>
+            <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+            {profile.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
+            <li><a href={siteUrl}>{siteLabel}</a></li>
+            {linkedin && <li><a href={linkedin.url}>{linkedin.url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></li>}
+            <li><a href={profile.github.url}>{profile.github.label}</a></li>
+          </ul>
+        </div>
+        <Image src={portrait} alt={t.hero.portraitAlt} width={260} format="webp" class="photo" />
+      </header>
+
+      <section>
+        <h2 class="mono">{t.about.title}</h2>
+        <p class="statement"><span class="serif-i">{t.about.lead}</span> <Rich as="span" text={t.about.statement} /></p>
+        <div class="two-col">
+          {t.about.paragraphs.map((p) => <Rich text={p} />)}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="mono">{t.experience.title}</h2>
+        {
+          t.experience.jobs.map((job) => (
+            <div class="entry">
+              <div class="mono when">{job.years}</div>
+              <div>
+                <h3>
+                  {job.company} <span class="serif-i role">{job.role}</span> <span class="where">· {job.location}</span>
+                </h3>
+                <Rich text={job.description} />
+              </div>
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2 class="mono">{t.skills.title}</h2>
+        {
+          t.skills.groups.map((g) => (
+            <div class="entry">
+              <div class="mono when"><span class="letter">{g.letter}</span></div>
+              <div>
+                <h3>{g.title}</h3>
+                <Rich text={g.description} />
+                <ul class="mono chips">
+                  {g.tiles.map((tile) => <li>{tile.name}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2 class="mono">{t.languages.title}</h2>
+        <ul class="langs">
+          {
+            t.languages.items.map((l) => (
+              <li>
+                <span class="serif-i lname">{l.name}</span> <strong>{l.level}</strong> · {l.detail}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="mono">{t.showcase.title}</h2>
+        <Rich text={t.showcase.intro} class="intro" />
+        <div class="projects">
+          {
+            t.showcase.projects.map((p) => (
+              <div class="project">
+                <div class="mono ctx">{p.context}</div>
+                <h3><a href={p.url}>{p.name}</a></h3>
+                <p>{p.description}</p>
+                <p class="small"><span class="mono label">{t.showcase.labels.role}</span> {p.role}</p>
+                <p class="small"><span class="mono label">{t.showcase.labels.tech}</span> {p.tech.join(' · ')}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="mono">{t.education.title}</h2>
+        {
+          t.education.items.map((e) => (
+            <div class="entry">
+              <div class="mono when">{e.years}</div>
+              <div>
+                <h3>{e.title}</h3>
+                <p class="small muted">{e.detail} · {e.location}</p>
+                <Rich text={e.description} />
+              </div>
+            </div>
+          ))
+        }
+        <p class="note"><span class="serif-i">{t.education.note.title}</span> {t.education.note.text}</p>
+      </section>
+
+      <section>
+        <h2 class="mono">{t.passions.title}</h2>
+        <div class="three-col">
+          {t.passions.items.map((p) => <Rich text={p.text} />)}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="mono">{t.tidbits.title}</h2>
+        <Rich text={t.tidbits.statement} />
+        <div class="two-col-grid">
+          {t.tidbits.paragraphs.map((p) => <Rich text={p} />)}
+        </div>
+      </section>
+
+      <footer class="mono foot">
+        {t.print.downloadNote} <a href={siteUrl}>{siteLabel}</a>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  /* Page box for the PDF: A4 with margins; Playwright honours this via preferCSSPageSize. */
+  @page {
+    size: A4;
+    margin: 14mm 15mm 14mm;
+  }
+  html,
+  body {
+    margin: 0;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cv {
+    font-family: var(--font-sans);
+    font-size: 9pt;
+    line-height: 1.42;
+    color: #000;
+  }
+  .cv a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .cv p {
+    margin: 0 0 0.5em;
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8mm;
+    padding-bottom: 5mm;
+    border-bottom: 1.5pt solid #000;
+  }
+  .kicker {
+    margin: 0 0 2mm;
+    font-size: 8pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-dark);
+  }
+  h1 {
+    margin: 0;
+    font-size: 32pt;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  h1 .serif-i {
+    letter-spacing: -0.02em;
+  }
+  .contacts {
+    list-style: none;
+    margin: 4mm 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1mm 5mm;
+    font-size: 7.5pt;
+    letter-spacing: 0.03em;
+  }
+  .photo {
+    width: 30mm;
+    height: auto;
+    flex: none;
+  }
+
+  section {
+    margin-top: 5mm;
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    margin: 0 0 3mm;
+    font-size: 8pt;
+    font-weight: 500;
+    /* Moderate tracking: very wide letter-spacing makes PDF text extractors (and recruiters'
+       ATS parsers) read "A B O U T" instead of "ABOUT". */
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    break-after: avoid;
+  }
+  h2::after {
+    content: '';
+    flex: 1;
+    height: 0.75pt;
+    background: #000;
+  }
+  h2::before {
+    content: '';
+    order: 2;
+    width: 2.2mm;
+    height: 2.2mm;
+    background: var(--yellow);
+    outline: 0.75pt solid #000;
+  }
+  h3 {
+    margin: 0 0 1mm;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    break-after: avoid;
+  }
+  .statement {
+    font-size: 15pt;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .two-col {
+    columns: 2;
+    column-gap: 7mm;
+    color: var(--grey-dark);
+  }
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7mm;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6mm;
+    color: var(--grey-dark);
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: 26mm 1fr;
+    gap: 4mm;
+    padding: 2mm 0;
+    border-top: 0.5pt solid var(--line-2);
+    break-inside: avoid;
+  }
+  .entry:first-of-type {
+    border-top: 0;
+  }
+  .when {
+    font-size: 8pt;
+    color: var(--grey-dark);
+    padding-top: 0.6mm;
+  }
+  .role {
+    font-weight: 400;
+    font-size: 11.5pt;
+  }
+  .where,
+  .muted {
+    color: var(--grey-mid);
+    font-weight: 400;
+  }
+  .small {
+    font-size: 8.5pt;
+  }
+  .letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5mm;
+    height: 5mm;
+    background: #000;
+    color: var(--yellow);
+  }
+  .chips {
+    list-style: none;
+    margin: 1.5mm 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2mm;
+    font-size: 7.5pt;
+  }
+  .chips li {
+    border: 0.5pt solid #bdbdb8;
+    padding: 0.4mm 1.6mm;
+  }
+  .langs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 8mm;
+  }
+  .lname {
+    font-size: 13pt;
+  }
+  .intro {
+    color: var(--grey-dark);
+  }
+  /* Multi-column (not grid): cards flow one by one, so a page can end mid-list
+     instead of pushing a whole grid row to the next page. */
+  .projects {
+    columns: 2;
+    column-gap: 7mm;
+  }
+  .project {
+    border-top: 0.5pt solid #000;
+    padding-top: 2mm;
+    margin-bottom: 3mm;
+    break-inside: avoid;
+  }
+  .ctx,
+  .label {
+    font-size: 6.8pt;
+    letter-spacing: 0.12em;
+    color: var(--grey-mid);
+  }
+  .note {
+    margin-top: 2mm;
+  }
+  .note .serif-i {
+    font-size: 12pt;
+  }
+  .foot {
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 0.75pt solid #000;
+    font-size: 7.5pt;
+    color: var(--grey-mid);
+  }
+  /* The highlight marker, static and a bit thinner for paper. */
+  .cv .hl {
+    background-size: 100% 38%;
+    animation: none;
+  }
+  .cv .ulink {
+    font-weight: 700;
+  }
+</style>
