@@ -3,6 +3,9 @@ import LanguageSwitcher, { type LanguageOption } from './LanguageSwitcher';
 import type { SiteContent } from '../content.config';
 import { LOCALE_LABELS, SWITCHER_ORDER, homePath, type Locale } from '../i18n/locales';
 import { profile } from '../data/profile';
+// Importing an .svg gives an Astro component that inlines the <svg> markup in the HTML:
+// no extra request, razor-sharp at any size. Props become attributes on the <svg>.
+import Logo from '../assets/logo.svg';
 
 interface Props {
   locale: Locale;
@@ -29,8 +32,9 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
 
 <header class="header">
   <div class="inner">
+    {/* The logo is the link's only content, so its label is the link's accessible name. */}
     <a href="#top" class="brand">
-      <span class="badge">AB</span><span>{profile.name.first} {profile.name.last}</span>
+      <Logo width={44} height={44} role="img" aria-label={`${profile.name.first} ${profile.name.last}`} class="logo" />
     </a>
     <nav class="nav mono" aria-label={t.nav.label}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
@@ -116,23 +120,13 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
     min-height: var(--header-h);
   }
   .brand {
-    text-decoration: none;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 20px;
-    letter-spacing: -0.02em;
+    flex: none;
   }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: var(--black);
-    color: var(--yellow);
-    font-size: 15px;
+  .logo {
+    display: block;
+    width: 44px;
+    height: 44px;
   }
 
   .nav {
@@ -170,7 +164,7 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
      so we target it with :global() but keep it namespaced under .header. */
   .header :global(.lang-switch) {
     position: relative;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.08em;
   }
   .header :global(.lsel) {

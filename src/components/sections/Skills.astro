@@ -62,14 +62,11 @@ const { skills } = Astro.props.t;
     margin-top: 72px;
     border-top: 1px solid var(--black);
   }
+  /* One column: heading, then description + tiles on their own row. */
   .row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 40px 72px;
-  }
-  .head {
-    flex: 1 1 360px;
-    min-width: 0;
+    flex-direction: column;
+    gap: 40px;
   }
   .tags {
     font-size: 13px;
@@ -99,8 +96,6 @@ const { skills } = Astro.props.t;
     letter-spacing: -0.035em;
   }
   .body {
-    flex: 1.3 1 460px;
-    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 32px;

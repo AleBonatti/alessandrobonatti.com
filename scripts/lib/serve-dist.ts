@@ -2,7 +2,6 @@
  * Lets Playwright load the *built* site (dist/) without a web server: every request to a fake
  * origin is intercepted and answered straight from disk, so absolute URLs like
  * /_astro/font.woff2 just work. Other origins (third parties) are blocked.
- * Shared by generate-pdf.ts and generate-favicons.ts.
  */
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';

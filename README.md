@@ -12,7 +12,7 @@ TypeScript and one React island, in English, Italian and Swedish, plus generated
 | `npm run check`   | Type-check `.astro`, `.ts` and `.tsx` files                          |
 | `npm run build`   | `check` → static build into `dist/` → PDFs into `dist/cv/`           |
 | `npm run pdf`     | Re-generate PDFs only (needs an existing `dist/`)                    |
-| `npm run favicons`| Redraw the "AB" favicons into `public/favicon/` (needs `dist/`; commit the result) |
+| `npm run favicons`| Rebuild `public/favicon/` from `src/assets/logo.svg` (commit the result) |
 | `npm run preview` | Serve `dist/` locally (runs in background: `npx astro preview stop`) |
 
 Print layout while developing: open http://localhost:4321/print/en/ in the dev server.
@@ -36,7 +36,7 @@ src/
   lib/deploy.ts                  ← production vs staging (from SITE_URL)
   pages/robots.txt.ts            ← robots.txt endpoint (blocks everything on staging)
 scripts/generate-pdf.ts          ← post-build: print pages → dist/cv/*.pdf (Playwright)
-scripts/generate-favicons.ts     ← one-off: draws the AB badge favicons
+scripts/generate-favicons.ts     ← one-off: favicons from the logo SVG
 scripts/lib/serve-dist.ts        ← lets Playwright load dist/ without a web server
 public/                          ← copied verbatim: favicons, .htaccess files
 ```

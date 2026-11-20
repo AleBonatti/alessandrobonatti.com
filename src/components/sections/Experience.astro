@@ -21,7 +21,7 @@ const { experience } = Astro.props.t;
             <div class="who">
               <h3>
                 {job.company}
-                <svg class="arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFE300" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg class="arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </h3>
@@ -38,8 +38,9 @@ const { experience } = Astro.props.t;
 </section>
 
 <style>
+  /* Same palette as the other dark sections (hero, contact): black, white, yellow accent. */
   section {
-    background: var(--grey-dark);
+    background: var(--black);
     color: var(--white);
   }
   .job {
@@ -63,7 +64,7 @@ const { experience } = Astro.props.t;
   .yr {
     flex: 0 0 170px;
     font-size: 15px;
-    color: var(--grey-on-dark-2);
+    color: var(--white);
     padding-top: 8px;
     transition: color 0.3s ease;
   }
@@ -85,6 +86,7 @@ const { experience } = Astro.props.t;
     gap: 16px;
   }
   .arrow {
+    color: var(--yellow);
     opacity: 0;
     transform: translateX(-12px);
     transition: transform 0.35s var(--ease-out), opacity 0.35s ease;
@@ -95,21 +97,21 @@ const { experience } = Astro.props.t;
   }
   .meta {
     margin-top: 12px;
-    color: var(--grey-on-dark-2);
+    color: var(--white);
     font-size: 15px;
   }
   .role {
     font-size: 21px;
-    color: var(--white);
   }
   .sep {
     margin: 0 8px;
+    color: var(--yellow);
   }
   .desc {
     flex: 1.4 1 360px;
     min-width: 0;
     margin: 0;
-    color: #e9ebe9;
+    color: var(--white);
     font-size: 17px;
   }
 </style>
