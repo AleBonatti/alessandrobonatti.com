@@ -32,16 +32,21 @@ const { about } = Astro.props.t;
     letter-spacing: -0.03em;
     font-weight: 700;
   }
+  /* One paragraph per column: 3 side by side, stacked on small screens (no 2+1 orphan in between).
+     A grid instead of CSS multi-column: columns start aligned at the top, no paragraph split mid-way. */
   .cols {
-    columns: 300px 3;
-    column-gap: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1em 56px;
     color: var(--grey-dark);
     font-size: 18px;
   }
   .cols :global(p) {
-    margin: 0 0 1.1em;
-  }
-  .cols :global(p:last-child) {
     margin: 0;
+  }
+  @media (max-width: 860px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

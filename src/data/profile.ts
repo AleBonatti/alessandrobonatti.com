@@ -10,7 +10,6 @@ interface Profile {
   phones: ReadonlyArray<{ country: 'SE' | 'IT'; display: string; tel: string }>;
   github: { url: string; label: string };
   social: ReadonlyArray<{ id: 'linkedin' | 'github' | 'whatsapp' | 'telegram'; label: string; url: string }>;
-  partnerUrl: string;
   iubenda: { siteId: number; cookiePolicyId: number };
   gaMeasurementId: string;
 }
@@ -29,7 +28,6 @@ export const profile = {
     { id: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/+393406887826' },
     { id: 'telegram', label: 'Telegram', url: 'https://t.me/+393406887826' },
   ],
-  partnerUrl: 'https://carmenghirardi.com',
   iubenda: {
     siteId: 3941646,
     cookiePolicyId: 72689656,
