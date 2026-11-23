@@ -126,11 +126,6 @@ export const siteSchema = z.strictObject({
     title: sectionTitle,
     items: z.array(passion).length(3),
   }),
-  tidbits: z.strictObject({
-    title: sectionTitle,
-    statement: text,
-    paragraphs: z.array(text).min(1),
-  }),
   contact: z.strictObject({
     title: text,
     location: text,

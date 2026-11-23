@@ -17,7 +17,6 @@ import Experience from '../../components/sections/Experience.astro';
 import Showcase from '../../components/sections/Showcase.astro';
 import Education from '../../components/sections/Education.astro';
 import Passions from '../../components/sections/Passions.astro';
-import Tidbits from '../../components/sections/Tidbits.astro';
 import Contact from '../../components/sections/Contact.astro';
 import Footer from '../../components/sections/Footer.astro';
 import { getSiteContent } from '../../lib/content';
@@ -47,7 +46,6 @@ const t = await getSiteContent(locale);
     <Showcase t={t} />
     <Education t={t} />
     <Passions t={t} />
-    <Tidbits t={t} />
     <Contact t={t} />
   </main>
   <Footer t={t} />

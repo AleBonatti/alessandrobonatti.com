@@ -12,7 +12,7 @@ const { passions } = Astro.props.t;
 
 <section id="passions">
   <div class="container">
-    <SectionHeader num="06" title={passions.title} />
+    <SectionHeader num="06" title={passions.title} tone="yellow" />
     <div class="pgrid">
       {
         passions.items.map((p) => (
@@ -20,21 +20,21 @@ const { passions } = Astro.props.t;
             {p.icon === 'mountain' && (
               <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
                 <path d="M3 40 L18 14 L26 27 L32 19 L45 40 Z" />
-                <path d="M14 21 L18 14 L22 21 L19 19 L16 22 Z" fill="#FFE300" />
+                <path d="M14 21 L18 14 L22 21 L19 19 L16 22 Z" fill="#fff" />
               </svg>
             )}
             {p.icon === 'dice' && (
               <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
                 <path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14 Z" />
                 <path d="M24 4 L24 24 M6 14 L24 24 L42 14" />
-                <path d="M24 24 L42 34 L24 44 Z" fill="#FFE300" />
+                <path d="M24 24 L42 34 L24 44 Z" fill="#fff" />
               </svg>
             )}
             {p.icon === 'globe' && (
               <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#000" stroke-width="2" aria-hidden="true">
                 <circle cx="24" cy="24" r="19" />
                 <path d="M5 24 H43 M24 5 C14 16 14 32 24 43 C34 32 34 16 24 5" />
-                <circle cx="35" cy="13" r="4" fill="#FFE300" />
+                <circle cx="35" cy="13" r="4" fill="#fff" />
               </svg>
             )}
             <Rich text={p.text} class="text" />
@@ -46,6 +46,14 @@ const { passions } = Astro.props.t;
 </section>
 
 <style>
+  /* Yellow section (the style of the former Tidbits block): black text and outlines,
+     white for the accents that are yellow elsewhere (icon fills, highlight marker). */
+  section {
+    background: var(--yellow);
+  }
+  section :global(.hl) {
+    background-image: linear-gradient(var(--white), var(--white));
+  }
   .pgrid {
     display: grid;
     gap: 48px;
@@ -64,6 +72,5 @@ const { passions } = Astro.props.t;
   .text {
     margin: 0;
     font-size: 18px;
-    color: var(--grey-dark);
   }
 </style>

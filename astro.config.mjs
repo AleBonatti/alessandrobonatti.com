@@ -67,5 +67,16 @@ export default defineConfig({
       subsets: ['latin', 'latin-ext'],
       fallbacks: ['ui-monospace', 'monospace'],
     },
+    // Only for the /seppia-cms/ page (it has its own look). Fonts are emitted only on pages
+    // that render <Font cssVariable="…">, so the main site never downloads this one.
+    {
+      provider: fontProviders.google(),
+      name: 'Instrument Sans',
+      cssVariable: '--font-seppia',
+      weights: [400, 500, 600],
+      styles: ['normal'],
+      subsets: ['latin', 'latin-ext'],
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+    },
   ],
 });

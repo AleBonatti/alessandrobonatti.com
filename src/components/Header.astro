@@ -54,7 +54,7 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
    *
    * Rule: the active section is the last one (in page order) whose top edge has crossed a line
    * one third down the visible area below the sticky header. Sections without a menu entry
-   * (languages, education, tidbits) keep the previous entry active. At the very bottom of the
+   * (languages, education) keep the previous entry active. At the very bottom of the
    * page the last entry wins, since "contact" may be too short to ever reach the line.
    */
   const header = document.querySelector<HTMLElement>('.header');

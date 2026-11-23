@@ -2,202 +2,202 @@
 # Markup inline: ==evidenziato==  **grassetto**  _corsivo serif_  [testo link](https://url)
 
 meta:
-  title: Alessandro Bonatti — Full Stack Developer
-  description: Alessandro Bonatti — Full Stack Developer con base a Malmö, Svezia.
+    title: Alessandro Bonatti — Full Stack Developer
+    description: Alessandro Bonatti — Full Stack Developer con base a Malmö, Svezia.
 
 nav:
-  label: Sezioni
-  about: Chi sono
-  skills: Competenze
-  experience: Esperienza
-  showcase: Progetti
-  passions: Passioni
-  contact: Dimmi hej!
+    label: Sezioni
+    about: Chi sono
+    skills: Competenze
+    experience: Esperienza
+    showcase: Progetti
+    passions: Passioni
+    contact: Dimmi hej!
 
 languageSwitcher:
-  label: Lingua
+    label: Lingua
 
 hero:
-  role: Full Stack Developer
-  basedIn: con base a
-  location: Malmö — Svezia
-  cvButton: Scarica il Curriculum Vitae
-  portraitAlt: Alessandro Bonatti
+    role: Full Stack Developer
+    basedIn: con base a
+    location: Malmö — Svezia
+    cvButton: Scarica il Curriculum Vitae
+    portraitAlt: Alessandro Bonatti
 
 about:
-  title: Chi sono
-  lead: Hej, sono Alessandro,
-  statement: un Full Stack Web Developer con ==oltre 25 anni di esperienza== nel settore.
-  paragraphs:
-    - Ho iniziato la mia carriera nel 1999 come dipendente, ruolo che ho ricoperto per 13 anni, prima di passare alla libera professione e fondare una mia agenzia, che ho gestito con successo per altri 13 anni.
-    - In questo percorso ho maturato una ==solida esperienza nello sviluppo web==, lavorando con tecnologie diverse e affrontando progetti di complessità variabile. Le mie competenze spaziano dal front end al back end, con una ==forte attenzione alla creazione di soluzioni scalabili, manutenibili e performanti==.
-    - Da quando mi sono trasferito a Malmö, in Svezia, nell’ottobre 2025, lavoro come ==consulente nello sviluppo software==, maturando un’esperienza preziosa all’interno dell’ambiente professionale svedese.
+    title: Chi sono
+    lead: Hej, sono Alessandro,
+    statement: un Full Stack Web Developer con ==oltre 25 anni di esperienza== nel settore.
+    paragraphs:
+        - Ho iniziato la mia carriera nel 1999 come dipendente, ruolo che ho ricoperto per 13 anni, prima di passare alla libera professione e fondare una mia agenzia, che ho gestito con successo per altri 13 anni.
+        - In questo percorso ho maturato una ==solida esperienza nello sviluppo web==, lavorando con tecnologie diverse e affrontando progetti di complessità variabile. Le mie competenze spaziano dal front end al back end, con una ==forte attenzione alla creazione di soluzioni scalabili, manutenibili e performanti==.
+        - Da quando mi sono trasferito a Malmö, in Svezia, nell’ottobre 2025, lavoro come ==consulente nello sviluppo software==, maturando un’esperienza preziosa all’interno dell’ambiente professionale svedese.
 
 skills:
-  title: Competenze
-  groups:
-    - letter: A
-      tags: HTML · CSS · VUEJS
-      title: Web Frontend
-      description: Negli ultimi anni ho cercato di colmare il più possibile le lacune che mi separavano dall’essere uno sviluppatore completo e indipendente, approfondendo lo sviluppo Frontend e Typescript, in particolare i ==framework Vue.js e React insieme a Tailwind CSS==. Ho esperienza anche con le tematiche legate alla SEO, all’usabilità e all’accessibilità.
-      tiles:
-        - { name: Vue, icon: vue }
-        - { name: React, icon: react }
-        - { name: Typescript, icon: typescript }
-        - { name: TailwindCss, icon: tailwind }
-        - { name: Next.js, icon: next }
-        - { name: Figma, icon: figma }
-        - { name: S.E.O. }
-        - { name: Accessibilità }
-        - { name: Usabilità }
-    - letter: B
-      tags: POSTGRESQL · NODE · TYPESCRIPT
-      title: Web Backend — API
-      description: Nel tempo mi sono appassionato ai framework e alle tecnologie di sviluppo moderne, e oggi il mio focus principale è su ==**Typescript** e **Node.js**==, con ==Fastify== per lo sviluppo backend. Ho inoltre una lunga esperienza con l’==ecosistema PHP/Laravel==, che per diversi anni è stato una parte importante del mio percorso professionale.
-      tiles:
-        - { name: Node.js, icon: node }
-        - { name: Typescript, icon: typescript }
-        - { name: DrizzleOrm, icon: drizzle }
-        - { name: Postgresql, icon: postgresql }
-        - { name: Php, icon: php }
-        - { name: Laravel, icon: laravel }
-        - { name: MySQL, icon: mysql }
-        - { name: Vercel, icon: vercel }
-        - { name: Python, icon: python }
-        - { name: MS SQL Server, icon: mssql }
-    - letter: C
-      tags: WEB · SERVER · MANAGEMENT
-      title: Server & Strumenti
-      description: So configurare un web server Linux scalabile basato su PHP e MySQL, sistema di backup incluso. Ho sviluppato e utilizzato diversi tipi di API. So lavorare in autonomia, ma sono anche abituato a lavorare in team di varie dimensioni.
-      tiles:
-        - { name: CI / CD, icon: cicd }
-        - { name: Server Linux, icon: linux }
-        - { name: Digital Ocean, icon: digitalocean }
-        - { name: GitKraken, icon: gitkraken }
-        - { name: GitHub, icon: github }
-        - { name: Claude AI, icon: claude }
-        - { name: Aws, icon: aws }
-        - { name: Docker, icon: docker }
-        - { name: NPM, icon: npm }
-        - { name: VS Code, icon: vscode }
+    title: Competenze
+    groups:
+        - letter: A
+          tags: HTML · CSS · VUEJS
+          title: Web Frontend
+          description: Negli ultimi anni ho cercato di colmare il più possibile le lacune che mi separavano dall’essere uno sviluppatore completo e indipendente, approfondendo lo sviluppo Frontend e Typescript, in particolare i ==framework Vue.js e React insieme a Tailwind CSS==. Ho esperienza anche con le tematiche legate alla SEO, all’usabilità e all’accessibilità.
+          tiles:
+              - { name: React, icon: react }
+              - { name: VueJs, icon: vue }
+              - { name: Typescript, icon: typescript }
+              - { name: TailwindCss, icon: tailwind }
+              - { name: CSS3, icon: css3 }
+              - { name: Next.js, icon: next }
+              - { name: Figma, icon: figma }
+              - { name: S.E.O. }
+              - { name: Accessibilità }
+              - { name: Usabilità }
+        - letter: B
+          tags: POSTGRESQL · NODE · TYPESCRIPT
+          title: Web Backend — API
+          description: Nel tempo mi sono appassionato ai framework e alle tecnologie di sviluppo moderne, e oggi il mio focus principale è su ==**Typescript** e **Node.js**==, con ==Fastify== per lo sviluppo backend. Ho inoltre una lunga esperienza con l’==ecosistema PHP/Laravel==, che per diversi anni è stato una parte importante del mio percorso professionale.
+          tiles:
+              - { name: Node.js, icon: node }
+              - { name: Typescript, icon: typescript }
+              - { name: DrizzleOrm, icon: drizzle }
+              - { name: Postgresql, icon: postgresql }
+              - { name: Php, icon: php }
+              - { name: Laravel, icon: laravel }
+              - { name: MySQL, icon: mysql }
+              - { name: Vercel, icon: vercel }
+              - { name: Python, icon: python }
+              - { name: MS SQL Server, icon: mssql }
+        - letter: C
+          tags: WEB · SERVER · MANAGEMENT
+          title: Server & Strumenti
+          description: So configurare un web server Linux scalabile basato su PHP e MySQL, sistema di backup incluso. Ho sviluppato e utilizzato diversi tipi di API. So lavorare in autonomia, ma sono anche abituato a lavorare in team di varie dimensioni.
+          tiles:
+              - { name: CI / CD, icon: cicd }
+              - { name: Server Linux, icon: linux }
+              - { name: Digital Ocean, icon: digitalocean }
+              - { name: GitKraken, icon: gitkraken }
+              - { name: GitHub, icon: github }
+              - { name: Claude AI, icon: claude }
+              - { name: Aws, icon: aws }
+              - { name: Docker, icon: docker }
+              - { name: NPM, icon: npm }
+              - { name: VS Code, icon: vscode }
 
 languages:
-  title: Lingue
-  items:
-    - { name: Italiano, code: IT, level: MADRELINGUA, detail: Lingua madre }
-    - { name: Inglese, code: EN, level: C2, detail: Fluente }
-    - { name: Svedese, code: SV, level: A2, detail: In fase di studio }
+    title: Lingue
+    items:
+        - { name: Italiano, code: IT, level: MADRELINGUA, detail: Lingua madre }
+        - { name: Inglese, code: EN, level: C2, detail: Fluente }
+        - { name: Svedese, code: SV, level: A2, detail: In fase di studio }
 
 experience:
-  title: Esperienza
-  jobs:
-    - years: 2025 — 2026
-      company: Elva11
-      role: Full stack developer
-      location: Malmö, Svezia
-      description: Lavoro come ==consulente== su diversi incarichi per clienti, contribuendo a progetti di sviluppo web full stack e adattandomi a tecnologie, team ed esigenze di business differenti.
-    - years: 2023 — 2025
-      company: e-Project
-      role: Full stack developer
-      location: Parma, Italia
-      description: Stanco della dura vita da freelance in Italia, ho deciso di tornare alla ==programmazione a tempo pieno==. Le nuove possibilità offerte dall’AI sono diventate il mio interesse principale.
-    - years: 2011 — 2023
-      company: Methlab
-      role: Socio e co-fondatore
-      location: Fidenza, Italia
-      description: Ho co-fondato e gestito ==la mia agenzia di sviluppo web==, occupandomi della progettazione, dello sviluppo e della gestione di siti e applicazioni. Mi sono specializzato come Full Stack Developer, seguendo sia lo sviluppo frontend che quello backend.
-    - years: 2001 — 2011
-      company: e-Project
-      role: Full stack developer
-      location: Parma, Italia
-      description: Ho iniziato sviluppando semplici siti web per passare gradualmente a progetti più complessi, tra cui gestionali e piattaforme e-commerce. Mi sono concentrato sulla creazione di interfacce intuitive e ==funzionalità avanzate==, lavorando a progetti in settori diversi e migliorando costantemente le mie competenze tecniche.
-    - years: 1999 — 2001
-      company: FirstPoint
-      role: Web developer
-      location: Fidenza, Italia
-      description: Il mio primo lavoro nello sviluppo web, dove ho realizzato e mantenuto siti web concentrandomi su HTML, CSS e JavaScript. Ho collaborato con designer e altri sviluppatori per offrire ==soluzioni efficaci e funzionali==, adattandomi alle esigenze dei clienti.
+    title: Esperienza
+    jobs:
+        - years: 2025 — 2026
+          company: Elva11
+          role: Full stack developer
+          location: Malmö, Svezia
+          description: Lavoro come ==consulente== su diversi incarichi per clienti, contribuendo a progetti di sviluppo web full stack e adattandomi a tecnologie, team ed esigenze di business differenti.
+        - years: 2023 — 2025
+          company: e-Project
+          role: Full stack developer
+          location: Parma, Italia
+          description: Stanco della dura vita da freelance in Italia, ho deciso di tornare alla ==programmazione a tempo pieno==. Le nuove possibilità offerte dall’AI sono diventate il mio interesse principale.
+        - years: 2011 — 2023
+          company: Methlab
+          role: Socio e co-fondatore
+          location: Fidenza, Italia
+          description: Ho co-fondato e gestito ==la mia agenzia di sviluppo web==, occupandomi della progettazione, dello sviluppo e della gestione di siti e applicazioni. Mi sono specializzato come Full Stack Developer, seguendo sia lo sviluppo frontend che quello backend.
+        - years: 2001 — 2011
+          company: e-Project
+          role: Full stack developer
+          location: Parma, Italia
+          description: Ho iniziato sviluppando semplici siti web per passare gradualmente a progetti più complessi, tra cui gestionali e piattaforme e-commerce. Mi sono concentrato sulla creazione di interfacce intuitive e ==funzionalità avanzate==, lavorando a progetti in settori diversi e migliorando costantemente le mie competenze tecniche.
+        - years: 1999 — 2001
+          company: FirstPoint
+          role: Web developer
+          location: Fidenza, Italia
+          description: Il mio primo lavoro nello sviluppo web, dove ho realizzato e mantenuto siti web concentrandomi su HTML, CSS e JavaScript. Ho collaborato con designer e altri sviluppatori per offrire ==soluzioni efficaci e funzionali==, adattandomi alle esigenze dei clienti.
 
 showcase:
-  title: Progetti
-  intro: Ho sviluppato decine di progetti, ==dai siti web ai gestionali aziendali, dalle API ai sistemi di pagamento==. Ogni progetto è stato un’occasione per affrontare nuove sfide e affinare le mie competenze. Sarei felice di ==mostrarli in un incontro dedicato==, presentando le ==soluzioni adottate==, il mio ==approccio allo sviluppo== e le ==tecnologie utilizzate== per raggiungere gli obiettivi richiesti.
-  labels:
-    project: PROGETTO
-    role: IL MIO RUOLO
-    tech: DIETRO LE QUINTE
-  projects:
-    - context: COME SVILUPPATORE METHLAB
-      name: parmafluid.com
-      url: https://parmafluid.com
-      description: Sito aziendale. Struttura del catalogo personalizzata, importazione dati dal vecchio db MsSql, archivio news, CMS ad hoc, gestione dei contenuti in 5 lingue, integrazione con newsletter di terze parti.
-      role: Sviluppo Backend — Gestione server e deploy
-      tech: [Laravel, Mysql]
-    - context: COME DIPENDENTE E-PROJECT
-      name: pieffeci.com
-      url: https://pieffeci.com
-      description: Sito aziendale. Catalogo personalizzato; news, certificazioni e moduli; CMS ad hoc.
-      role: Sviluppo Backend — Gestione server e deploy
-      tech: [Laravel, MySql]
-    - context: LAVORO INDIPENDENTE
-      name: SeppiaCms
-      url: https://pieffeci.com/login
-      description: Il mio CMS, sviluppato nel corso degli anni e adattabile alla maggior parte delle esigenze. È protetto da autenticazione, ma sarò felice di mostrarti tutte le sue funzionalità.
-      role: UI/UX — Sviluppo Full Stack — Gestione server e deploy — manutenzione e aggiornamento continui
-      tech: [VueJs, TailwindCSS, Laravel, Mysql]
-    - context: COME SVILUPPATORE METHLAB
-      name: lamamita.it
-      url: https://lamamita.com
-      description: E-commerce aziendale B2C e B2B. Pagamenti online, ricerca e filtri prodotto personalizzati, CMS ad hoc, supporto per 4 lingue. Integrazione ad hoc di flussi dati di terze parti. Sistemi personalizzati di fidelizzazione e wishlist.
-      role: Sviluppo Backend — Gestione server e deploy
-      tech: [Laravel, MySql, Integrazione pagamenti Stripe e Paypal]
-    - context: COME DIPENDENTE E-PROJECT
-      name: crm.termest.it
-      url: https://crm.termest.it
-      description: Gestionale aziendale B2C. Connessione API con i siti aziendali. Gestione ordini e clienti. È protetto da autenticazione, ma sarò felice di mostrarti tutte le sue funzionalità.
-      role: Sviluppo Full Stack — Gestione server e deploy
-      tech: [Tailwind CSS, VueJs, Laravel, MySql, Gestione dati via API]
+    title: Progetti
+    intro: Ho sviluppato decine di progetti, ==dai siti web ai gestionali aziendali, dalle API ai sistemi di pagamento==. Ogni progetto è stato un’occasione per affrontare nuove sfide e affinare le mie competenze. Sarei felice di ==mostrarli in un incontro dedicato==, presentando le ==soluzioni adottate==, il mio ==approccio allo sviluppo== e le ==tecnologie utilizzate== per raggiungere gli obiettivi richiesti.
+    labels:
+        project: PROGETTO
+        role: IL MIO RUOLO
+        tech: DIETRO LE QUINTE
+    projects:
+        - context: LAVORO INDIPENDENTE
+          name: Manateca
+          url: https://manateca.com
+          description: "Una moderna web application e app nativa per gli appassionati di Magic: The Gathering, per gestire la propria collezione di carte e generare composizioni di mazzi con l’AI."
+          role: UI/UX — Sviluppo Full Stack — Gestione server e deploy
+          tech: [React, React Native, TypeScript, PostgreSQL, Expo]
+        - context: COME SVILUPPATORE METHLAB
+          name: parmafluid.com
+          url: https://parmafluid.com
+          description: Sito aziendale. Struttura del catalogo personalizzata, importazione dati dal vecchio db MsSql, archivio news, CMS ad hoc, gestione dei contenuti in 5 lingue, integrazione con newsletter di terze parti.
+          role: Sviluppo Backend — Gestione server e deploy
+          tech: [Laravel, Mysql]
+        - context: COME DIPENDENTE E-PROJECT
+          name: pieffeci.com
+          url: https://pieffeci.com
+          description: Sito aziendale. Catalogo personalizzato; news, certificazioni e moduli; CMS ad hoc.
+          role: Sviluppo Backend — Gestione server e deploy
+          tech: [Laravel, MySql]
+        - context: LAVORO INDIPENDENTE
+          name: SeppiaCms
+          url: https://pieffeci.com/login
+          description: Il mio CMS, sviluppato nel corso degli anni e adattabile alla maggior parte delle esigenze. È protetto da autenticazione, ma sarò felice di mostrarti tutte le sue funzionalità.
+          role: UI/UX — Sviluppo Full Stack — Gestione server e deploy — manutenzione e aggiornamento continui
+          tech: [VueJs, TailwindCSS, Laravel, Mysql]
+        - context: COME SVILUPPATORE METHLAB
+          name: lamamita.it
+          url: https://lamamita.com
+          description: E-commerce aziendale B2C e B2B. Pagamenti online, ricerca e filtri prodotto personalizzati, CMS ad hoc, supporto per 4 lingue. Integrazione ad hoc di flussi dati di terze parti. Sistemi personalizzati di fidelizzazione e wishlist.
+          role: Sviluppo Backend — Gestione server e deploy
+          tech: [Laravel, MySql, Integrazione pagamenti Stripe e Paypal]
+        - context: COME DIPENDENTE E-PROJECT
+          name: crm.termest.it
+          url: https://crm.termest.it
+          description: Gestionale aziendale B2C. Connessione API con i siti aziendali. Gestione ordini e clienti. È protetto da autenticazione, ma sarò felice di mostrarti tutte le sue funzionalità.
+          role: Sviluppo Full Stack — Gestione server e deploy
+          tech: [Tailwind CSS, VueJs, Laravel, MySql, Gestione dati via API]
 
 education:
-  title: Formazione
-  items:
-    - years: 1996 — 1999
-      title: Studi universitari in Scienze della Comunicazione
-      detail: Non completati — Università di Parma
-      location: Parma, Italia
-      description: La passione per quella incredibile nuova invenzione chiamata "Internet" mi ha spinto a ==esplorare lo sviluppo web da autodidatta==. Affascinato dalle sue potenzialità, ho iniziato a studiare in autonomia, gettando le basi per la mia futura carriera nel settore.
-    - years: 1991 — 1996
-      title: Istituto Tecnico Industriale ad indirizzo Informatico
-      detail: Diploma con 51/60 — I.T.I.S. Berenini
-      location: Fidenza, Italia
-      description: In questo periodo ho imparato i fondamenti della programmazione, in un’epoca in cui internet non era ancora diffuso. Questa esperienza mi ha dato una solida ==base nel problem solving== e nel pensiero algoritmico, che ho poi applicato allo sviluppo web.
-  note:
-    title: "Sviluppo web da autodidatta:"
-    text: all’inizio degli anni 2000 lo sviluppo web non faceva ancora parte dei programmi scolastici. Per questo ho intrapreso un percorso di autoformazione, studiando in autonomia tecnologie e linguaggi di programmazione per restare al passo con l’evoluzione del settore.
+    title: Formazione
+    items:
+        - years: 1996 — 1999
+          title: Studi universitari in Scienze della Comunicazione
+          detail: Non completati — Università di Parma
+          location: Parma, Italia
+          description: La passione per quella incredibile nuova invenzione chiamata "Internet" mi ha spinto a ==esplorare lo sviluppo web da autodidatta==. Affascinato dalle sue potenzialità, ho iniziato a studiare in autonomia, gettando le basi per la mia futura carriera nel settore.
+        - years: 1991 — 1996
+          title: Istituto Tecnico Industriale ad indirizzo Informatico
+          detail: Diploma con 51/60 — I.T.I.S. Berenini
+          location: Fidenza, Italia
+          description: In questo periodo ho imparato i fondamenti della programmazione, in un’epoca in cui internet non era ancora diffuso. Questa esperienza mi ha dato una solida ==base nel problem solving== e nel pensiero algoritmico, che ho poi applicato allo sviluppo web.
+    note:
+        title: "Sviluppo web da autodidatta:"
+        text: all’inizio degli anni 2000 lo sviluppo web non faceva ancora parte dei programmi scolastici. Per questo ho intrapreso un percorso di autoformazione, studiando in autonomia tecnologie e linguaggi di programmazione per restare al passo con l’evoluzione del settore.
 
 passions:
-  title: Passioni
-  items:
-    - icon: mountain
-      text: Le montagne e i boschi sono il mio rifugio, luoghi in cui trovo ==equilibrio tra natura e libertà==. Amo vivere la montagna in ogni modo possibile, dal trekking alla mountain bike, dallo sci all’arrampicata. Adoro la neve, la nebbia e i climi freddi; e ciò che mi manca di più, vivendo in Svezia, sono le Alpi.
-    - icon: dice
-      text: Fin da bambino sono appassionato di videogiochi e giochi di ruolo, sia digitali che da tavolo. Credo che aiutino a ==stimolare la creatività==, il pensiero critico e il lavoro di squadra. Mi piacciono le serie TV, il cinema e la cultura nerd in generale.
-    - icon: globe
-      text: Sono un ==viaggiatore appassionato==, attratto sia dall’Estremo Oriente che dal Grande Nord — affascinato dalla cultura e dalla filosofia del Giappone così come dal minimalismo, dalla natura e dall’innovazione della Scandinavia. Viaggiare mi aiuta a crescere, a imparare e a vedere il mondo da prospettive diverse.
-
-tidbits:
-  title: Curiosità
-  statement: Nato il _17/01/1976_, sono una persona indipendente, con anni di esperienza e una forte determinazione a mettermi costantemente alla prova. Affronto ogni nuova sfida con entusiasmo e voglia di crescere, sempre aperto a nuove opportunità di apprendimento e miglioramento.
-  paragraphs:
-    - Ho la **patente sia per l’auto che per la moto** e sono abituato a gestirmi in autonomia e ad adattarmi ad ambienti diversi.
-    - Da quando mi sono trasferito in Svezia ho intrapreso nuove esperienze professionali e personali, portando con me il mio **spirito d’iniziativa, la mia affidabilità e il mio entusiasmo** nel contribuire attivamente a nuovi progetti.
+    title: Passioni
+    items:
+        - icon: mountain
+          text: Le montagne e i boschi sono il mio rifugio, luoghi in cui trovo ==equilibrio tra natura e libertà==. Amo vivere la montagna in ogni modo possibile, dal trekking alla mountain bike, dallo sci all’arrampicata. Adoro la neve, la nebbia e i climi freddi; e ciò che mi manca di più, vivendo in Svezia, sono le Alpi.
+        - icon: dice
+          text: Fin da bambino sono appassionato di videogiochi e giochi di ruolo, sia digitali che da tavolo. Credo che aiutino a ==stimolare la creatività==, il pensiero critico e il lavoro di squadra. Mi piacciono le serie TV, il cinema e la cultura nerd in generale.
+        - icon: globe
+          text: Sono un ==viaggiatore appassionato==, attratto sia dall’Estremo Oriente che dal Grande Nord — affascinato dalla cultura e dalla filosofia del Giappone così come dal minimalismo, dalla natura e dall’innovazione della Scandinavia. Viaggiare mi aiuta a crescere, a imparare e a vedere il mondo da prospettive diverse.
 
 contact:
-  title: Dimmi hej!
-  location: Malmö, Svezia
+    title: Dimmi hej!
+    location: Malmö, Svezia
 
 footer:
-  rights: Tutti i diritti riservati
-  cookiePolicy: cookie policy
+    rights: Tutti i diritti riservati
+    cookiePolicy: cookie policy
 
 print:
-  contacts: Contatti
-  downloadNote: La versione interattiva di questo CV è disponibile su
+    contacts: Contatti
+    downloadNote: La versione interattiva di questo CV è disponibile su

@@ -4,7 +4,7 @@
  * the Icon component throws at build time if one is missing.
  */
 export const ICON_NAMES = [
-  'aws', 'cicd', 'claude', 'digitalocean', 'docker', 'drizzle', 'figma', 'github',
+  'aws', 'cicd', 'claude', 'css3', 'digitalocean', 'docker', 'drizzle', 'figma', 'github',
   'gitkraken', 'laravel', 'linkedin', 'linux', 'mssql', 'mysql', 'next', 'node', 'npm',
   'php', 'postgresql', 'python', 'react', 'tailwind', 'telegram', 'typescript',
   'vercel', 'vscode', 'vue', 'whatsapp',
