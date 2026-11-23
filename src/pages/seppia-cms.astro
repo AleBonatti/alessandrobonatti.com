@@ -325,9 +325,16 @@ const year = new Date().getFullYear();
     flex: none;
     color: var(--accent);
   }
+  /* Header brand: one step smaller on phones, full size from 40rem (640px) up. */
   .mark-lg {
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  @media (min-width: 40rem) {
+    .mark-lg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
   }
   .mark-sm {
     width: 1.25rem;
@@ -338,19 +345,28 @@ const year = new Date().getFullYear();
   .header {
     display: flex;
     align-items: center;
+    flex-wrap: wrap; /* on the narrowest phones the menu drops below the brand */
     justify-content: space-between;
-    padding-block: 1.5rem;
+    gap: 0.5rem 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0.75rem;
   }
   .brand {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     color: var(--strong);
   }
   .brand-name {
     font-size: 1.5rem;
     line-height: 2rem;
     letter-spacing: -0.025em;
+  }
+  @media (min-width: 40rem) {
+    .brand-name {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
   }
   .nav {
     display: flex;
@@ -365,12 +381,12 @@ const year = new Date().getFullYear();
 
   /* Hero */
   .hero {
-    padding-top: 4rem;
+    padding-top: 2.5rem;
     padding-bottom: 6rem;
   }
   @media (min-width: 40rem) {
     .hero {
-      padding-top: 6rem;
+      padding-top: 4rem;
     }
   }
   .hero-inner {

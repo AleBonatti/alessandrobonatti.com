@@ -26,8 +26,11 @@ ErrorDocument 404 /404.html
     RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-    # Language pages always end with a slash: /it → /it/
-    RewriteRule ^(it|sv)$ /$1/ [L,R=301]
+    # Every page is a folder with an index.html: add the missing final slash to any URL that
+    # points to an existing folder (/it → /it/, /seppia-cms → /seppia-cms/). Covers future pages
+    # too; the server usually does this by itself (DirectorySlash), this makes it explicit.
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.+[^/])$ /$1/ [L,R=301]
 </IfModule>
 
 <IfModule mod_deflate.c>

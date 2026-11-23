@@ -12,8 +12,11 @@ export default defineConfig({
   // The config file runs in Node, so process.env is available here.
   site: process.env.SITE_URL || PRODUCTION_SITE,
 
-  // Emit /it/index.html rather than /it.html, so URLs end with a slash on any static host.
-  trailingSlash: 'always',
+  // Pages are built as folders (dist/it/index.html), so their real URL ends with "/" and the
+  // canonical/hreflang/sitemap URLs do too. 'ignore' only makes the *dev server* accept both
+  // /it and /it/ (with 'always' it returns 404 for /it); the build output is identical.
+  // In production the web server redirects /it → /it/ (see public/.htaccess).
+  trailingSlash: 'ignore',
 
   // Astro's built-in i18n routing. English lives at "/", the others under "/it/" and "/sv/".
   // This config powers `Astro.currentLocale` and the helpers in `astro:i18n`.
