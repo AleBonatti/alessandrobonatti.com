@@ -120,7 +120,7 @@ experience:
 
 showcase:
   title: Showcase
-  intro: I have developed dozens of projects, ranging ==from websites to business management systems, APIs, and payment systems==. Each project has been an opportunity to tackle new challenges and refine my skills. Most of these projects are protected by authentication, but I would be happy to ==showcase them in a dedicated meeting==, presenting the ==solutions implemented==, my ==development approach==, and the ==technologies used== to achieve the required goals.
+  intro: I have developed dozens of projects, ranging ==from websites to business management systems, APIs, and payment systems==. Each project has been an opportunity to tackle new challenges and refine my skills. I would be happy to ==showcase them in a dedicated meeting==, presenting the ==solutions implemented==, my ==development approach==, and the ==technologies used== to achieve the required goals.
   labels:
     project: PROJECT
     role: MY ROLE
@@ -189,8 +189,8 @@ tidbits:
   title: Tidbits
   statement: Born on _17/01/1976_, I am an independent person with years of experience and a strong determination to constantly challenge myself. I approach every new challenge with enthusiasm and a desire to grow, always open to new learning and improvement opportunities.
   paragraphs:
-    - I have a **driving license for both cars and motorcycles** and am used to managing myself autonomously and adapting to different environments. Since moving to Sweden, I have embraced new professional and personal experiences, bringing with me my **initiative, reliability, and eagerness** to actively contribute to new projects.
-    - I’m embarking on this exciting new chapter of life with my partner — both in love and work — Carmen.
+    - I have a **driving license for both cars and motorcycles** and am used to managing myself autonomously and adapting to different environments.
+    - Since moving to Sweden, I have embraced new professional and personal experiences, bringing with me my **initiative, reliability, and eagerness** to actively contribute to new projects.
 
 contact:
   title: Say hej!
