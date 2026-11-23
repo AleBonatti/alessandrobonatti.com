@@ -48,9 +48,8 @@ skills:
               - { name: CSS3, icon: css3 }
               - { name: Next.js, icon: next }
               - { name: Figma, icon: figma }
-              - { name: S.E.O. }
-              - { name: Tillgänglighet }
-              - { name: Användbarhet }
+              - { name: S.E.O.-optimering }
+              - { name: Tillgänglighet och användbarhet }
         - letter: B
           tags: POSTGRESQL · NODE · TYPESCRIPT
           title: Webbbackend — API
@@ -146,8 +145,8 @@ showcase:
           tech: [Laravel, MySql]
         - context: EGET ARBETE
           name: SeppiaCms
-          url: https://pieffeci.com/login
-          description: Mitt eget CMS, utvecklat under många år och anpassningsbart till de flesta behov. Det ligger bakom inloggning, men jag visar gärna alla dess funktioner.
+          url: /seppia-cms/
+          description: Mitt eget CMS, utvecklat under många år och anpassningsbart till de flesta behov.
           role: UI/UX — Fullstackutveckling — Server- och driftsättningshantering — löpande underhåll
           tech: [VueJs, TailwindCSS, Laravel, Mysql]
         - context: SOM UTVECKLARE PÅ METHLAB
@@ -159,7 +158,7 @@ showcase:
         - context: SOM ANSTÄLLD PÅ E-PROJECT
           name: crm.termest.it
           url: https://crm.termest.it
-          description: Affärssystem för B2C. API-koppling till företagets webbplatser. Hantering av ordrar och kunder. Det ligger bakom inloggning, men jag visar gärna alla dess funktioner.
+          description: Affärssystem för B2C. API-koppling till företagets webbplatser. Hantering av ordrar och kunder.
           role: Fullstackutveckling — Server- och driftsättningshantering
           tech: [Tailwind CSS, VueJs, Laravel, MySql, Datahantering via API]
 

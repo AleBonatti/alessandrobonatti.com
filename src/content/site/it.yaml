@@ -48,9 +48,8 @@ skills:
               - { name: CSS3, icon: css3 }
               - { name: Next.js, icon: next }
               - { name: Figma, icon: figma }
-              - { name: S.E.O. }
-              - { name: Accessibilità }
-              - { name: Usabilità }
+              - { name: Ottimizzazione S.E.O. }
+              - { name: Accessibilità e usabilità }
         - letter: B
           tags: POSTGRESQL · NODE · TYPESCRIPT
           title: Web Backend — API
@@ -146,8 +145,8 @@ showcase:
           tech: [Laravel, MySql]
         - context: LAVORO INDIPENDENTE
           name: SeppiaCms
-          url: https://pieffeci.com/login
-          description: Il mio CMS, sviluppato nel corso degli anni e adattabile alla maggior parte delle esigenze. È protetto da autenticazione, ma sarò felice di mostrarti tutte le sue funzionalità.
+          url: /seppia-cms/
+          description: Il mio CMS, sviluppato nel corso degli anni e adattabile alla maggior parte delle esigenze.
           role: UI/UX — Sviluppo Full Stack — Gestione server e deploy — manutenzione e aggiornamento continui
           tech: [VueJs, TailwindCSS, Laravel, Mysql]
         - context: COME SVILUPPATORE METHLAB
@@ -159,7 +158,7 @@ showcase:
         - context: COME DIPENDENTE E-PROJECT
           name: crm.termest.it
           url: https://crm.termest.it
-          description: Gestionale aziendale B2C. Connessione API con i siti aziendali. Gestione ordini e clienti. È protetto da autenticazione, ma sarò felice di mostrarti tutte le sue funzionalità.
+          description: Gestionale aziendale B2C. Connessione API con i siti aziendali. Gestione ordini e clienti.
           role: Sviluppo Full Stack — Gestione server e deploy
           tech: [Tailwind CSS, VueJs, Laravel, MySql, Gestione dati via API]
 

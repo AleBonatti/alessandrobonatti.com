@@ -116,7 +116,8 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
             t.showcase.projects.map((p) => (
               <div class="project">
                 <div class="mono ctx">{p.context}</div>
-                <h3><a href={p.url}>{p.name}</a></h3>
+                {/* Site paths (/seppia-cms/) become full URLs: a PDF has no "current site" to resolve them against. */}
+                <h3><a href={new URL(p.url, siteUrl).href}>{p.name}</a></h3>
                 <p>{p.description}</p>
                 <p class="small"><span class="mono label">{t.showcase.labels.role}</span> {p.role}</p>
                 <p class="small"><span class="mono label">{t.showcase.labels.tech}</span> {p.tech.join(' · ')}</p>

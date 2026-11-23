@@ -50,7 +50,8 @@ const job = z.strictObject({
 const project = z.strictObject({
   context: text,
   name: text,
-  url: z.url(),
+  // A full URL, or a path on this site such as /seppia-cms/ (works on staging and production alike).
+  url: z.union([z.url(), z.string().regex(/^\/\S*$/, 'Expected a full URL or a site path starting with "/"')]),
   description: text,
   role: text,
   tech: z.array(text).min(1),
