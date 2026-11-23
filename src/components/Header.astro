@@ -32,9 +32,10 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
 
 <header class="header">
   <div class="inner">
-    {/* The logo is the link's only content, so its label is the link's accessible name. */}
+    {/* The visible name is the link's accessible name, so the logo is decorative (aria-hidden). */}
     <a href="#top" class="brand">
-      <Logo width={44} height={44} role="img" aria-label={`${profile.name.first} ${profile.name.last}`} class="logo" />
+      <Logo width={44} height={44} aria-hidden="true" class="logo" />
+      <span>{profile.name.first} {profile.name.last}</span>
     </a>
     <nav class="nav mono" aria-label={t.nav.label}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
@@ -122,6 +123,12 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
   .brand {
     display: flex;
     flex: none;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.02em;
   }
   .logo {
     display: block;

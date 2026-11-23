@@ -54,7 +54,7 @@ skills:
     - letter: B
       tags: POSTGRESQL · NODE · TYPESCRIPT
       title: Web Backend — API
-      description: I started my professional career as a .NET developer in a Microsoft environment, then, within a few years, I transitioned to the open source world and philosophy. Over the years, I became passionate about modern development frameworks and technologies, and today my primary focus is on ==**Typescript** and **Node.js**==, with ==Fastify== for backend development. I also have extensive experience with the ==PHP/Laravel ecosystem==, which has been an important part of my professional journey for several years.
+      description: Over the years, I became passionate about modern development frameworks and technologies, and today my primary focus is on ==**Typescript** and **Node.js**==, with ==Fastify== for backend development. I also have extensive experience with the ==PHP/Laravel ecosystem==, which has been an important part of my professional journey for several years.
       tiles:
         - { name: Node.js, icon: node }
         - { name: Typescript, icon: typescript }
@@ -69,7 +69,7 @@ skills:
     - letter: C
       tags: WEB · SERVER · MANAGEMENT
       title: Server & Tools
-      description: I can configure a scalable Linux web server based on PHP and MySQL, including a backup system. I have developed and used various types of APIs. I can work independently, but I am also accustomed to working in teams of various sizes. ==I have built my own CMS from scratch==, which I use as the foundation for most of my projects.
+      description: I can configure a scalable Linux web server based on PHP and MySQL, including a backup system. I have developed and used various types of APIs. I can work independently, but I am also accustomed to working in teams of various sizes.
       tiles:
         - { name: CI / CD, icon: cicd }
         - { name: Linux server, icon: linux }

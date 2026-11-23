@@ -53,7 +53,7 @@ skills:
     - letter: B
       tags: POSTGRESQL · NODE · TYPESCRIPT
       title: Webbbackend — API
-      description: Jag började min yrkeskarriär som .NET-utvecklare i en Microsoft-miljö och gick sedan, inom några år, över till open source-världen och dess filosofi. Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**Typescript** och **Node.js**==, med ==Fastify== för backendutveckling. Jag har också lång erfarenhet av ==PHP/Laravel-ekosystemet==, som under flera år har varit en viktig del av min yrkesresa.
+      description: Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**Typescript** och **Node.js**==, med ==Fastify== för backendutveckling. Jag har också lång erfarenhet av ==PHP/Laravel-ekosystemet==, som under flera år har varit en viktig del av min yrkesresa.
       tiles:
         - { name: Node.js, icon: node }
         - { name: Typescript, icon: typescript }
@@ -68,7 +68,7 @@ skills:
     - letter: C
       tags: WEBB · SERVER · DRIFT
       title: Server & verktyg
-      description: Jag kan konfigurera en skalbar Linux-webbserver baserad på PHP och MySQL, inklusive ett backupsystem. Jag har utvecklat och använt olika typer av API:er. Jag kan arbeta självständigt, men är också van vid att arbeta i team av olika storlek. ==Jag har byggt mitt eget CMS från grunden==, som jag använder som bas för de flesta av mina projekt.
+      description: Jag kan konfigurera en skalbar Linux-webbserver baserad på PHP och MySQL, inklusive ett backupsystem. Jag har utvecklat och använt olika typer av API:er. Jag kan arbeta självständigt, men är också van vid att arbeta i team av olika storlek.
       tiles:
         - { name: CI / CD, icon: cicd }
         - { name: Linuxserver, icon: linux }
