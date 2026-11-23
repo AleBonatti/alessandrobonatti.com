@@ -12,7 +12,7 @@ nav:
     experience: Esperienza
     showcase: Progetti
     passions: Passioni
-    contact: Dimmi hej!
+    contact: Contattami
 
 languageSwitcher:
     label: Lingua
@@ -190,7 +190,7 @@ passions:
           text: Sono un ==viaggiatore appassionato==, attratto sia dall’Estremo Oriente che dal Grande Nord — affascinato dalla cultura e dalla filosofia del Giappone così come dal minimalismo, dalla natura e dall’innovazione della Scandinavia. Viaggiare mi aiuta a crescere, a imparare e a vedere il mondo da prospettive diverse.
 
 contact:
-    title: Dimmi hej!
+    title: Contattami
     location: Malmö, Svezia
 
 footer:
