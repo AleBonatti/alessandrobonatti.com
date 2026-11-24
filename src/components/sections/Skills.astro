@@ -1,0 +1,145 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import Rich from '../Rich.astro';
+import Icon from '../Icon.astro';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { skills } = Astro.props.t;
+---
+
+<section id="skills">
+  <div class="container">
+    <SectionHeader num="02" title={skills.title} />
+
+    {
+      skills.groups.map((group) => (
+        <div class="group">
+          <div class="row">
+            <div class="rv head">
+              <div class="mono tags">
+                <span class="letter">{group.letter}</span>
+                {group.tags}
+              </div>
+              <h3>{group.title}</h3>
+            </div>
+            <div class="rv body">
+              <Rich text={group.description} class="desc" />
+              <div class="tiles">
+                {group.tiles.map((tile) => (
+                  <div class="tile">
+                    <span class="ti">
+                      {tile.icon ? (
+                        <Icon name={tile.icon} size={28} />
+                      ) : (
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                          <rect x="7" y="7" width="14" height="14" transform="rotate(45 14 14)" />
+                        </svg>
+                      )}
+                    </span>
+                    <span class="tname">{tile.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  section {
+    background: var(--grey-light);
+    border-top: 1px solid var(--line);
+  }
+  .group + .group {
+    padding-top: 72px;
+    margin-top: 72px;
+    border-top: 1px solid var(--black);
+  }
+  /* One column: heading, then description + tiles on their own row. */
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .tags {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--grey-dark);
+  }
+  .letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--black);
+    color: var(--yellow);
+    font-size: 13px;
+  }
+  h3 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(40px, 4.6vw, 64px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .desc {
+    margin: 0;
+    font-size: 18px;
+    color: var(--grey-dark);
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 10px;
+  }
+  .tile {
+    background: var(--white);
+    border: 1px solid var(--line-2);
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    min-height: 118px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s var(--ease-out), border-color 0.3s ease;
+  }
+  .ti {
+    display: inline-flex;
+    color: var(--black);
+    transition: color 0.3s ease, transform 0.4s var(--ease-out);
+  }
+  .tname {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .tile:hover {
+    background: var(--black);
+    color: var(--white);
+    transform: translateY(-4px);
+    border-color: var(--black);
+  }
+  .tile:hover .ti {
+    color: var(--yellow);
+    transform: scale(1.15) rotate(-4deg);
+  }
+</style>

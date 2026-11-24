@@ -1,0 +1,21 @@
+---
+/**
+ * Inline SVG icon. The code between the `---` fences is the component "frontmatter":
+ * it runs only at build time (on Node), never in the browser.
+ */
+import { getIconSvg, type IconName } from '../icons';
+
+interface Props {
+  name: IconName;
+  size: number;
+}
+
+const { name, size } = Astro.props;
+// Inject width/height into the root <svg> tag; aria-hidden because icons are decorative here.
+const svg = getIconSvg(name).replace(
+  '<svg ',
+  `<svg width="${size}" height="${size}" aria-hidden="true" focusable="false" `,
+);
+---
+
+<Fragment set:html={svg} />

@@ -1,0 +1,74 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import Rich from '../Rich.astro';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { education } = Astro.props.t;
+---
+
+<section id="education">
+  <div class="container">
+    <SectionHeader num="05" title={education.title} />
+    <div class="grid">
+      {
+        education.items.map((e) => (
+          <div class="rv">
+            <div class="mono years">{e.years}</div>
+            <h3>{e.title}</h3>
+            <div class="detail">
+              {e.detail} <span aria-hidden="true">|</span> {e.location}
+            </div>
+            <Rich text={e.description} class="desc" />
+          </div>
+        ))
+      }
+    </div>
+    <p class="rv note"><span class="serif-i note-title">{education.note.title}</span> {education.note.text}</p>
+  </div>
+</section>
+
+<style>
+  section {
+    background: var(--grey-light);
+    border-top: 1px solid var(--line);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 48px 64px;
+  }
+  .years {
+    font-size: 14px;
+    color: var(--grey-dark);
+    margin-bottom: 14px;
+  }
+  h3 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .detail {
+    color: var(--grey-mid);
+    margin-bottom: 18px;
+  }
+  .desc {
+    margin: 0;
+    color: var(--grey-dark);
+  }
+  .note {
+    margin: 72px 0 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--black);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .note-title {
+    font-size: 28px;
+  }
+</style>

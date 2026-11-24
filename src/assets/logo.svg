@@ -1,0 +1,8 @@
+<svg viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
+<!-- Bind-rune AB logo (RUNE font), yellow on black. Original 720×720 framing; scripts/generate-favicons.ts crops it tighter for small icons. -->
+<rect width="720" height="720" fill="#000000"/>
+<g fill="#ffe300" transform="translate(360 360) scale(0.2252 -0.2252) translate(-29.5 -1021.5)">
+<path d="M9 0 8 2038 608 1448 189 1019 608 590ZM452 590 125 928V252ZM452 1448 125 1786V1111Z"/>
+<path transform="translate(132.0 0) scale(-1 1)" d="M9 143Q9 747 9.0 1071.5Q9 1396 9.0 1569.0Q9 1742 9.0 1828.0Q9 1914 9 2043L614 1419L681 1274L547 1331L124 1779V1352L614 837L681 692L547 750L124 1197V143L66 0Z"/>
+</g>
+</svg>

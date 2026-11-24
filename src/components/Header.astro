@@ -1,0 +1,242 @@
+---
+import LanguageSwitcher, { type LanguageOption } from './LanguageSwitcher';
+import type { SiteContent } from '../content.config';
+import { LOCALE_LABELS, SWITCHER_ORDER, homePath, type Locale } from '../i18n/locales';
+import { PUBLISHED_LOCALES } from '../i18n/published';
+import { profile } from '../data/profile';
+// Importing an .svg gives an Astro component that inlines the <svg> markup in the HTML:
+// no extra request, razor-sharp at any size. Props become attributes on the <svg>.
+import Logo from '../assets/logo.svg';
+
+interface Props {
+  locale: Locale;
+  t: SiteContent;
+}
+
+const { locale, t } = Astro.props;
+
+const links = [
+  { href: '#about', label: t.nav.about },
+  { href: '#skills', label: t.nav.skills },
+  { href: '#experience', label: t.nav.experience },
+  { href: '#showcase', label: t.nav.showcase },
+  { href: '#passions', label: t.nav.passions },
+  { href: '#contact', label: t.nav.contact },
+];
+
+// Unreleased languages (see src/i18n/published.ts) get no entry in the switcher.
+const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES.includes(l)).map((l) => ({
+  locale: l,
+  label: LOCALE_LABELS[l],
+  href: homePath(l),
+}));
+---
+
+<header class="header">
+  <div class="inner">
+    {/* The visible name is the link's accessible name, so the logo is decorative (aria-hidden). */}
+    <a href="#top" class="brand">
+      <Logo width={44} height={44} aria-hidden="true" class="logo" />
+      <span>{profile.name.first} {profile.name.last}</span>
+    </a>
+    <nav class="nav mono" aria-label={t.nav.label}>
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    {/* client:load → hydrate as soon as the page loads (it's visible immediately). */}
+    <LanguageSwitcher client:load current={locale} options={options} label={t.languageSwitcher.label} />
+  </div>
+</header>
+
+<script>
+  /*
+   * Scroll spy: underline the menu link of the section being read.
+   *
+   * A plain <script> in an .astro file (no is:inline) is processed by Astro: it's TypeScript,
+   * bundled and deduplicated, and loaded as a deferred module, so the DOM is ready when it runs.
+   *
+   * Rule: the active section is the last one (in page order) whose top edge has crossed a line
+   * one third down the visible area below the sticky header. Sections without a menu entry
+   * (languages, education) keep the previous entry active. At the very bottom of the
+   * page the last entry wins, since "contact" may be too short to ever reach the line.
+   */
+  const header = document.querySelector<HTMLElement>('.header');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.header .nav a[href^="#"]')];
+  const targets = links
+    .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+    .filter((t): t is { link: HTMLAnchorElement; section: HTMLElement } => t.section !== null);
+
+  let current: HTMLAnchorElement | null = null;
+  let scheduled = false;
+
+  function update(): void {
+    scheduled = false;
+    const headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+    const line = headerBottom + (window.innerHeight - headerBottom) / 3;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+    let active: HTMLAnchorElement | null = null;
+    if (atBottom) {
+      active = targets.at(-1)?.link ?? null;
+    } else {
+      for (const { link, section } of targets) {
+        if (section.getBoundingClientRect().top <= line) active = link;
+      }
+    }
+
+    if (active === current) return;
+    current?.removeAttribute('aria-current');
+    // aria-current="location" tells screen readers which in-page section this link points to.
+    active?.setAttribute('aria-current', 'location');
+    current = active;
+  }
+
+  // Batch scroll/resize events to at most one update per animation frame.
+  function schedule(): void {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  update();
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+    min-height: var(--header-h);
+  }
+  .brand {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+  .logo {
+    display: block;
+    width: 44px;
+    height: 44px;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 22px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .nav a {
+    text-decoration: none;
+    position: relative;
+    padding: 12px 2px;
+  }
+  .nav a::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    bottom: 6px;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-out);
+  }
+  /* Hover, and the section currently on screen (aria-current is set by the script below). */
+  .nav a:hover::after,
+  .nav a[aria-current]::after {
+    transform: scaleX(1);
+  }
+
+  /* Language switcher: its markup comes from the React island, outside Astro's scoping,
+     so we target it with :global() but keep it namespaced under .header. */
+  .header :global(.lang-switch) {
+    position: relative;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .header :global(.lsel) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 44px;
+    padding: 0 8px;
+    border: 0;
+    background: transparent;
+    color: var(--black);
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+  }
+  .header :global(.lsel:hover) {
+    background: var(--yellow);
+  }
+  .header :global(.chev) {
+    transition: transform 0.25s ease;
+  }
+  .header :global(.lsel[aria-expanded='true'] .chev) {
+    transform: rotate(180deg);
+  }
+  .header :global(.lmenu) {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+    background: var(--white);
+    border: 1px solid var(--black);
+    box-shadow: 4px 4px 0 var(--black);
+    min-width: 150px;
+    z-index: 60;
+  }
+  .header :global(.lmenu[hidden]) {
+    display: none;
+  }
+  .header :global(.lopt) {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 12px;
+    text-decoration: none;
+    background: transparent;
+    color: var(--black);
+    transition: background-color 0.2s ease;
+  }
+  .header :global(.lopt.is-active) {
+    background: var(--black);
+    color: var(--yellow);
+  }
+  .header :global(.lopt:hover) {
+    background: var(--yellow);
+    color: var(--black);
+  }
+  .header :global(.lcode) {
+    opacity: 0.7;
+  }
+</style>

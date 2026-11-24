@@ -1,0 +1,44 @@
+---
+/** Square social buttons (LinkedIn, GitHub, WhatsApp, Telegram). 52px in the hero, 48px in Say hej!. */
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+
+interface Props {
+  size: 'lg' | 'md';
+}
+
+const { size } = Astro.props;
+const iconSize = size === 'lg' ? 20 : 18;
+---
+
+<div class="socials">
+  {
+    profile.social.map((s) => (
+      <a class:list={['soc', `soc--${size}`]} href={s.url} aria-label={s.label} target="_blank" rel="noopener">
+        <Icon name={s.id} size={iconSize} />
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .socials {
+    display: flex;
+    gap: 8px;
+  }
+  .soc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #444;
+    color: var(--white);
+  }
+  .soc--lg {
+    width: 52px;
+    height: 52px;
+  }
+  .soc--md {
+    width: 48px;
+    height: 48px;
+  }
+</style>

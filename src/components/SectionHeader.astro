@@ -1,0 +1,70 @@
+---
+/**
+ * "01 · ABOUT ──────── ■" section header.
+ * `tone` adapts colours to the section background (white/grey, dark, yellow).
+ */
+interface Props {
+  title: string;
+  num?: string;
+  tone?: 'light' | 'dark' | 'yellow';
+}
+
+const { title, num, tone = 'light' } = Astro.props;
+---
+
+<div class:list={['sh', 'rv', `sh--${tone}`]}>
+  {num && <span class="mono sh-num">{num}</span>}
+  <h2>{title}</h2>
+  <span class="sh-rule"></span>
+  <span class="sh-sq"></span>
+</div>
+
+<style>
+  .sh {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+  .sh-num {
+    font-size: 13px;
+    color: var(--grey-mid);
+  }
+  h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .sh-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--black);
+  }
+  .sh-sq {
+    width: 12px;
+    height: 12px;
+    background: var(--yellow);
+    outline: 1px solid var(--black);
+  }
+
+  .sh--dark .sh-num {
+    color: var(--grey-on-dark);
+  }
+  .sh--dark .sh-rule {
+    background: var(--white);
+    opacity: 0.5;
+  }
+  .sh--dark .sh-sq {
+    outline: 0;
+  }
+
+  .sh--yellow .sh-num {
+    color: inherit;
+  }
+  .sh--yellow .sh-sq {
+    background: var(--black);
+    outline: 0;
+  }
+</style>

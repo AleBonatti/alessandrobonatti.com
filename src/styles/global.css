@@ -1,0 +1,235 @@
+/*
+ * Global styles: design tokens + classes shared across components or used inside
+ * content rendered with set:html (which scoped component styles cannot reach).
+ * Layout-specific styles live in each component's scoped <style> block.
+ */
+
+:root {
+  /* Colours (design handoff §2) */
+  --white: #fff;
+  --black: #000;
+  --grey-dark: #303631;
+  --grey-light: #f4f4f2;
+  --grey-mid: #5b605c;
+  --grey-on-dark: #b9bdb9;
+  --line: #e6e6e6;
+  --line-2: #d9d9d6;
+  --yellow: #ffe300;
+
+  /* Layout */
+  --container: 1240px;
+  --gutter: 32px;
+  --header-h: 72px;
+
+  /* Easing used throughout the design */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* --font-sans / --font-serif / --font-mono are defined by Astro's <Font> component. */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+}
+
+.site {
+  font-family: var(--font-sans);
+  color: var(--black);
+  background: var(--white);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--black);
+}
+a:hover {
+  color: var(--black);
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+/* Long compound words (e.g. Swedish "kommunikationsvetenskap") must not overflow narrow screens.
+   overflow-wrap only acts when a word doesn't fit, so the English layout is untouched.
+   hyphens:auto (dictionary from <html lang>) also re-flows normal lines, so it's limited to
+   headings of the translated pages, which have no design reference to match. */
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: break-word;
+}
+:lang(sv) :is(h1, h2, h3),
+:lang(it) :is(h1, h2, h3) {
+  hyphens: auto;
+}
+
+/* Anchor targets stop below the sticky header. */
+section[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 72px var(--gutter);
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+.serif-i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+.mono {
+  font-family: var(--font-mono);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Scroll progress bar ---------- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--yellow);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 50;
+  animation: grow linear both;
+  animation-timeline: scroll(root);
+}
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Buttons & links ---------- */
+.btn {
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--black);
+}
+.btn-y:hover {
+  background: var(--white) !important;
+  color: var(--black) !important;
+}
+
+.soc {
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.soc:hover {
+  background: var(--yellow) !important;
+  color: var(--black) !important;
+  transform: rotate(-6deg);
+}
+
+/* Underlined link; the underline shrinks on hover */
+.ulink {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s ease;
+}
+.ulink:hover {
+  background-size: 0 2px;
+}
+
+/* ---------- Highlight marker ---------- */
+.hl {
+  font-style: normal;
+  background-image: linear-gradient(var(--yellow), var(--yellow));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 42%;
+  transition: background-size 1.1s var(--ease-out) 0.25s;
+}
+.dark .hl {
+  color: var(--white);
+  background-image: linear-gradient(rgba(255, 227, 0, 0.5), rgba(255, 227, 0, 0.5));
+  background-position: 0 88%;
+  background-size: 100% 42%;
+}
+.card:hover .hl {
+  color: var(--white);
+  background-image: linear-gradient(rgba(255, 227, 0, 0.38), rgba(255, 227, 0, 0.38));
+}
+
+/* ---------- Scroll-driven reveal animations ----------
+ * Pure CSS: `animation-timeline: view()` ties the animation progress to the element's
+ * position in the viewport instead of to time. Browsers without support simply show
+ * everything (the @supports guard), as do users who prefer reduced motion.
+ */
+@keyframes rvIn {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hlIn {
+  from {
+    background-size: 0 var(--hh, 42%);
+  }
+  to {
+    background-size: 100% var(--hh, 42%);
+  }
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rv {
+      animation: rvIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0px entry 220px;
+    }
+    .hl {
+      transition: none;
+      animation: hlIn linear both;
+      animation-timeline: view();
+      animation-range: cover 28% cover 52%;
+    }
+    #top .rv {
+      animation: heroIn 0.9s var(--ease-out) both;
+      animation-timeline: auto;
+    }
+    #top .rv + .rv {
+      animation-delay: 0.2s;
+    }
+  }
+}

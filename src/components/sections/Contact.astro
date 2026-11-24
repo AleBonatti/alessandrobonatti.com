@@ -1,0 +1,137 @@
+---
+import SocialLinks from '../SocialLinks.astro';
+import Icon from '../Icon.astro';
+import type { SiteContent } from '../../content.config';
+import { profile } from '../../data/profile';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { contact } = Astro.props.t;
+
+// Short tag shown before each phone number instead of a flag.
+const PHONE_TAG: Record<(typeof profile.phones)[number]['country'], string> = { SE: 'SV', IT: 'IT' };
+---
+
+<section id="contact">
+  <div class="container">
+    <p class="mono rv kicker">{contact.title}</p>
+    <div class="mail-box">
+      <a class="foot-mail rv" href={`mailto:${profile.email}`}>{profile.email}</a>
+    </div>
+    <div class="bottom">
+      {/* One entry per row. The <li>s use display: contents, so all marks share the list's first grid
+          column: it's as wide as the widest tag ([SV]), and the icons are centred in it. */}
+      <ul class="list">
+        {
+          profile.phones.map((phone) => (
+            <li>
+              <span class="mark mono">[{PHONE_TAG[phone.country]}]</span>
+              <a class="flink" href={`tel:${phone.tel}`}>{phone.display}</a>
+            </li>
+          ))
+        }
+        <li>
+          <span class="mark icon"><Icon name="github" size={22} /></span>
+          <a class="flink" href={profile.github.url} target="_blank" rel="noopener">{profile.github.label}</a>
+        </li>
+        <li class="muted">
+          <span class="mark icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+          </span>
+          {contact.location}
+        </li>
+      </ul>
+      <SocialLinks size="md" />
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    background: var(--black);
+    color: var(--white);
+  }
+  .kicker {
+    margin: 0 0 20px;
+    color: var(--yellow);
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  /* A size container: inside it, 1cqi = 1% of its width (the text column), used below. */
+  .mail-box {
+    container-type: inline-size;
+  }
+  .foot-mail {
+    display: inline-block;
+    font-weight: 800;
+    /* Design size, but never wider than the column so the address stays on one line on phones.
+       At this weight/tracking the address is ≈12.6em wide: 100cqi / 13 ≈ 7.6cqi (with a little slack).
+       If the email address changes length, adjust 7.6cqi. */
+    font-size: min(clamp(26px, 4.4vw, 60px), 7.6cqi);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    word-break: break-word;
+    text-decoration: none;
+    color: var(--white);
+    background-image: linear-gradient(var(--yellow), var(--yellow));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 100%;
+    transition: background-size 0.5s var(--ease-out), color 0.3s ease;
+  }
+  .foot-mail:hover {
+    background-size: 100% 100%;
+    color: var(--black);
+  }
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: center;
+    gap: 12px 16px;
+    font-size: 20px;
+  }
+  .list li {
+    display: contents;
+  }
+  .mark {
+    display: inline-flex;
+    justify-self: start;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--yellow);
+  }
+  .mark.icon {
+    justify-self: center;
+  }
+  .muted {
+    color: var(--grey-on-dark);
+  }
+  .flink {
+    text-decoration: none;
+    color: var(--white);
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s ease;
+  }
+  .flink:hover {
+    background-size: 100% 2px;
+    color: var(--white);
+  }
+</style>

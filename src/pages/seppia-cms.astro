@@ -1,0 +1,636 @@
+---
+/**
+ * /seppia-cms/ — standalone presentation of Seppia CMS.
+ *
+ * Ported from the Seppia project (resources/views/seppia.blade.php) and fully independent of it:
+ * logo, colours, font and content all live in this repo. It has its own look, so it does NOT use
+ * BaseLayout (no site header, consent banner or analytics): it's a self-contained HTML page.
+ * Tailwind classes from the original were translated to plain scoped CSS with the same values.
+ * English only, content hardcoded below.
+ */
+import { Font } from 'astro:assets';
+import OctopusMark from '../assets/seppia/octopus-mark.svg';
+import { PRODUCTION_SITE, isProductionSite } from '../lib/deploy';
+
+interface Feature {
+  title: string;
+  text: string;
+  /** Inner markup of a 24×24 stroke icon (Lucide). */
+  icon: string;
+}
+
+interface Project {
+  name: string;
+  sector: string;
+  url: string;
+}
+
+const VERSION = 'Cms v8.1';
+
+const features: Feature[] = [
+  {
+    title: 'Structured content',
+    text: 'Pages, blog posts and custom content types, each with its own fields, attachments and related items.',
+    icon: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+  },
+  {
+    title: 'Rich text editor',
+    text: 'A clean, modern editor with tables, alignment, images and character counting, built for editors, not developers.',
+    icon: '<path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>',
+  },
+  {
+    title: 'Media library',
+    text: 'Upload once and use everywhere. Images are resized, compressed and thumbnailed automatically, and organized with tags.',
+    icon: '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+  },
+  {
+    title: 'Navigation menus',
+    text: 'Build nested menus with drag and drop and keep the site structure under control.',
+    icon: '<path d="M21 12h-8"/><path d="M21 6H8"/><path d="M21 18h-8"/><path d="M3 6v4c0 1.1.9 2 2 2h3"/><path d="M3 10v6c0 1.1.9 2 2 2h3"/>',
+  },
+  {
+    title: 'SEO ready',
+    text: 'Per-page meta tags, clean URLs and an automatically generated sitemap.',
+    icon: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  },
+  {
+    title: 'Multilingual',
+    text: 'Translate content and interface strings, and publish the site in as many languages as you need.',
+    icon: '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
+  },
+  {
+    title: 'E-commerce',
+    text: 'Products, attributes, price lists, customer groups, orders and stock management, all in the same panel.',
+    icon: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
+  },
+  {
+    title: 'Maps and locations',
+    text: 'Geolocate content on a map, with built-in data for countries, regions, provinces and municipalities.',
+    icon: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+  },
+  {
+    title: 'Users and roles',
+    text: 'Give each team member the access they need, with role-based permissions on every section.',
+    icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  },
+];
+
+const stack = ['Laravel 13', 'Vue 3', 'Tailwind CSS 4', 'TipTap', 'MySQL'];
+
+// Websites and shops running on Seppia CMS (shown in "Powered by Seppia").
+const projects: Project[] = [
+  { name: 'Residence Pineta', sector: 'Hospitality', url: 'https://residencepineta.it' },
+  { name: 'Mediatori Associati Parma', sector: 'Real Estate', url: 'https://www.mediatoriassociati.it' },
+  { name: 'Pi.Effe.Ci.', sector: 'Corporate', url: 'https://www.pieffeci.com' },
+  { name: 'Fism Parma', sector: 'Education', url: 'https://fismparma.eu' },
+  { name: 'Magdata', sector: 'Corporate', url: 'https://www.mag-data.com' },
+  { name: 'Parmafluid', sector: 'Corporate', url: 'https://parmafluid.com' },
+  { name: 'La Mamita', sector: 'E-commerce B2B and B2C', url: 'https://www.lamamita.it' },
+  { name: 'NIT - New Induction Technology', sector: 'Corporate', url: 'https://newinduction.it' },
+  { name: 'Medical Center', sector: 'Health corporate', url: 'https://medicalcenterfidenza.it' },
+  { name: 'Salotti Musicali', sector: 'Festival', url: 'https://salottimusicaliparmensi.it' },
+];
+
+const title = 'Seppia CMS — A content management system built for real projects';
+const description =
+  'Seppia CMS is a fast, flexible content management system built on Laravel and Vue, used to run websites, online shops and editorial projects.';
+
+const site = Astro.site ?? new URL(PRODUCTION_SITE);
+const production = isProductionSite(site);
+const canonical = new URL(Astro.url.pathname, site).href;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {production ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href="/seppia-cms/favicon.svg" />
+    <Font cssVariable="--font-seppia" preload={[{ weight: 600, style: 'normal' }, { weight: 400, style: 'normal' }]} />
+  </head>
+
+  <body>
+    <header class="wrap header">
+      <a href="#top" class="brand" aria-label="Seppia CMS">
+        <OctopusMark class="mark mark-lg" aria-hidden="true" />
+        <span class="brand-name">SeppiaCms</span>
+      </a>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#projects">Projects</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="wrap hero">
+        <div class="hero-inner">
+          <span class="badge">{VERSION}</span>
+          <h1>
+            {/* {' '} keeps the space: Astro's HTML compression drops whitespace that is only a line break. */}
+            One flexible CMS for websites, shops and{' '}
+            <span class="accent">everything in between.</span>
+          </h1>
+          <p class="lead">
+            Seppia is a content management system we have been building and refining on real client projects. It
+            gives editors a clean, fast admin panel to manage pages, media, menus and products, and gives developers a
+            solid Laravel foundation to shape each site around its content, not around a generic template.
+          </p>
+          <div class="actions">
+            <a href="#projects" class="btn btn-primary">See it in action</a>
+            <a href="#features" class="btn btn-secondary">Explore features</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <div class="wrap stack-16">
+          <div class="intro">
+            <h2>Everything a site needs, in one panel</h2>
+            <p class="lead">
+              Like its namesake, Seppia adapts to its surroundings: each feature can be switched on or shaped to fit
+              the project.
+            </p>
+          </div>
+
+          <div class="grid">
+            {
+              features.map((feature) => (
+                <article class="card">
+                  <span class="card-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                      set:html={feature.icon}
+                    />
+                  </span>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.text}</p>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="built">
+            <span class="built-label">Built with</span>
+            {stack.map((technology) => <span class="pill">{technology}</span>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="wrap projects">
+        <div class="intro">
+          <h2>Powered by Seppia</h2>
+          <p class="lead">A selection of the websites and online shops running on Seppia CMS.</p>
+        </div>
+
+        <ul class="plist">
+          {
+            projects.map((project) => (
+              <li>
+                <a href={project.url} target="_blank" rel="noopener" class="prow">
+                  <span class="pmeta">
+                    <span class="pname">{project.name}</span>
+                    <span class="psector">{project.sector}</span>
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="20"
+                    height="20"
+                    class="parrow"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <span class="footer-brand">
+          <OctopusMark class="mark mark-sm" aria-hidden="true" />
+          SeppiaCms &copy; {year}
+        </span>
+        <span>{VERSION}</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /*
+   * Plain-CSS translation of the original Tailwind 4 classes.
+   * Light/dark follow the visitor's OS setting, like Tailwind's default `dark:` variant.
+   */
+  :global(html) {
+    --blue: #2b7fff; /* seppia-blue */
+    --green: #66ff4c; /* seppia-green */
+    --zinc-50: #fafafa;
+    --zinc-200: #e4e4e7;
+    --zinc-300: #d4d4d8;
+    --zinc-400: #9f9fa9;
+    --zinc-500: #71717b;
+    --zinc-700: #3f3f46;
+    --zinc-800: #27272a;
+    --zinc-900: #18181b;
+    --zinc-950: #09090b;
+
+    /* Semantic colours (light) */
+    --bg: #fff;
+    --text: var(--zinc-700);
+    --strong: var(--zinc-950);
+    --muted: var(--zinc-500);
+    --line: var(--zinc-200);
+    --band: var(--zinc-50);
+    --card: #fff;
+    --accent: var(--blue);
+    --accent-soft: rgb(43 127 255 / 0.1);
+    --on-accent: #fff;
+    --hover-bg: var(--zinc-50);
+
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(html) {
+      --bg: var(--zinc-950);
+      --text: var(--zinc-300);
+      --strong: #fff;
+      --line: var(--zinc-800);
+      --band: rgb(24 24 27 / 0.4);
+      --card: var(--zinc-950);
+      --accent: var(--green);
+      --accent-soft: rgb(102 255 76 / 0.1);
+      --on-accent: var(--zinc-950);
+      --hover-bg: var(--zinc-900);
+    }
+  }
+
+  :global(*),
+  :global(*::before),
+  :global(*::after) {
+    box-sizing: border-box;
+  }
+  :global(body) {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-seppia);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Layout container: max-w-6xl px-4 sm:px-8 */
+  .wrap {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 40rem) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  .mark {
+    display: block;
+    flex: none;
+    color: var(--accent);
+  }
+  /* Header brand: one step smaller on phones, full size from 40rem (640px) up. */
+  .mark-lg {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  @media (min-width: 40rem) {
+    .mark-lg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+  .mark-sm {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* on the narrowest phones the menu drops below the brand */
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--strong);
+  }
+  .brand-name {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: -0.025em;
+  }
+  @media (min-width: 40rem) {
+    .brand-name {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .nav a:hover {
+    color: var(--strong);
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: 2.5rem;
+    padding-bottom: 6rem;
+  }
+  @media (min-width: 40rem) {
+    .hero {
+      padding-top: 4rem;
+    }
+  }
+  .hero-inner {
+    max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .badge {
+    width: fit-content;
+    border: 1px solid var(--line);
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.25rem;
+    line-height: 1.11;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    color: var(--strong);
+  }
+  @media (min-width: 40rem) {
+    h1 {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+  }
+  .accent {
+    color: var(--accent);
+  }
+  .lead {
+    max-width: 42rem;
+    font-size: 1.125rem;
+    line-height: 1.625;
+    text-wrap: pretty;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .btn {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .btn-secondary {
+    border: 1px solid var(--line);
+    color: var(--strong);
+  }
+  .btn-secondary:hover {
+    background: var(--hover-bg);
+  }
+
+  /* Features */
+  .features {
+    border-block: 1px solid var(--line);
+    background: var(--band);
+    padding-block: 6rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    .features {
+      border-color: var(--zinc-900);
+    }
+  }
+  .stack-16 {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+  .intro {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  h2 {
+    font-size: 1.875rem;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--strong);
+  }
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 40rem) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--card);
+    padding: 1.5rem;
+  }
+  .card-icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  h3 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: var(--strong);
+  }
+  .card p {
+    line-height: 1.625;
+  }
+  .built {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .built-label {
+    font-weight: 500;
+    color: var(--strong);
+  }
+  .pill {
+    border: 1px solid var(--line);
+    border-radius: 9999px;
+    background: var(--card);
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* Projects */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-block: 6rem;
+  }
+  .plist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-block: 1px solid var(--line);
+  }
+  .plist li + li {
+    border-top: 1px solid var(--line);
+  }
+  .prow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.25rem;
+  }
+  .pmeta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  @media (min-width: 40rem) {
+    .pmeta {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 1rem;
+    }
+  }
+  .pname {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    color: var(--strong);
+  }
+  .psector {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--muted);
+  }
+  .parrow {
+    flex: none;
+    color: var(--zinc-400);
+  }
+  .prow:hover .pname,
+  .prow:hover .parrow {
+    color: var(--accent);
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--line);
+  }
+  @media (prefers-color-scheme: dark) {
+    .footer {
+      border-color: var(--zinc-900);
+    }
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-block: 2rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--muted);
+  }
+  @media (min-width: 40rem) {
+    .footer-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>
