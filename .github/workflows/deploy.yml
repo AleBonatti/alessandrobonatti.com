@@ -1,0 +1,100 @@
+name: Build & deploy
+
+# build:  every push and pull request (type check + build + PDFs), so broken content never reaches main unnoticed.
+# deploy: after a successful build, pushes (or manual runs) on
+#           develop → "staging"    environment → https://dev.alessandrobonatti.com (noindex, no analytics)
+#           main    → "production" environment → https://alessandrobonatti.com
+#         Each GitHub environment has its own DEPLOY_PATH secret (see README).
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two deploys at once; a newer push waits for the running one.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Read by astro.config.mjs. Anything other than the production URL builds a staging site.
+      SITE_URL: ${{ github.ref_name == 'main' && 'https://alessandrobonatti.com' || 'https://dev.alessandrobonatti.com' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Playwright's Chromium renders the PDFs. Cache the browser download between runs.
+      - name: Get Playwright version
+        id: pw
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
+      - run: npx playwright install --with-deps chromium
+
+      # astro check → astro build → PDF generation (see package.json "build").
+      - run: npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          include-hidden-files: true # keep .htaccess
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && (github.ref_name == 'main' || github.ref_name == 'develop')
+    runs-on: ubuntu-latest
+    # Environment secrets override repository secrets with the same name: DEPLOY_PATH differs per
+    # environment, the SSH secrets can stay at repository level.
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+      url: ${{ github.ref_name == 'main' && 'https://alessandrobonatti.com' || 'https://dev.alessandrobonatti.com' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      # --delete removes files that no longer exist in the build (e.g. old hashed assets).
+      # DEPLOY_PATH must be a directory dedicated to this site: anything else in it is deleted,
+      # EXCEPT excluded paths (rsync never deletes excluded files):
+      #   /.well-known/  SSL certificate validation files the hosting panel may place there;
+      #   /dev/          the staging site, in case the host nests the subdomain folder
+      #                  inside the main public_html (Hostinger's default layout).
+      # Keep the build itself free of these names.
+      - name: Upload with rsync
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER: ${{ secrets.DEPLOY_USER }}
+          PORT: ${{ secrets.DEPLOY_PORT }}
+          TARGET: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          rsync -rlvz --delete --checksum \
+            --exclude='/.well-known/' --exclude='/dev/' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT:-22} -o StrictHostKeyChecking=yes" \
+            dist/ "$USER@$HOST:${TARGET%/}/"

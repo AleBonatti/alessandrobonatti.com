@@ -1,0 +1,21 @@
+---
+/**
+ * Renders a content string with inline markup (==hl==, **bold**, _serif_, [link](url)) as HTML.
+ * `as` picks the wrapper element; any other attribute (class, style...) is forwarded.
+ *
+ * Note: `set:html` skips Astro's escaping. That's safe here because inline() escapes the
+ * raw text first and only then adds our own known tags.
+ */
+import type { HTMLTag } from 'astro/types';
+import { inline } from '../lib/inline';
+
+interface Props {
+  text: string;
+  as?: HTMLTag;
+  class?: string;
+}
+
+const { text, as: Tag = 'p', ...attrs } = Astro.props;
+---
+
+<Tag {...attrs} set:html={inline(text)} />

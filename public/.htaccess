@@ -1,0 +1,51 @@
+# Apache / LiteSpeed config for the static site (copied as-is into dist/ by Astro).
+# Hostinger shared hosting runs LiteSpeed, which reads .htaccess like Apache.
+# Ignored by nginx: see README for the equivalent server block.
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Hostinger keeps the staging site in /dev/ inside the production folder, so it would also be
+    # reachable as alessandrobonatti.com/dev/… (with broken asset paths). Send it to its subdomain.
+    # This file ships in both builds: staging's own copy in /dev/ replaces the parent's rewrite
+    # rules for that folder, so the rule must live in both, and it never fires on dev.* itself.
+    RewriteCond %{HTTP_HOST} !^dev\. [NC]
+    RewriteCond %{REQUEST_URI} ^/dev(?:/(.*))?$
+    RewriteRule ^ https://dev.alessandrobonatti.com/%1 [L,R=301]
+
+    # www → apex
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+    # Every page is a folder with an index.html: add the missing final slash to any URL that
+    # points to an existing folder (/it → /it/, /seppia-cms → /seppia-cms/). Covers future pages
+    # too; the server usually does this by itself (DirectorySlash), this makes it explicit.
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.+[^/])$ /$1/ [L,R=301]
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml application/xml text/plain
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Files in /_astro/ are cached forever: see _astro/.htaccess.
+    # HTML and PDFs must be revalidated so a deploy is visible immediately.
+    <FilesMatch "\.(html|pdf)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
+
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>

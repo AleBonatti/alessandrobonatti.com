@@ -1,0 +1,52 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import Rich from '../Rich.astro';
+import { inline } from '../../lib/inline';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { about } = Astro.props.t;
+---
+
+<section id="about">
+  <div class="container">
+    <SectionHeader num="01" title={about.title} />
+    <p class="rv statement">
+      <span class="serif-i">{about.lead}</span><br /><Fragment set:html={inline(about.statement)} />
+    </p>
+    <div class="rv cols">
+      {about.paragraphs.map((p) => <Rich text={p} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .statement {
+    margin: 0 0 64px;
+    max-width: 1080px;
+    font-size: clamp(34px, 4.4vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  /* One paragraph per column: 3 side by side, stacked on small screens (no 2+1 orphan in between).
+     A grid instead of CSS multi-column: columns start aligned at the top, no paragraph split mid-way. */
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1em 56px;
+    color: var(--grey-dark);
+    font-size: 18px;
+  }
+  .cols :global(p) {
+    margin: 0;
+  }
+  @media (max-width: 860px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

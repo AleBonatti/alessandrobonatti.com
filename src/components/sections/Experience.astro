@@ -1,0 +1,117 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+import Rich from '../Rich.astro';
+import type { SiteContent } from '../../content.config';
+
+interface Props {
+  t: SiteContent;
+}
+
+const { experience } = Astro.props.t;
+---
+
+<section id="experience" class="dark">
+  <div class="container">
+    <SectionHeader num="03" title={experience.title} tone="dark" />
+    <div class="jobs">
+      {
+        experience.jobs.map((job) => (
+          <div class="job rv">
+            <div class="yr mono">{job.years}</div>
+            <div class="who">
+              <h3>
+                {job.company}
+                <svg class="arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </h3>
+              <div class="meta">
+                <span class="serif-i role">{job.role}</span> <span aria-hidden="true" class="sep">|</span> {job.location}
+              </div>
+            </div>
+            <Rich text={job.description} class="desc" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Same palette as the other dark sections (hero, contact): black, white, yellow accent. */
+  section {
+    background: var(--black);
+    color: var(--white);
+  }
+  .job {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 48px;
+    padding: 44px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background-color 0.35s ease;
+  }
+  .job:first-child {
+    padding-top: 0;
+  }
+  .job:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .job:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .yr {
+    flex: 0 0 170px;
+    font-size: 15px;
+    color: var(--white);
+    padding-top: 8px;
+    transition: color 0.3s ease;
+  }
+  .job:hover .yr {
+    color: var(--yellow);
+  }
+  .who {
+    flex: 1 1 280px;
+    min-width: 0;
+  }
+  h3 {
+    margin: 0;
+    font-size: clamp(32px, 3.4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .arrow {
+    color: var(--yellow);
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: transform 0.35s var(--ease-out), opacity 0.35s ease;
+  }
+  .job:hover .arrow {
+    opacity: 1;
+    transform: none;
+  }
+  .meta {
+    margin-top: 12px;
+    color: var(--white);
+    font-size: 15px;
+  }
+  .role {
+    font-size: 21px;
+  }
+  .sep {
+    margin: 0 8px;
+    color: var(--yellow);
+  }
+  .desc {
+    flex: 1.4 1 360px;
+    min-width: 0;
+    margin: 0;
+    color: var(--white);
+    font-size: 17px;
+  }
+</style>

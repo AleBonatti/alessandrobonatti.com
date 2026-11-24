@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    // React islands (.tsx) use the automatic JSX runtime.
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    // arr[i] / record[key] are typed `T | undefined`: forces handling missing entries.
+    "noUncheckedIndexedAccess": true,
+    // Flags `obj.optional = undefined` when the property was declared `optional?: T`.
+    "exactOptionalPropertyTypes": true
+  }
+}
