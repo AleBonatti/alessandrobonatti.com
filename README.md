@@ -25,6 +25,7 @@ src/
   content.config.ts              ← Zod schema the YAML files must satisfy
   data/profile.ts                ← language-independent data: email, phones, links, iubenda/GA ids
   i18n/locales.ts                ← supported languages, URLs, PDF file names
+  i18n/published.ts              ← languages live on this build (unreleased ones: staging only)
   icons/*.svg + index.ts         ← monochrome icons, inlined at build time
   lib/content.ts                 ← loads content + checks all languages share the same structure
   lib/inline.ts                  ← tiny markup renderer (see below)
@@ -67,6 +68,11 @@ Adding an icon: drop `name.svg` (single path, `fill="#000"`) in `src/icons/` and
 - On `/`, a tiny inline script redirects to `/it/` or `/sv/` if the browser prefers them
   (`navigator.languages`) and the visitor hasn't picked a language yet.
 - The header dropdown stores the explicit choice in `localStorage` (`lang`), which always wins.
+- **Unreleased languages** (`UNRELEASED_LOCALES` in `src/i18n/published.ts`, currently Swedish)
+  are built on staging only. Production has no `/sv/` pages, switcher entry, hreflang, redirect
+  or PDF. The YAML is still validated. To go live, remove the language from that list.
+  Locally `npm run dev` matches production; `SITE_URL=https://dev.alessandrobonatti.com npm run dev`
+  shows every language.
 
 ## PDF
 

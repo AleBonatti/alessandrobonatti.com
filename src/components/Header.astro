@@ -2,6 +2,7 @@
 import LanguageSwitcher, { type LanguageOption } from './LanguageSwitcher';
 import type { SiteContent } from '../content.config';
 import { LOCALE_LABELS, SWITCHER_ORDER, homePath, type Locale } from '../i18n/locales';
+import { PUBLISHED_LOCALES } from '../i18n/published';
 import { profile } from '../data/profile';
 // Importing an .svg gives an Astro component that inlines the <svg> markup in the HTML:
 // no extra request, razor-sharp at any size. Props become attributes on the <svg>.
@@ -23,7 +24,8 @@ const links = [
   { href: '#contact', label: t.nav.contact },
 ];
 
-const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
+// Unreleased languages (see src/i18n/published.ts) get no entry in the switcher.
+const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES.includes(l)).map((l) => ({
   locale: l,
   label: LOCALE_LABELS[l],
   href: homePath(l),
@@ -126,7 +128,7 @@ const options: LanguageOption[] = SWITCHER_ORDER.map((l) => ({
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 20px;
     letter-spacing: -0.02em;
   }

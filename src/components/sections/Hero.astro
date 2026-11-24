@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import portrait from '../../assets/portrait.png';
+// Black & white watercolour illustration (1024×1024 JPG, true black background, so it blends into the hero).
+import portrait from '../../assets/portrait-design-patterns-bw.jpg';
 import SocialLinks from '../SocialLinks.astro';
 import type { SiteContent } from '../../content.config';
 import { cvPdfPath, type Locale } from '../../i18n/locales';
@@ -30,7 +31,7 @@ const { locale, t } = Astro.props;
       </div>
     </div>
     <div class="rv photo">
-      {/* Astro optimises the PNG at build time: WebP, 1x/2x srcset, intrinsic width/height (no layout shift). */}
+      {/* Astro optimises the image at build time: WebP, 1x/2x srcset, intrinsic width/height (no layout shift). */}
       <Image
         src={portrait}
         alt={t.hero.portraitAlt}
@@ -115,6 +116,14 @@ const { locale, t } = Astro.props;
     max-width: 320px;
     min-width: 220px;
     align-self: center;
+  }
+  /* Side by side with the text (wide screens): keep the picture off the right edge of the
+     content area. Below 1000px the margin would push it under the text too early (it wraps
+     around 870px anyway, and then needs no extra space). */
+  @media (min-width: 1000px) {
+    .photo {
+      margin-right: clamp(32px, 6vw, 96px);
+    }
   }
   .portrait {
     display: block;

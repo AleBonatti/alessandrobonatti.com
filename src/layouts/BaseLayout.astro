@@ -5,7 +5,8 @@
  */
 import { Font } from 'astro:assets';
 import '../styles/global.css';
-import { DEFAULT_LOCALE, LANG_STORAGE_KEY, LOCALES, homePath, type Locale } from '../i18n/locales';
+import { DEFAULT_LOCALE, LANG_STORAGE_KEY, homePath, type Locale } from '../i18n/locales';
+import { PUBLISHED_LOCALES } from '../i18n/published';
 import { profile } from '../data/profile';
 import { PRODUCTION_SITE, isProductionSite } from '../lib/deploy';
 
@@ -27,7 +28,8 @@ const site = Astro.site ?? new URL(PRODUCTION_SITE);
 const production = isProductionSite(site);
 const noindex = Astro.props.noindex === true || !production;
 const canonical = new URL(Astro.url.pathname, site).href;
-const alternates = LOCALES.map((l) => ({ hreflang: l, href: new URL(homePath(l), site).href }));
+// Only languages that are live on this build (see src/i18n/published.ts).
+const alternates = PUBLISHED_LOCALES.map((l) => ({ hreflang: l, href: new URL(homePath(l), site).href }));
 const ogLocale: Record<Locale, string> = { en: 'en_US', it: 'it_IT', sv: 'sv_SE' };
 
 const iubendaConfig = {
@@ -48,9 +50,10 @@ const iubendaConfig = {
       /* Browser-language detection, only on the default-language home page ("/").
          Runs before anything renders: if the visitor has no saved choice and prefers a
          language we support, jump to its URL. An explicit choice (saved by the language
-         switcher) always wins. Pages /it/ and /sv/ never redirect: an explicit URL is respected. */
+         switcher) always wins. Pages /it/ and /sv/ never redirect: an explicit URL is respected.
+         Unreleased languages are not in the list, so production never redirects to them. */
       detectLanguage && locale === DEFAULT_LOCALE && (
-        <script is:inline define:vars={{ locales: LOCALES, storageKey: LANG_STORAGE_KEY, fallback: DEFAULT_LOCALE }}>
+        <script is:inline define:vars={{ locales: PUBLISHED_LOCALES, storageKey: LANG_STORAGE_KEY, fallback: DEFAULT_LOCALE }}>
           (function () {
             var target = null;
             try {

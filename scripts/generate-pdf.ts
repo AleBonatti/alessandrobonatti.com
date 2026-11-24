@@ -8,7 +8,7 @@
  * Run directly with Node ≥ 22.18, which strips TypeScript types natively:
  *   node scripts/generate-pdf.ts
  */
-import { mkdir, stat } from 'node:fs/promises';
+import { access, mkdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { chromium } from 'playwright';
 import { LOCALES, cvPdfPath } from '../src/i18n/locales.ts';
@@ -24,6 +24,13 @@ async function main(): Promise<void> {
     await page.emulateMedia({ media: 'print' });
 
     for (const locale of LOCALES) {
+      // Unreleased languages have no print page on production builds (see src/i18n/published.ts).
+      // Check the built file: the local server would otherwise answer with the 404 page.
+      const printPage = path.join(DIST, 'print', locale, 'index.html');
+      if (!(await access(printPage).then(() => true, () => false))) {
+        console.log(`– ${locale}: not published in this build, no PDF`);
+        continue;
+      }
       await page.goto(`${ORIGIN}/print/${locale}/`, { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
 

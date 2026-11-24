@@ -6,15 +6,16 @@
  * Open /print/en/ in the dev server to iterate on the layout.
  */
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import { Font, Image } from 'astro:assets';
+import { Font } from 'astro:assets';
 import '../../styles/global.css';
-import portrait from '../../assets/portrait.png';
 import Rich from '../../components/Rich.astro';
 import { getSiteContent } from '../../lib/content';
-import { LOCALES, homePath } from '../../i18n/locales';
+import { homePath } from '../../i18n/locales';
+import { PUBLISHED_LOCALES } from '../../i18n/published';
 import { profile } from '../../data/profile';
 
-export const getStaticPaths = (() => LOCALES.map((locale) => ({ params: { lang: locale }, props: { locale } }))) satisfies GetStaticPaths;
+// No print page (hence no PDF) for unreleased languages.
+export const getStaticPaths = (() => PUBLISHED_LOCALES.map((locale) => ({ params: { lang: locale }, props: { locale } }))) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { locale } = Astro.props;
@@ -37,6 +38,7 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
   </head>
   <body>
     <div class="cv">
+      {/* No photo on purpose: the PDF is text only (also friendlier to ATS parsers and anonymous screening). */}
       <header class="top">
         <div class="id">
           <p class="mono kicker">{t.hero.role} · {t.hero.basedIn} {t.hero.location}</p>
@@ -49,7 +51,6 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
             <li><a href={profile.github.url}>{profile.github.label}</a></li>
           </ul>
         </div>
-        <Image src={portrait} alt={t.hero.portraitAlt} width={260} format="webp" class="photo" />
       </header>
 
       <section>
@@ -219,11 +220,6 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
     gap: 1mm 5mm;
     font-size: 7.5pt;
     letter-spacing: 0.03em;
-  }
-  .photo {
-    width: 30mm;
-    height: auto;
-    flex: none;
   }
 
   section {

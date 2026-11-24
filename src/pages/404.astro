@@ -1,10 +1,11 @@
 ---
 /**
  * Not-found page. Astro emits it as dist/404.html; the web server must be told to use it
- * (see public/.htaccess). The language is unknown here, so it greets in all three.
+ * (see public/.htaccess). The language is unknown here, so it greets in every live language.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { LOCALES, LOCALE_LABELS, homePath } from '../i18n/locales';
+import { PUBLISHED_LOCALES } from '../i18n/published';
 
 const messages = {
   en: 'This page doesn’t exist.',
@@ -20,7 +21,7 @@ const messages = {
       <h1>Hej<span class="serif-i">?</span></h1>
       <ul class="list">
         {
-          LOCALES.map((l) => (
+          PUBLISHED_LOCALES.map((l) => (
             <li lang={l}>
               <span>{messages[l]}</span>
               <a class="flink" href={homePath(l)}>
