@@ -138,6 +138,17 @@ export const siteSchema = z.strictObject({
     title: text,
     location: text,
   }),
+  footer: z.strictObject({
+    privacy: text,
+  }),
+  /** The privacy notice, shown in a dialog from the footer. `{email}` becomes a mailto link to profile.email. */
+  privacy: z.strictObject({
+    title: text,
+    close: text,
+    updated: text,
+    intro: text,
+    sections: z.array(z.strictObject({ heading: text, paragraphs: z.array(text).min(1) })).min(1),
+  }),
   /** Labels only used in the PDF / print layout. */
   print: z.strictObject({
     contacts: text,

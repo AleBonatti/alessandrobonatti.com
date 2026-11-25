@@ -196,6 +196,37 @@ contact:
     title: Säg hej!
     location: Malmö, Sverige
 
+footer:
+    privacy: "Integritet"
+
+privacy:
+    title: "Integritetspolicy"
+    close: "Stäng"
+    updated: "Senast uppdaterad: 25 november 2026"
+    intro: "Den här webbplatsen är ett personligt CV. Den använder **inga cookies, inga analysverktyg och ingen spårning från tredje part**. Här förklaras de få personuppgifter som berörs."
+    sections:
+        - heading: "Personuppgiftsansvarig"
+          paragraphs:
+              - "Personuppgiftsansvarig för de uppgifter som behandlas via webbplatsen är Alessandro Bonatti, Malmö. Kontakt: {email}."
+        - heading: "Serverloggar"
+          paragraphs:
+              - "När du besöker webbplatsen registrerar webbservern automatiskt vissa tekniska uppgifter, till exempel IP-adress, webbläsartyp, begärd sida och tidpunkt. De behövs för att leverera webbplatsen och hålla den säker (berättigat intresse, art. 6.1 f GDPR). Loggarna sparas av webbhotellet Hostinger enligt dess lagringsregler och används inte för att identifiera eller profilera besökare."
+        - heading: "Om du kontaktar mig"
+          paragraphs:
+              - "Om du mejlar mig eller kontaktar mig via telefon, WhatsApp eller Telegram använder jag dina uppgifter och ditt meddelande enbart för att svara och diskutera ett eventuellt samarbete (art. 6.1 b och f GDPR). Jag sparar dem så länge samtalet eller samarbetet kräver. WhatsApp och Telegram drivs av tredje parter enligt deras egna integritetspolicyer."
+        - heading: "Sparat i din webbläsare"
+          paragraphs:
+              - "Om du väljer ett språk sparar webbplatsen valet i webbläsarens lokala lagring (local storage). Det stannar på din enhet, skickas aldrig till mig och du kan ta bort det genom att rensa webbläsarens data. Inga cookies sätts."
+        - heading: "Typsnitt, länkar och nedladdningar"
+          paragraphs:
+              - "Typsnitt och filer levereras direkt från den här webbplatsen: inga externa tjänster kontaktas när du surfar. Länkar till LinkedIn, GitHub och andra webbplatser leder till tjänster med egna integritetspolicyer. Att ladda ner CV:t som PDF innebär ingen spårning."
+        - heading: "Dina rättigheter"
+          paragraphs:
+              - "Du kan begära tillgång till, rättelse eller radering av dina personuppgifter, begära begränsning av eller invända mot behandlingen och få en kopia av uppgifterna genom att skriva till {email}. Du har också rätt att lämna klagomål till Integritetsskyddsmyndigheten ([imy.se](https://www.imy.se))."
+        - heading: "Ändringar"
+          paragraphs:
+              - "Om webbplatsen börjar använda nya tjänster (till exempel anonym statistik utan cookies) uppdateras den här informationen först."
+
 print:
     contacts: Kontakt
     downloadNote: Den interaktiva versionen av detta CV finns på

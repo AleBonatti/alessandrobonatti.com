@@ -1,14 +1,93 @@
 ---
+/**
+ * Footer: copyright + the privacy notice, which opens in a native <dialog>.
+ * The notice is reachable as a link too: /#privacy (or /it/#privacy) opens it on load.
+ */
+import type { SiteContent } from '../../content.config';
+import Rich from '../Rich.astro';
 import { profile } from '../../data/profile';
 
+interface Props {
+  t: SiteContent;
+}
+
+const { footer, privacy } = Astro.props.t;
 // Evaluated at build time: the year is the build year (the site is rebuilt on every change).
 const year = new Date().getFullYear();
+// The email lives in profile.ts only: the YAML says {email}, we turn it into a mailto link.
+const withEmail = (text: string): string => text.replaceAll('{email}', `[${profile.email}](mailto:${profile.email})`);
 ---
 
 <footer>
-  {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
-  <p class="mono inner">© {year} {profile.name.first} {profile.name.last}</p>
+  <div class="mono inner">
+    {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
+    <span>© {year} {profile.name.first} {profile.name.last}</span>
+    {/* A real link (#privacy) so it can be shared and works as a fallback; the script opens the dialog. */}
+    <a class="ulink" href="#privacy" aria-haspopup="dialog" data-privacy-open>{footer.privacy}</a>
+  </div>
 </footer>
+
+{
+  /* showModal() puts the dialog in the top layer: focus stays inside, Esc closes it, the page
+     behind becomes inert, and focus returns to the footer link when it closes. */
+}
+<dialog id="privacy" class="pdlg" aria-labelledby="privacy-title">
+  <div class="phead">
+    <h2 id="privacy-title">{privacy.title}</h2>
+    {/* method="dialog": submitting this form closes the dialog, no script needed. */}
+    <form method="dialog">
+      <button class="mono pclose" autofocus>
+        <span>{privacy.close}</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 2l10 10M12 2 2 12"></path></svg>
+      </button>
+    </form>
+  </div>
+  <div class="pbody">
+    <p class="mono updated">{privacy.updated}</p>
+    <Rich text={privacy.intro} class="intro" />
+    {
+      privacy.sections.map((s) => (
+        <section>
+          <h3>{s.heading}</h3>
+          {s.paragraphs.map((para) => (
+            <Rich text={withEmail(para)} />
+          ))}
+        </section>
+      ))
+    }
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('privacy');
+  if (dialog instanceof HTMLDialogElement) {
+    const open = (): void => {
+      if (!dialog.open) dialog.showModal();
+    };
+
+    for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-privacy-open]')) {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        open();
+      });
+    }
+
+    // Shared link: /#privacy opens the notice right away.
+    if (window.location.hash === '#privacy') open();
+
+    // A click on the dimmed area around the panel (the dialog element itself) closes it.
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    // Don't leave #privacy in the address bar after closing (a reload would reopen it).
+    dialog.addEventListener('close', () => {
+      if (window.location.hash === '#privacy') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+  }
+</script>
 
 <style>
   footer {
@@ -19,9 +98,156 @@ const year = new Date().getFullYear();
   .inner {
     max-width: var(--container);
     margin: 0 auto;
-    /* Extra room at the bottom so the floating CV / back-to-top buttons never cover the text. */
-    padding: 28px var(--gutter) 96px;
+    padding: 28px var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
     font-size: 12px;
     letter-spacing: 0.04em;
+  }
+  .inner a,
+  .inner a:hover {
+    color: #8a8f8b;
+  }
+
+  /* ---------- Privacy dialog ---------- */
+  /* The page behind doesn't scroll while the notice is open. */
+  :global(html:has(.pdlg[open])) {
+    overflow: hidden;
+  }
+  .pdlg {
+    /* <dialog> has browser defaults (border, padding, small max size): reset them. */
+    box-sizing: border-box;
+    width: min(44rem, calc(100% - 32px));
+    max-width: none;
+    max-height: min(85dvh, 900px);
+    padding: 0;
+    border: 1px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+  }
+  /* The dialog box itself is not a control: no focus ring around the whole panel
+     (the Close button and the links inside keep theirs). */
+  .pdlg:focus,
+  .pdlg:focus-visible {
+    outline: none;
+  }
+  .pdlg[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .pdlg::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .phead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 16px 16px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .phead h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+  .phead form {
+    margin: 0;
+  }
+  .pclose {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .pclose:hover {
+    background: var(--yellow);
+  }
+  .pbody {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 24px 28px 32px;
+  }
+  .updated {
+    margin: 0 0 20px;
+    font-size: 13px;
+    color: var(--grey-mid);
+  }
+  .pbody :global(.intro) {
+    margin: 0 0 32px;
+    font-size: 19px;
+    line-height: 1.5;
+  }
+  section + section {
+    margin-top: 28px;
+  }
+  h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  .pbody :global(p) {
+    margin: 0 0 1em;
+    color: var(--grey-dark);
+    text-wrap: pretty;
+  }
+  .pbody :global(.ulink) {
+    font-weight: 600;
+    color: var(--black);
+    text-underline-offset: 3px;
+  }
+
+  /* Phones: a full-screen sheet instead of a floating box. */
+  @media (max-width: 599.98px) {
+    .pdlg {
+      width: 100%;
+      height: 100dvh;
+      max-height: none;
+      border: 0;
+    }
+    .phead {
+      padding-left: 20px;
+    }
+    .pbody {
+      padding: 20px 20px 32px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pdlg[open] {
+      animation: pdlg-in 0.28s var(--ease-out);
+    }
+    .pdlg[open]::backdrop {
+      animation: pdlg-fade 0.28s ease;
+    }
+  }
+  @keyframes pdlg-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  @keyframes pdlg-fade {
+    from {
+      opacity: 0;
+    }
   }
 </style>
