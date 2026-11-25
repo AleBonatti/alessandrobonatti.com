@@ -49,6 +49,11 @@ const PHONE_TAG: Record<(typeof profile.phones)[number]['country'], string> = { 
 </section>
 
 <style>
+  /* Bottom room for the floating CV / back-to-top buttons, which come to rest at the end of
+     this section (24px above the footer, 48px tall): 95px leaves a 23px gap above them. */
+  .container {
+    padding-bottom: 95px;
+  }
   section {
     background: var(--black);
     color: var(--white);
