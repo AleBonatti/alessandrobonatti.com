@@ -23,7 +23,8 @@ hero:
     role: Full Stack Developer
     basedIn: con base a
     location: Malmö — Svezia
-    cvButton: Scarica il CV in PDF
+    cvButton: Scarica il Curriculum Vitae
+    cvButtonShort: Scarica il CV
     portraitAlt: Alessandro Bonatti
 
 about:
@@ -194,9 +195,6 @@ passions:
 contact:
     title: Contattami
     location: Malmö, Svezia
-
-footer:
-    cookiePolicy: cookie policy
 
 print:
     contacts: Contatti

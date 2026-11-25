@@ -23,7 +23,8 @@ hero:
     role: Fullstackutvecklare
     basedIn: baserad i
     location: Malmö — Sverige
-    cvButton: Ladda ner CV (PDF)
+    cvButton: Ladda ner CV
+    cvButtonShort: Ladda ner CV
     portraitAlt: Alessandro Bonatti
 
 about:
@@ -194,9 +195,6 @@ passions:
 contact:
     title: Säg hej!
     location: Malmö, Sverige
-
-footer:
-    cookiePolicy: cookiepolicy
 
 print:
     contacts: Kontakt

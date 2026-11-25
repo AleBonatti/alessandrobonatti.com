@@ -23,13 +23,13 @@ Print layout while developing: open http://localhost:4321/print/en/ in the dev s
 src/
   content/site/{en,it,sv}.yaml   ← ALL visible text, one file per language
   content.config.ts              ← Zod schema the YAML files must satisfy
-  data/profile.ts                ← language-independent data: email, phones, links, iubenda/GA ids
+  data/profile.ts                ← language-independent data: email, phones, links
   i18n/locales.ts                ← supported languages, URLs, PDF file names
   i18n/published.ts              ← languages live on this build (unreleased ones: staging only)
   icons/*.svg + index.ts         ← monochrome icons, inlined at build time
   lib/content.ts                 ← loads content + checks all languages share the same structure
   lib/inline.ts                  ← tiny markup renderer (see below)
-  layouts/BaseLayout.astro       ← <head>: SEO, hreflang, fonts, iubenda, GA, language detection
+  layouts/BaseLayout.astro       ← <head>: SEO, hreflang, fonts, language detection
   components/                    ← Header, LanguageSwitcher (React), sections/*
   pages/[...lang]/index.astro    ← home page → /, /it/, /sv/
   pages/print/[lang].astro       ← A4 print layout → rendered to PDF

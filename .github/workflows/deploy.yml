@@ -2,7 +2,7 @@ name: Build & deploy
 
 # build:  every push and pull request (type check + build + PDFs), so broken content never reaches main unnoticed.
 # deploy: after a successful build, pushes (or manual runs) on
-#           develop → "staging"    environment → https://dev.alessandrobonatti.com (noindex, no analytics)
+#           develop → "staging"    environment → https://dev.alessandrobonatti.com (noindex)
 #           main    → "production" environment → https://alessandrobonatti.com
 #         Each GitHub environment has its own DEPLOY_PATH secret (see README).
 on:

@@ -24,7 +24,9 @@ const { locale, t } = Astro.props;
       <h1>{profile.name.first}<br /><span class="serif-i last">{profile.name.last}</span></h1>
       <div class="actions">
         <a class="btn btn-y cv" href={cvPdfPath(locale)} download>
-          {t.hero.cvButton}
+          {/* Two labels, one shown at a time: display:none also hides the other from screen readers. */}
+          <span class="cv-long">{t.hero.cvButton}</span>
+          <span class="cv-short">{t.hero.cvButtonShort}</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
         </a>
         <SocialLinks size="lg" />
@@ -110,6 +112,18 @@ const { locale, t } = Astro.props;
     font-size: 15px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+  /* The long label needs ~400px of button: below 520px it would wrap, so phones get the short one. */
+  .cv-short {
+    display: none;
+  }
+  @media (max-width: 519.98px) {
+    .cv-long {
+      display: none;
+    }
+    .cv-short {
+      display: inline;
+    }
   }
   .photo {
     flex: 1 1 240px;

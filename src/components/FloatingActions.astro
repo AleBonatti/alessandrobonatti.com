@@ -17,9 +17,11 @@ const { locale, t } = Astro.props;
 ---
 
 <div class="fab" data-visible="false">
-  {/* The visible text is a short "CV"; the accessible name is the full label. */}
-  <a class="mono fab-btn fab-cv" href={cvPdfPath(locale)} download aria-label={t.hero.cvButton}>
-    <span aria-hidden="true">CV</span>
+  {/* Visible: "Download CV" from 520px, just "CV" on phones (same switch as the hero button).
+      The accessible name is always the full label, so both spans are hidden from screen readers. */}
+  <a class="mono fab-btn fab-cv" href={cvPdfPath(locale)} download aria-label={t.hero.cvButtonShort}>
+    <span class="fab-long" aria-hidden="true">{t.hero.cvButtonShort}</span>
+    <span class="fab-short" aria-hidden="true">CV</span>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
   </a>
   <a class="fab-btn fab-top" href="#top" aria-label={t.nav.toTop}>
@@ -97,6 +99,18 @@ const { locale, t } = Astro.props;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .fab-short {
+    display: none;
+  }
+  @media (max-width: 519.98px) {
+    .fab-long {
+      display: none;
+    }
+    .fab-short {
+      display: inline;
+    }
   }
   /* Black with a white edge: visible on white, yellow and black sections. */
   .fab-top {

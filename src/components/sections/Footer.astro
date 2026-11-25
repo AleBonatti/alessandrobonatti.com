@@ -1,23 +1,13 @@
 ---
-import type { SiteContent } from '../../content.config';
 import { profile } from '../../data/profile';
 
-interface Props {
-  t: SiteContent;
-}
-
-const { footer } = Astro.props.t;
 // Evaluated at build time: the year is the build year (the site is rebuilt on every change).
 const year = new Date().getFullYear();
-const cookieUrl = `https://www.iubenda.com/privacy-policy/${profile.iubenda.cookiePolicyId}/cookie-policy?an=no&s_ck=false&newmarkup=yes`;
 ---
 
 <footer>
-  <div class="mono inner">
-    {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
-    <span>© {year} {profile.name.first} {profile.name.last}</span>
-    <a class="ulink iubenda-nostyle" href={cookieUrl} target="_blank" rel="noopener">{footer.cookiePolicy}</a>
-  </div>
+  {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
+  <p class="mono inner">© {year} {profile.name.first} {profile.name.last}</p>
 </footer>
 
 <style>
@@ -29,19 +19,9 @@ const cookieUrl = `https://www.iubenda.com/privacy-policy/${profile.iubenda.cook
   .inner {
     max-width: var(--container);
     margin: 0 auto;
-    /* Extra room at the bottom so the floating CV / back-to-top buttons never cover the links. */
+    /* Extra room at the bottom so the floating CV / back-to-top buttons never cover the text. */
     padding: 28px var(--gutter) 96px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 12px;
     font-size: 12px;
     letter-spacing: 0.04em;
-  }
-  a {
-    color: #8a8f8b;
-  }
-  a:hover {
-    color: #8a8f8b;
   }
 </style>
