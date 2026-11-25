@@ -36,7 +36,7 @@ A developer who has done the whole job: a quarter-century of web work spanning f
 - Languages: English (default, `/`), Italian (`/it/`), Swedish (`/sv/`). Swedish is written but **unreleased** on production until a native speaker reviews it. Every language must keep the same structure, and the build enforces it.
 - Browser-language detection on `/`; an explicit language choice always wins.
 - PDF CVs per language, text only (no photo), generated with Playwright after each build.
-- Cookie consent through iubenda; Google Analytics 4 only after consent and only on production. GDPR applies (EU/Sweden audience).
+- No cookies, no analytics and no third-party scripts: fonts are self-hosted, and the only browser storage is the visitor's own language choice (localStorage). GDPR applies (EU/Sweden audience). Umami (cookieless analytics) is planned, not built.
 - Hosting: Hostinger shared hosting (LiteSpeed, `.htaccess`); deployed by GitHub Actions + rsync. Staging (dev.alessandrobonatti.com) exists temporarily for the Swedish review.
 - Planned, not built: a contact form, probably on a dedicated page.
 

@@ -1,0 +1,145 @@
+---
+/**
+ * Floating actions, bottom right: download the CV and go back to the top.
+ * They appear once the hero's own CV button has scrolled out of view, so the PDF is one tap
+ * away from anywhere on the page without two CV buttons ever competing on screen.
+ * Plain links: they work without JavaScript; the script only decides when to show them.
+ */
+import type { SiteContent } from '../content.config';
+import { cvPdfPath, type Locale } from '../i18n/locales';
+
+interface Props {
+  locale: Locale;
+  t: SiteContent;
+}
+
+const { locale, t } = Astro.props;
+---
+
+<div class="fab" data-visible="false">
+  {/* Visible: "Download CV" from 520px, just "CV" on phones (same switch as the hero button).
+      The accessible name is always the full label, so both spans are hidden from screen readers. */}
+  <a class="mono fab-btn fab-cv" href={cvPdfPath(locale)} download aria-label={t.hero.cvButtonShort}>
+    <span class="fab-long" aria-hidden="true">{t.hero.cvButtonShort}</span>
+    <span class="fab-short" aria-hidden="true">CV</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
+  </a>
+  <a class="fab-btn fab-top" href="#top" aria-label={t.nav.toTop}>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5M5 11l7-7 7 7"></path></svg>
+  </a>
+</div>
+
+<script>
+  /*
+   * Show the buttons while the hero's CV button is out of view (above the sticky header line).
+   * IntersectionObserver reports visibility changes without listening to every scroll event.
+   */
+  const fab = document.querySelector<HTMLElement>('.fab');
+  const heroCv = document.querySelector<HTMLElement>('.hero .cv');
+  if (fab && heroCv) {
+    const header = document.querySelector<HTMLElement>('.header');
+    const headerHeight = Math.round(header?.getBoundingClientRect().height ?? 0);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry) fab.dataset.visible = String(!entry.isIntersecting);
+      },
+      // Treat the area under the sticky header as "out of view".
+      { rootMargin: `-${headerHeight}px 0px 0px 0px` },
+    );
+    observer.observe(heroCv);
+  }
+</script>
+
+<style>
+  .fab {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 45;
+    display: flex;
+    gap: 8px;
+    transition:
+      opacity 0.25s ease,
+      transform 0.35s var(--ease-out),
+      visibility 0s linear 0s;
+  }
+  /* Hidden: visibility also takes the links out of the Tab order and away from screen readers. */
+  .fab[data-visible='false'] {
+    opacity: 0;
+    transform: translateY(12px);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.2s ease,
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
+  }
+
+  .fab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    text-decoration: none;
+    /* Soft lift so they read as floating over any section. */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  /* Yellow with a black edge: visible on black, white and the yellow Passions section. */
+  .fab-cv {
+    padding: 0 16px;
+    border: 1px solid var(--black);
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .fab-short {
+    display: none;
+  }
+  @media (max-width: 519.98px) {
+    .fab-long {
+      display: none;
+    }
+    .fab-short {
+      display: inline;
+    }
+  }
+  /* Black with a white edge: visible on white, yellow and black sections. */
+  .fab-top {
+    border: 1px solid var(--white);
+    background: var(--black);
+    color: var(--white);
+  }
+  @media (hover: hover) {
+    .fab-cv:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+    .fab-top:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+  }
+  /* Two-tone focus ring (black + yellow) so it shows on every section colour. */
+  .fab-btn:focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: 0;
+    box-shadow: 0 0 0 5px var(--yellow);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fab,
+    .fab[data-visible='false'] {
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

@@ -77,6 +77,10 @@ export const siteSchema = z.strictObject({
   }),
   nav: z.strictObject({
     label: text,
+    /** Accessible name of the mobile menu button. */
+    menu: text,
+    /** Accessible name of the floating "back to top" button. */
+    toTop: text,
     about: text,
     skills: text,
     experience: text,
@@ -91,7 +95,10 @@ export const siteSchema = z.strictObject({
     role: text,
     basedIn: text,
     location: text,
+    /** Hero CV button on wide screens. */
     cvButton: text,
+    /** Hero CV button on phones, and the accessible name of the floating CV button. */
+    cvButtonShort: text,
     portraitAlt: text,
   }),
   about: z.strictObject({
@@ -130,10 +137,6 @@ export const siteSchema = z.strictObject({
   contact: z.strictObject({
     title: text,
     location: text,
-  }),
-  footer: z.strictObject({
-    rights: text,
-    cookiePolicy: text,
   }),
   /** Labels only used in the PDF / print layout. */
   print: z.strictObject({

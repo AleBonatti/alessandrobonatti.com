@@ -42,8 +42,59 @@ const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES
     <nav class="nav mono" aria-label={t.nav.label}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
-    {/* client:load → hydrate as soon as the page loads (it's visible immediately). */}
+    {/* client:load → hydrate as soon as the page loads (it's visible immediately). Desktop only. */}
     <LanguageSwitcher client:load current={locale} options={options} label={t.languageSwitcher.label} />
+
+    {
+      /* Mobile menu button (below 1024px it replaces the nav and the language dropdown).
+         popovertarget wires it to the panel natively: click toggles it, Esc and a tap outside
+         close it, focus returns here, and screen readers hear "expanded/collapsed" without
+         any script. */
+    }
+    <button type="button" class="burger" popovertarget="mobile-menu" aria-label={t.nav.menu}>
+      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+
+  {
+    /* The popover panel lives in the browser's "top layer": above everything else, positioned
+       against the viewport even though the header has a backdrop-filter. */
+  }
+  <div id="mobile-menu" class="mpanel" popover>
+    <nav class="mono" aria-label={t.nav.label}>
+      <ul class="mlist">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="mrow">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <hr class="msep" />
+    {/* Compact language row: the codes are visible, the full names are the accessible names. */}
+    <ul class="mlangs mono" aria-label={t.languageSwitcher.label}>
+      {
+        options.map((o) => (
+          <li>
+            <a
+              href={o.href}
+              hreflang={o.locale}
+              lang={o.locale}
+              class="mlang"
+              data-locale={o.locale}
+              aria-label={o.label}
+              aria-current={o.locale === locale ? 'page' : undefined}
+            >
+              {o.locale.toUpperCase()}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </header>
 
@@ -59,8 +110,12 @@ const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES
    * (languages, education) keep the previous entry active. At the very bottom of the
    * page the last entry wins, since "contact" may be too short to ever reach the line.
    */
+  import { LANG_STORAGE_KEY } from '../i18n/locales';
+
   const header = document.querySelector<HTMLElement>('.header');
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.header .nav a[href^="#"]')];
+  // The same sections, listed again in the mobile panel: they get the same aria-current.
+  const panelLinks = [...document.querySelectorAll<HTMLAnchorElement>('.mpanel nav a[href^="#"]')];
   const targets = links
     .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
     .filter((t): t is { link: HTMLAnchorElement; section: HTMLElement } => t.section !== null);
@@ -84,9 +139,11 @@ const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES
     }
 
     if (active === current) return;
-    current?.removeAttribute('aria-current');
     // aria-current="location" tells screen readers which in-page section this link points to.
-    active?.setAttribute('aria-current', 'location');
+    for (const link of [...links, ...panelLinks]) {
+      if (active !== null && link.hash === active.hash) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    }
     current = active;
   }
 
@@ -100,6 +157,39 @@ const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule);
   update();
+
+  /*
+   * Mobile menu. Opening/closing is native (popover + popovertarget); the script only covers
+   * what the browser can't know:
+   * - a section link scrolls within the page, so nothing would close the panel: close it;
+   * - a language link saves the choice (like the desktop dropdown) and keeps the current #section;
+   * - widening the window past the breakpoint hides the button, so close a panel left open.
+   */
+  const panel = document.getElementById('mobile-menu');
+  if (panel) {
+    const close = (): void => {
+      if (panel.matches(':popover-open')) panel.hidePopover();
+    };
+    for (const link of panelLinks) link.addEventListener('click', close);
+
+    for (const link of panel.querySelectorAll<HTMLAnchorElement>('a[data-locale]')) {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        try {
+          localStorage.setItem(LANG_STORAGE_KEY, link.dataset.locale ?? '');
+        } catch {
+          // Storage unavailable (privacy mode): the choice just won't persist.
+        }
+        if (link.getAttribute('aria-current') === 'page') close();
+        else window.location.assign(link.pathname + window.location.hash);
+      });
+    }
+
+    // Same value as the CSS breakpoint below.
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+      if (e.matches) close();
+    });
+  }
 </script>
 
 <style>
@@ -167,6 +257,184 @@ const options: LanguageOption[] = SWITCHER_ORDER.filter((l) => PUBLISHED_LOCALES
   .nav a:hover::after,
   .nav a[aria-current]::after {
     transform: scaleX(1);
+  }
+
+  /* ---------- Mobile menu (below 1024px) ----------
+     1024px: the widest language (Italian) needs ~980px for logo + nav + switcher on one row. */
+  .burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px; /* optical: align the bars, not the tap area, with the gutter */
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--black);
+    cursor: pointer;
+  }
+  .bars {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 14px;
+  }
+  .bars > span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s var(--ease-out), opacity 0.2s ease;
+  }
+  .bars > span:nth-child(1) {
+    top: 0;
+  }
+  .bars > span:nth-child(2) {
+    top: 6px;
+  }
+  .bars > span:nth-child(3) {
+    top: 12px;
+  }
+  /* Open: the bars become an X. */
+  .header:has(.mpanel:popover-open) .bars > span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .header:has(.mpanel:popover-open) .bars > span:nth-child(2) {
+    opacity: 0;
+  }
+  .header:has(.mpanel:popover-open) .bars > span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* The panel: full width, right under the header (72px + its 1px border).
+     [popover] has browser defaults (centered, bordered box): reset them. */
+  .mpanel {
+    position: fixed;
+    inset: calc(var(--header-h) + 1px) 0 auto;
+    width: auto;
+    max-height: calc(100dvh - var(--header-h) - 1px);
+    overflow-y: auto;
+    margin: 0;
+    padding: 8px calc(var(--gutter) - 12px) 24px;
+    border: 0;
+    border-bottom: 1px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.14);
+  }
+  .mlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .mrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 48px;
+    padding: 0 12px;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--black);
+  }
+  @media (hover: hover) {
+    .mrow:hover {
+      background: var(--yellow);
+    }
+  }
+  /* Current section: the same 2px underline as the desktop menu. */
+  .mpanel nav .mrow[aria-current] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+  }
+  .msep {
+    margin: 12px 12px 16px;
+    border: 0;
+    border-top: 1px solid var(--black);
+  }
+  .mlangs {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0 12px;
+    list-style: none;
+  }
+  .mlang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 44px;
+    border: 1px solid var(--black);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--black);
+  }
+  @media (hover: hover) {
+    .mlang:hover {
+      background: var(--yellow);
+    }
+  }
+  /* Current language: same black/yellow as the active option of the desktop dropdown. */
+  .mlang[aria-current],
+  .mlang[aria-current]:hover {
+    background: var(--black);
+    color: var(--yellow);
+    font-weight: 500;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Slide/fade in. display and overlay are switched "discretely" so the closing transition
+       can play before the popover leaves the top layer; @starting-style is the state it opens from. */
+    .mpanel {
+      transition:
+        opacity 0.22s ease,
+        transform 0.32s var(--ease-out),
+        overlay 0.32s allow-discrete,
+        display 0.32s allow-discrete;
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    .mpanel:popover-open {
+      opacity: 1;
+      transform: none;
+    }
+    @starting-style {
+      .mpanel:popover-open {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bars > span {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 1023.98px) {
+    .nav,
+    .header :global(.lang-switch) {
+      display: none;
+    }
+    .inner {
+      flex-wrap: nowrap;
+    }
+    .burger {
+      display: inline-flex;
+    }
+  }
+  @media (min-width: 1024px) {
+    .mpanel {
+      display: none;
+    }
   }
 
   /* Language switcher: its markup comes from the React island, outside Astro's scoping,

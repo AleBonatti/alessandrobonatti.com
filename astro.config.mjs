@@ -8,7 +8,7 @@ import { PRODUCTION_SITE } from './src/lib/deploy.ts';
 export default defineConfig({
   // Absolute URL of the site: used for canonical/hreflang URLs, og:url, the sitemap and robots.txt.
   // Production by default; CI sets SITE_URL=https://dev.alessandrobonatti.com for staging builds,
-  // which also turns on noindex and turns off analytics (see src/lib/deploy.ts).
+  // which also turns on noindex and a blocking robots.txt (see src/lib/deploy.ts).
   // The config file runs in Node, so process.env is available here.
   site: process.env.SITE_URL || PRODUCTION_SITE,
 

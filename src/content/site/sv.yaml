@@ -7,6 +7,8 @@ meta:
 
 nav:
     label: Sektioner
+    menu: Meny
+    toTop: Till toppen
     about: Om mig
     skills: Kompetenser
     experience: Erfarenhet
@@ -22,6 +24,7 @@ hero:
     basedIn: baserad i
     location: Malmö — Sverige
     cvButton: Ladda ner CV
+    cvButtonShort: Ladda ner CV
     portraitAlt: Alessandro Bonatti
 
 about:
@@ -192,10 +195,6 @@ passions:
 contact:
     title: Säg hej!
     location: Malmö, Sverige
-
-footer:
-    rights: Alla rättigheter förbehållna
-    cookiePolicy: cookiepolicy
 
 print:
     contacts: Kontakt

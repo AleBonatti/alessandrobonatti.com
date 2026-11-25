@@ -7,6 +7,8 @@ meta:
 
 nav:
     label: Sezioni
+    menu: Menu
+    toTop: Torna su
     about: Chi sono
     skills: Competenze
     experience: Esperienza
@@ -22,6 +24,7 @@ hero:
     basedIn: con base a
     location: Malmö — Svezia
     cvButton: Scarica il Curriculum Vitae
+    cvButtonShort: Scarica il CV
     portraitAlt: Alessandro Bonatti
 
 about:
@@ -192,10 +195,6 @@ passions:
 contact:
     title: Contattami
     location: Malmö, Svezia
-
-footer:
-    rights: Tutti i diritti riservati
-    cookiePolicy: cookie policy
 
 print:
     contacts: Contatti
