@@ -201,8 +201,7 @@ footer:
 
 privacy:
     title: "Integritetspolicy"
-    description: "Hur den här webbplatsen hanterar personuppgifter: inga cookies, ingen analys, ingen spårning."
-    back: "Tillbaka till webbplatsen"
+    close: "Stäng"
     updated: "Senast uppdaterad: 25 november 2026"
     intro: "Den här webbplatsen är ett personligt CV. Den använder **inga cookies, inga analysverktyg och ingen spårning från tredje part**. Här förklaras de få personuppgifter som berörs."
     sections:
@@ -226,7 +225,7 @@ privacy:
               - "Du kan begära tillgång till, rättelse eller radering av dina personuppgifter, begära begränsning av eller invända mot behandlingen och få en kopia av uppgifterna genom att skriva till {email}. Du har också rätt att lämna klagomål till Integritetsskyddsmyndigheten ([imy.se](https://www.imy.se))."
         - heading: "Ändringar"
           paragraphs:
-              - "Om webbplatsen börjar använda nya tjänster (till exempel anonym statistik utan cookies) uppdateras den här sidan först."
+              - "Om webbplatsen börjar använda nya tjänster (till exempel anonym statistik utan cookies) uppdateras den här informationen först."
 
 print:
     contacts: Kontakt

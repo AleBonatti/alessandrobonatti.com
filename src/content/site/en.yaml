@@ -203,10 +203,9 @@ footer:
 
 privacy:
     title: "Privacy policy"
-    description: "How this site handles personal data: no cookies, no analytics, no tracking."
-    back: "Back to the site"
+    close: "Close"
     updated: "Last updated: 25 November 2026"
-    intro: "This site is a personal CV. It uses **no cookies, no analytics and no third-party tracking**. This page explains the little personal data involved."
+    intro: "This site is a personal CV. It uses **no cookies, no analytics and no third-party tracking**. Here is the little personal data involved."
     sections:
         - heading: "Who is responsible"
           paragraphs:
@@ -228,7 +227,7 @@ privacy:
               - "You can ask for access to your personal data, its correction or deletion, restriction of or objection to its processing, and a copy of it, by writing to {email}. You also have the right to lodge a complaint with a supervisory authority, such as the Swedish Authority for Privacy Protection ([imy.se](https://www.imy.se)) or the authority in your country."
         - heading: "Changes"
           paragraphs:
-              - "If the site starts using new services (for example anonymous, cookieless statistics), this page will be updated first."
+              - "If the site starts using new services (for example anonymous, cookieless statistics), this notice will be updated first."
 
 print:
     contacts: Contacts

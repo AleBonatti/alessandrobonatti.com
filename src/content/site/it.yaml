@@ -201,10 +201,9 @@ footer:
 
 privacy:
     title: "Informativa privacy"
-    description: "Come questo sito tratta i dati personali: niente cookie, niente analytics, niente tracciamento."
-    back: "Torna al sito"
+    close: "Chiudi"
     updated: "Ultimo aggiornamento: 25 novembre 2026"
-    intro: "Questo sito è un curriculum personale. Non usa **cookie, strumenti di analisi o tracciamento di terze parti**. Questa pagina spiega i pochi dati personali coinvolti."
+    intro: "Questo sito è un curriculum personale. Non usa **cookie, strumenti di analisi o tracciamento di terze parti**. Qui trovi i pochi dati personali coinvolti."
     sections:
         - heading: "Titolare del trattamento"
           paragraphs:
@@ -226,7 +225,7 @@ privacy:
               - "Puoi chiedere l’accesso ai tuoi dati personali, la loro rettifica o cancellazione, la limitazione del trattamento o opporti a esso, e riceverne una copia, scrivendo a {email}. Hai anche il diritto di presentare reclamo a un’autorità di controllo: in Svezia è l’Integritetsskyddsmyndigheten ([imy.se](https://www.imy.se)), in Italia il Garante per la protezione dei dati personali ([garanteprivacy.it](https://www.garanteprivacy.it))."
         - heading: "Modifiche"
           paragraphs:
-              - "Se il sito inizierà a usare nuovi servizi (ad esempio statistiche anonime senza cookie), questa pagina verrà aggiornata prima."
+              - "Se il sito inizierà a usare nuovi servizi (ad esempio statistiche anonime senza cookie), questa informativa verrà aggiornata prima."
 
 print:
     contacts: Contatti

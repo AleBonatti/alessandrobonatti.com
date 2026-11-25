@@ -17,11 +17,9 @@ interface Props {
   detectLanguage?: boolean;
   /** Keep the page out of search results (e.g. the 404 page). */
   noindex?: boolean;
-  /** Page path after the language prefix ('' = home, 'privacy/'), for the hreflang alternates. */
-  path?: string;
 }
 
-const { locale, title, description, detectLanguage = false, path = '' } = Astro.props;
+const { locale, title, description, detectLanguage = false } = Astro.props;
 
 // Astro.site comes from `site` in astro.config.mjs (SITE_URL env var); Astro.url is this page's URL.
 const site = Astro.site ?? new URL(PRODUCTION_SITE);
@@ -30,7 +28,7 @@ const production = isProductionSite(site);
 const noindex = Astro.props.noindex === true || !production;
 const canonical = new URL(Astro.url.pathname, site).href;
 // Only languages that are live on this build (see src/i18n/published.ts).
-const alternates = PUBLISHED_LOCALES.map((l) => ({ hreflang: l, href: new URL(homePath(l) + path, site).href }));
+const alternates = PUBLISHED_LOCALES.map((l) => ({ hreflang: l, href: new URL(homePath(l), site).href }));
 const ogLocale: Record<Locale, string> = { en: 'en_US', it: 'it_IT', sv: 'sv_SE' };
 
 ---
@@ -78,7 +76,7 @@ const ogLocale: Record<Locale, string> = { en: 'en_US', it: 'it_IT', sv: 'sv_SE'
           {alternates.map((a) => (
             <link rel="alternate" hreflang={a.hreflang} href={a.href} />
           ))}
-          <link rel="alternate" hreflang="x-default" href={new URL('/' + path, site).href} />
+          <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
         </>
       )
     }
