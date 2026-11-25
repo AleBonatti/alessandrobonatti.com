@@ -1,13 +1,27 @@
 ---
 import { profile } from '../../data/profile';
+import { homePath, type Locale } from '../../i18n/locales';
 
+interface Props {
+  locale: Locale;
+  /** Translated "Privacy" link label. */
+  label: string;
+}
+
+const { locale, label } = Astro.props;
+const privacyPath = `${homePath(locale)}privacy/`;
+// On the privacy page itself, mark the link as the current page.
+const current = Astro.url.pathname.replace(/\/?$/, '/') === privacyPath;
 // Evaluated at build time: the year is the build year (the site is rebuilt on every change).
 const year = new Date().getFullYear();
 ---
 
 <footer>
-  {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
-  <p class="mono inner">© {year} {profile.name.first} {profile.name.last}</p>
+  <div class="mono inner">
+    {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
+    <span>© {year} {profile.name.first} {profile.name.last}</span>
+    <a class="ulink" href={privacyPath} aria-current={current ? 'page' : undefined}>{label}</a>
+  </div>
 </footer>
 
 <style>
@@ -19,9 +33,17 @@ const year = new Date().getFullYear();
   .inner {
     max-width: var(--container);
     margin: 0 auto;
-    /* Extra room at the bottom so the floating CV / back-to-top buttons never cover the text. */
+    /* Extra room at the bottom so the floating CV / back-to-top buttons never cover the links. */
     padding: 28px var(--gutter) 96px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
     font-size: 12px;
     letter-spacing: 0.04em;
+  }
+  a,
+  a:hover {
+    color: #8a8f8b;
   }
 </style>

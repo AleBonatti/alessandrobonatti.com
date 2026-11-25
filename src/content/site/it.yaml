@@ -196,6 +196,38 @@ contact:
     title: Contattami
     location: Malmö, Svezia
 
+footer:
+    privacy: "Privacy"
+
+privacy:
+    title: "Informativa privacy"
+    description: "Come questo sito tratta i dati personali: niente cookie, niente analytics, niente tracciamento."
+    back: "Torna al sito"
+    updated: "Ultimo aggiornamento: 25 novembre 2026"
+    intro: "Questo sito è un curriculum personale. Non usa **cookie, strumenti di analisi o tracciamento di terze parti**. Questa pagina spiega i pochi dati personali coinvolti."
+    sections:
+        - heading: "Titolare del trattamento"
+          paragraphs:
+              - "Il titolare dei dati personali trattati tramite questo sito è Alessandro Bonatti, Malmö, Svezia. Contatto: {email}."
+        - heading: "Log del server"
+          paragraphs:
+              - "Quando visiti il sito, il server web registra automaticamente alcuni dati tecnici, come indirizzo IP, tipo di browser, pagina richiesta e orario. Servono a erogare il sito e a mantenerlo sicuro (legittimo interesse, art. 6(1)(f) GDPR). I log sono conservati dal fornitore di hosting, Hostinger, secondo le sue politiche di conservazione, e non vengono usati per identificare o profilare i visitatori."
+        - heading: "Se mi contatti"
+          paragraphs:
+              - "Se mi scrivi via email o mi contatti per telefono, WhatsApp o Telegram, uso i tuoi dati e il tuo messaggio solo per risponderti e per valutare una possibile collaborazione (art. 6(1)(b) e (f) GDPR). Li conservo per il tempo richiesto dalla conversazione o dalla collaborazione. WhatsApp e Telegram sono gestiti da terze parti, secondo le rispettive informative."
+        - heading: "Dati salvati nel tuo browser"
+          paragraphs:
+              - "Se scegli una lingua, il sito la ricorda nella memoria locale (local storage) del tuo browser. Resta sul tuo dispositivo, non mi viene mai inviata e puoi cancellarla svuotando i dati del browser. Il sito non imposta cookie."
+        - heading: "Font, link e download"
+          paragraphs:
+              - "Font e file sono serviti direttamente da questo sito: durante la navigazione non viene contattato alcun servizio esterno. I link a LinkedIn, GitHub e altri siti portano a servizi con le proprie informative privacy. Scaricare il CV in PDF non comporta alcun tracciamento."
+        - heading: "I tuoi diritti"
+          paragraphs:
+              - "Puoi chiedere l’accesso ai tuoi dati personali, la loro rettifica o cancellazione, la limitazione del trattamento o opporti a esso, e riceverne una copia, scrivendo a {email}. Hai anche il diritto di presentare reclamo a un’autorità di controllo: in Svezia è l’Integritetsskyddsmyndigheten ([imy.se](https://www.imy.se)), in Italia il Garante per la protezione dei dati personali ([garanteprivacy.it](https://www.garanteprivacy.it))."
+        - heading: "Modifiche"
+          paragraphs:
+              - "Se il sito inizierà a usare nuovi servizi (ad esempio statistiche anonime senza cookie), questa pagina verrà aggiornata prima."
+
 print:
     contacts: Contatti
     downloadNote: La versione interattiva di questo CV è disponibile su

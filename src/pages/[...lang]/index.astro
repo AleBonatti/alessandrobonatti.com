@@ -51,6 +51,6 @@ const t = await getSiteContent(locale);
     <Passions t={t} />
     <Contact t={t} />
   </main>
-  <Footer />
+  <Footer locale={locale} label={t.footer.privacy} />
   <FloatingActions locale={locale} t={t} />
 </BaseLayout>

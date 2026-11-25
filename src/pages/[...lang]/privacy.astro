@@ -1,0 +1,148 @@
+---
+/**
+ * Privacy policy, in every published language: /privacy/, /it/privacy/ (and /sv/privacy/ once
+ * Swedish is released). Same rest-parameter trick as the home page in this folder.
+ * The text lives in src/content/site/<locale>.yaml under `privacy`.
+ */
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/sections/Footer.astro';
+import Rich from '../../components/Rich.astro';
+import Logo from '../../assets/logo.svg';
+import { getSiteContent } from '../../lib/content';
+import { DEFAULT_LOCALE, homePath } from '../../i18n/locales';
+import { PUBLISHED_LOCALES } from '../../i18n/published';
+import { profile } from '../../data/profile';
+
+export const getStaticPaths = (() =>
+  PUBLISHED_LOCALES.map((locale) => ({
+    params: { lang: locale === DEFAULT_LOCALE ? undefined : locale },
+    props: { locale },
+  }))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { locale } = Astro.props;
+const t = await getSiteContent(locale);
+const p = t.privacy;
+const home = homePath(locale);
+
+// The email lives in profile.ts only: the YAML says {email}, we turn it into a mailto link.
+const withEmail = (text: string): string => text.replaceAll('{email}', `[${profile.email}](mailto:${profile.email})`);
+---
+
+<BaseLayout locale={locale} title={`${p.title} — ${profile.name.first} ${profile.name.last}`} description={p.description} path="privacy/">
+  <header class="top">
+    <div class="bar">
+      <a href={home} class="brand">
+        <Logo width={40} height={40} aria-hidden="true" class="logo" />
+        <span>{profile.name.first} {profile.name.last}</span>
+      </a>
+      <a href={home} class="mono back">← {p.back}</a>
+    </div>
+  </header>
+
+  <main class="doc">
+    <h1>{p.title}</h1>
+    <p class="mono updated">{p.updated}</p>
+    <Rich text={p.intro} class="intro" />
+    {
+      p.sections.map((s) => (
+        <section>
+          <h2>{s.heading}</h2>
+          {s.paragraphs.map((para) => (
+            <Rich text={withEmail(para)} />
+          ))}
+        </section>
+      ))
+    }
+  </main>
+
+  <Footer locale={locale} label={t.footer.privacy} />
+</BaseLayout>
+
+<style>
+  .top {
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    min-height: var(--header-h);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+  .logo {
+    display: block;
+  }
+  .back {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 0;
+  }
+  .back:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+
+  /* Reading page: one comfortable column (~68 characters per line). */
+  .doc {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 64px var(--gutter) 96px;
+    box-sizing: content-box;
+  }
+  h1 {
+    margin: 0 0 12px;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .updated {
+    margin: 0 0 40px;
+    font-size: 13px;
+    color: var(--grey-mid);
+  }
+  .doc :global(.intro) {
+    margin: 0 0 48px;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  section + section {
+    margin-top: 36px;
+  }
+  h2 {
+    margin: 0 0 10px;
+    font-size: 21px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  .doc :global(p) {
+    margin: 0 0 1em;
+    color: var(--grey-dark);
+    text-wrap: pretty;
+  }
+  .doc :global(.ulink) {
+    font-weight: 600;
+    color: var(--black);
+    text-underline-offset: 3px;
+  }
+</style>

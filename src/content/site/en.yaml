@@ -198,6 +198,38 @@ contact:
     title: Say hej!
     location: Malmö, Sweden
 
+footer:
+    privacy: "Privacy"
+
+privacy:
+    title: "Privacy policy"
+    description: "How this site handles personal data: no cookies, no analytics, no tracking."
+    back: "Back to the site"
+    updated: "Last updated: 25 November 2026"
+    intro: "This site is a personal CV. It uses **no cookies, no analytics and no third-party tracking**. This page explains the little personal data involved."
+    sections:
+        - heading: "Who is responsible"
+          paragraphs:
+              - "Alessandro Bonatti, Malmö, Sweden, is the controller of the personal data processed through this site. Contact: {email}."
+        - heading: "Server logs"
+          paragraphs:
+              - "When you visit the site, the web server automatically records technical data such as your IP address, browser type, the page requested and the time. This is needed to deliver the site and keep it secure (legitimate interest, Art. 6(1)(f) GDPR). The logs are kept by the hosting provider, Hostinger, according to its retention policy, and are not used to identify or profile visitors."
+        - heading: "If you contact me"
+          paragraphs:
+              - "If you email me or contact me by phone, WhatsApp or Telegram, I use your details and your message only to reply and to discuss possible work together (Art. 6(1)(b) and (f) GDPR). I keep them for as long as the conversation or collaboration requires. WhatsApp and Telegram are run by third parties under their own privacy policies."
+        - heading: "Stored in your browser"
+          paragraphs:
+              - "If you choose a language, the site remembers it in your browser’s local storage. It stays on your device, is never sent to me, and you can delete it by clearing your browser data. No cookies are set."
+        - heading: "Fonts, links and downloads"
+          paragraphs:
+              - "Fonts and files are served by this site itself: no external service is contacted while you browse. Links to LinkedIn, GitHub and other sites lead to services with their own privacy policies. Downloading the PDF CV involves no tracking."
+        - heading: "Your rights"
+          paragraphs:
+              - "You can ask for access to your personal data, its correction or deletion, restriction of or objection to its processing, and a copy of it, by writing to {email}. You also have the right to lodge a complaint with a supervisory authority, such as the Swedish Authority for Privacy Protection ([imy.se](https://www.imy.se)) or the authority in your country."
+        - heading: "Changes"
+          paragraphs:
+              - "If the site starts using new services (for example anonymous, cookieless statistics), this page will be updated first."
+
 print:
     contacts: Contacts
     downloadNote: The interactive version of this CV is available at
