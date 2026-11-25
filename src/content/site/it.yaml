@@ -48,8 +48,8 @@ skills:
               - { name: CSS3, icon: css3 }
               - { name: Next.js, icon: next }
               - { name: Figma, icon: figma }
-              - { name: Ottimizzazione S.E.O. }
-              - { name: Accessibilità e usabilità }
+              - { name: Ottimizzazione S.E.O., icon: seo }
+              - { name: Accessibilità e usabilità, icon: accessibility }
         - letter: B
           tags: POSTGRESQL · NODE · TYPESCRIPT
           title: Web Backend — API
