@@ -7,6 +7,8 @@ meta:
 
 nav:
     label: Sektioner
+    menu: Meny
+    toTop: Till toppen
     about: Om mig
     skills: Kompetenser
     experience: Erfarenhet
@@ -21,7 +23,7 @@ hero:
     role: Fullstackutvecklare
     basedIn: baserad i
     location: Malmö — Sverige
-    cvButton: Ladda ner CV
+    cvButton: Ladda ner CV (PDF)
     portraitAlt: Alessandro Bonatti
 
 about:
@@ -194,7 +196,6 @@ contact:
     location: Malmö, Sverige
 
 footer:
-    rights: Alla rättigheter förbehållna
     cookiePolicy: cookiepolicy
 
 print:

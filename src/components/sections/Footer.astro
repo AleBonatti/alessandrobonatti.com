@@ -14,7 +14,8 @@ const cookieUrl = `https://www.iubenda.com/privacy-policy/${profile.iubenda.cook
 
 <footer>
   <div class="mono inner">
-    <span>© {year} · {profile.name.first} {profile.name.last} · {footer.rights}</span>
+    {/* No "All rights reserved": copyright applies automatically (Berne Convention), the phrase adds nothing. */}
+    <span>© {year} {profile.name.first} {profile.name.last}</span>
     <a class="ulink iubenda-nostyle" href={cookieUrl} target="_blank" rel="noopener">{footer.cookiePolicy}</a>
   </div>
 </footer>
@@ -28,7 +29,8 @@ const cookieUrl = `https://www.iubenda.com/privacy-policy/${profile.iubenda.cook
   .inner {
     max-width: var(--container);
     margin: 0 auto;
-    padding: 28px var(--gutter);
+    /* Extra room at the bottom so the floating CV / back-to-top buttons never cover the links. */
+    padding: 28px var(--gutter) 96px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

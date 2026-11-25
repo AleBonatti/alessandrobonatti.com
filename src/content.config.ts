@@ -77,6 +77,10 @@ export const siteSchema = z.strictObject({
   }),
   nav: z.strictObject({
     label: text,
+    /** Accessible name of the mobile menu button. */
+    menu: text,
+    /** Accessible name of the floating "back to top" button. */
+    toTop: text,
     about: text,
     skills: text,
     experience: text,
@@ -132,7 +136,6 @@ export const siteSchema = z.strictObject({
     location: text,
   }),
   footer: z.strictObject({
-    rights: text,
     cookiePolicy: text,
   }),
   /** Labels only used in the PDF / print layout. */
