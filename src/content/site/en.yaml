@@ -138,18 +138,18 @@ showcase:
           description: Company website. Custom catalogue structure, data import from old MsSql db, news history, ad hoc CMS, 5 different languages contents management, third party newsletter integration.
           role: Backend Development — Server and deploy management
           tech: [Laravel, Mysql]
-        - context: AS E-PROJECT EMPLOYEE
-          name: pieffeci.com
-          url: https://pieffeci.com
-          description: Company website. Custom catalogue; news, certifications and forms; ad hoc CMS.
-          role: Backend Development — Server and deploy management
-          tech: [Laravel, MySql]
         - context: INDEPENDENT WORK
           name: SeppiaCms
           url: /seppia-cms/
           description: My own CMS, developed over the years and adaptable to most needs.
           role: UI/UX — Full Stack Development — Server and deploy management — up-to-date maintenance
           tech: [VueJs, TailwindCSS, Laravel, Mysql]
+        - context: AS E-PROJECT EMPLOYEE
+          name: pieffeci.com
+          url: https://pieffeci.com
+          description: Company website. Custom catalogue; news, certifications and forms; ad hoc CMS.
+          role: Backend Development — Server and deploy management
+          tech: [Laravel, MySql]
         - context: AS METHLAB DEVELOPER
           name: lamamita.it
           # NOTE: the live site links lamamita.it to lamamita.com: kept as-is, please verify.

@@ -137,18 +137,18 @@ showcase:
           description: Sito aziendale. Struttura del catalogo personalizzata, importazione dati dal vecchio db MsSql, archivio news, CMS ad hoc, gestione dei contenuti in 5 lingue, integrazione con newsletter di terze parti.
           role: Sviluppo Backend — Gestione server e deploy
           tech: [Laravel, Mysql]
-        - context: COME DIPENDENTE E-PROJECT
-          name: pieffeci.com
-          url: https://pieffeci.com
-          description: Sito aziendale. Catalogo personalizzato; news, certificazioni e moduli; CMS ad hoc.
-          role: Sviluppo Backend — Gestione server e deploy
-          tech: [Laravel, MySql]
         - context: LAVORO INDIPENDENTE
           name: SeppiaCms
           url: /seppia-cms/
           description: Il mio CMS, sviluppato nel corso degli anni e adattabile alla maggior parte delle esigenze.
           role: UI/UX — Sviluppo Full Stack — Gestione server e deploy — manutenzione e aggiornamento continui
           tech: [VueJs, TailwindCSS, Laravel, Mysql]
+        - context: COME DIPENDENTE E-PROJECT
+          name: pieffeci.com
+          url: https://pieffeci.com
+          description: Sito aziendale. Catalogo personalizzato; news, certificazioni e moduli; CMS ad hoc.
+          role: Sviluppo Backend — Gestione server e deploy
+          tech: [Laravel, MySql]
         - context: COME SVILUPPATORE METHLAB
           name: lamamita.it
           url: https://lamamita.com

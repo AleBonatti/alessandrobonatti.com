@@ -137,18 +137,18 @@ showcase:
           description: Företagswebbplats. Skräddarsydd katalogstruktur, dataimport från en gammal MsSql-databas, nyhetsarkiv, eget CMS, innehållshantering på 5 språk, integration med extern nyhetsbrevstjänst.
           role: Backendutveckling — Server- och driftsättningshantering
           tech: [Laravel, Mysql]
-        - context: SOM ANSTÄLLD PÅ E-PROJECT
-          name: pieffeci.com
-          url: https://pieffeci.com
-          description: Företagswebbplats. Skräddarsydd katalog; nyheter, certifieringar och formulär; eget CMS.
-          role: Backendutveckling — Server- och driftsättningshantering
-          tech: [Laravel, MySql]
         - context: EGET ARBETE
           name: SeppiaCms
           url: /seppia-cms/
           description: Mitt eget CMS, utvecklat under många år och anpassningsbart till de flesta behov.
           role: UI/UX — Fullstackutveckling — Server- och driftsättningshantering — löpande underhåll
           tech: [VueJs, TailwindCSS, Laravel, Mysql]
+        - context: SOM ANSTÄLLD PÅ E-PROJECT
+          name: pieffeci.com
+          url: https://pieffeci.com
+          description: Företagswebbplats. Skräddarsydd katalog; nyheter, certifieringar och formulär; eget CMS.
+          role: Backendutveckling — Server- och driftsättningshantering
+          tech: [Laravel, MySql]
         - context: SOM UTVECKLARE PÅ METHLAB
           name: lamamita.it
           url: https://lamamita.com
