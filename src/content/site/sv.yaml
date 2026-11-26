@@ -34,7 +34,7 @@ about:
     statement: en fullstackutvecklare med ==över 25 års erfarenhet== inom branschen.
     paragraphs:
         - Jag började min karriär 1999 som anställd, en roll jag hade i 13 år, innan jag gick över till att frilansa och grundade min egen byrå, som jag framgångsrikt drev i ytterligare 13 år.
-        - Under den här resan har jag fått ==bred erfarenhet av webbutveckling==, arbetat med många olika tekniker och tagit mig an projekt av varierande komplexitet. Min kompetens sträcker sig från frontend till backend, med ==starkt fokus på skalbara, underhållbara och högpresterande lösningar==.
+        - Under den här resan har jag fått bred erfarenhet av webbutveckling, arbetat med många olika tekniker och tagit mig an projekt av varierande komplexitet. Min kompetens sträcker sig från frontend till backend, med starkt fokus på skalbara, underhållbara och högpresterande lösningar.
         - Sedan jag flyttade till Malmö i oktober 2025 arbetar jag som ==konsult inom mjukvaruutveckling== och har fått värdefull erfarenhet av den svenska arbetsmiljön.
 
 skills:
@@ -52,7 +52,7 @@ skills:
           also: [CSS3, Next.js, Figma, S.E.O.-optimering, Tillgänglighet och användbarhet]
         - letter: B
           title: Webbbackend — API
-          description: Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**TypeScript** och **Node.js**==. Jag har också lång erfarenhet av ==PHP/Laravel-ekosystemet==, som under flera år har varit en viktig del av min yrkesresa.
+          description: Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**TypeScript** och **Node.js**==. Jag har också lång erfarenhet av PHP/Laravel-ekosystemet, som under flera år har varit en viktig del av min yrkesresa.
           tiles:
               - { name: Node.js, icon: node }
               - { name: TypeScript, icon: typescript }
@@ -84,12 +84,12 @@ experience:
           company: Elva11
           role: Fullstackutvecklare
           location: Malmö, Sverige
-          description: Arbetar som ==konsult== i flera kunduppdrag, bidrar till fullstackprojekt inom webbutveckling och anpassar mig till olika tekniker, team och affärskrav.
+          description: Arbetar som konsult i flera kunduppdrag, bidrar till fullstackprojekt inom webbutveckling och anpassar mig till olika tekniker, team och affärskrav.
         - years: 2023 — 2025
           company: e-Project
           role: Fullstackutvecklare
           location: Parma, Italien
-          description: Efter flera år med min egen byrå valde jag att återigen fokusera helt på ==utveckling==, tillbaka på e-Project. De nya möjligheterna som AI för med sig blev mitt största intresse.
+          description: Efter flera år med min egen byrå valde jag att återigen fokusera helt på utveckling, tillbaka på e-Project. De nya möjligheterna som AI för med sig blev mitt största intresse.
         - years: 2011 — 2023
           company: Methlab
           role: Delägare och medgrundare
@@ -99,16 +99,16 @@ experience:
           company: e-Project
           role: Fullstackutvecklare
           location: Parma, Italien
-          description: Jag började med att utveckla enkla webbplatser och gick gradvis över till mer komplexa projekt, bland annat affärssystem och e-handelsplattformar. Jag fokuserade på intuitiva användargränssnitt och ==avancerade funktioner==, i projekt inom många olika branscher, samtidigt som jag ständigt utvecklade mina tekniska färdigheter.
+          description: Jag började med att utveckla enkla webbplatser och gick gradvis över till mer komplexa projekt, bland annat affärssystem och e-handelsplattformar. Jag fokuserade på intuitiva användargränssnitt och avancerade funktioner, i projekt inom många olika branscher, samtidigt som jag ständigt utvecklade mina tekniska färdigheter.
         - years: 1999 — 2001
           company: FirstPoint
           role: Webbutvecklare
           location: Fidenza, Italien
-          description: Mitt första jobb inom webbutveckling, där jag skapade och underhöll webbplatser med fokus på HTML, CSS och JavaScript. Jag samarbetade med designers och andra utvecklare för att leverera ==effektiva och funktionella lösningar== anpassade efter kundernas behov.
+          description: Mitt första jobb inom webbutveckling, där jag skapade och underhöll webbplatser med fokus på HTML, CSS och JavaScript. Jag samarbetade med designers och andra utvecklare för att leverera effektiva och funktionella lösningar anpassade efter kundernas behov.
 
 showcase:
     title: Projekt
-    intro: Jag har utvecklat dussintals projekt, ==från webbplatser till affärssystem, API:er och betalsystem==. Varje projekt har varit ett tillfälle att anta nya utmaningar och förfina mina färdigheter. Jag visar dem gärna ==vid ett separat möte==, där jag presenterar ==de lösningar som tagits fram==, min ==utvecklingsmetodik== och ==teknikerna som använts== för att nå målen.
+    intro: Jag har utvecklat dussintals projekt, från webbplatser till affärssystem, API:er och betalsystem. Varje projekt har varit ett tillfälle att anta nya utmaningar och förfina mina färdigheter. Jag visar dem gärna ==vid ett separat möte==, där jag presenterar de lösningar som tagits fram, min utvecklingsmetodik och teknikerna som använts för att nå målen.
     labels:
         project: PROJEKT
         role: MIN ROLL
@@ -163,7 +163,7 @@ education:
           title: Tekniskt gymnasium med inriktning på datavetenskap
           detail: Examen med betyg 51/60 — I.T.I.S. Berenini
           location: Fidenza, Italien
-          description: Under den här perioden lärde jag mig grunderna i programmering, i en tid då internet ännu inte var utbrett. Den erfarenheten gav mig en stark ==grund i problemlösning== och algoritmiskt tänkande, som jag senare har tillämpat inom webbutveckling.
+          description: Under den här perioden lärde jag mig grunderna i programmering, i en tid då internet ännu inte var utbrett. Den erfarenheten gav mig en stark grund i problemlösning och algoritmiskt tänkande, som jag senare har tillämpat inom webbutveckling.
     note:
         title: "Självlärd webbutvecklare:"
         text: i början av 2000-talet ingick webbutveckling ännu inte i skolornas läroplaner. Därför gav jag mig in på en resa av självstudier och lärde mig tekniker och programmeringsspråk på egen hand för att hänga med i branschens utveckling.

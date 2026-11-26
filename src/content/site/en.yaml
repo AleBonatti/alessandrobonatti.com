@@ -35,7 +35,7 @@ about:
     statement: a Full Stack Web Developer with ==over 25 years of experience== in the field.
     paragraphs:
         - I started my career in 1999 as an employee, a role I held for 13 years, before transitioning to freelancing and founding my own agency, which I successfully managed for another 13 years.
-        - Through this journey, I have gained ==extensive experience in web development==, working with various technologies and tackling projects of varying complexity. My expertise ranges from front end to back end development, with a ==strong focus on creating scalable, maintainable, and high-performance solutions==.
+        - Through this journey, I have gained extensive experience in web development, working with various technologies and tackling projects of varying complexity. My expertise ranges from front end to back end development, with a strong focus on creating scalable, maintainable, and high-performance solutions.
         - Since relocating to Malmö, Sweden in October 2025, I have been working as a ==software development consultant==, gaining valuable experience within the Swedish professional environment.
 
 skills:
@@ -53,7 +53,7 @@ skills:
           also: [CSS3, Next.js, Figma, S.E.O. optimization, Accessibility and Usability]
         - letter: B
           title: Web Backend — API
-          description: Over the years, I became passionate about modern development frameworks and technologies, and today my primary focus is on ==**TypeScript** and **Node.js**==. I also have extensive experience with the ==PHP/Laravel ecosystem==, which has been an important part of my professional journey for several years.
+          description: Over the years, I became passionate about modern development frameworks and technologies, and today my primary focus is on ==**TypeScript** and **Node.js**==. I also have extensive experience with the PHP/Laravel ecosystem, which has been an important part of my professional journey for several years.
           tiles:
               - { name: Node.js, icon: node }
               - { name: TypeScript, icon: typescript }
@@ -85,12 +85,12 @@ experience:
           company: Elva11
           role: Full stack developer
           location: Malmö, Sweden
-          description: Working as a ==consultant== across several client assignments, contributing to full-stack web development projects and adapting to different technologies, teams, and business requirements.
+          description: Working as a consultant across several client assignments, contributing to full-stack web development projects and adapting to different technologies, teams, and business requirements.
         - years: 2023 — 2025
           company: e-Project
           role: Full stack developer
           location: Parma, Italy
-          description: After years running my own agency, I chose to focus fully on ==hands-on development== again, back at e-Project. The new possibilities brought by AI became my main interest.
+          description: After years running my own agency, I chose to focus fully on hands-on development again, back at e-Project. The new possibilities brought by AI became my main interest.
         - years: 2011 — 2023
           company: Methlab
           role: Co-owner and co-founder
@@ -100,16 +100,16 @@ experience:
           company: e-Project
           role: Full stack developer
           location: Parma, Italy
-          description: I started by developing simple websites and gradually transitioned to more complex projects, including management systems and e-commerce platforms. I focused on creating intuitive user interfaces and ==advanced functionalities==, working on projects across various industries while continuously improving my technical skills.
+          description: I started by developing simple websites and gradually transitioned to more complex projects, including management systems and e-commerce platforms. I focused on creating intuitive user interfaces and advanced functionalities, working on projects across various industries while continuously improving my technical skills.
         - years: 1999 — 2001
           company: FirstPoint
           role: Web developer
           location: Fidenza, Italy
-          description: My first job in web development, where I created and maintained websites with a focus on HTML, CSS, and JavaScript. I collaborated with designers and other developers to deliver ==effective and functional solutions==, adapting to client needs.
+          description: My first job in web development, where I created and maintained websites with a focus on HTML, CSS, and JavaScript. I collaborated with designers and other developers to deliver effective and functional solutions, adapting to client needs.
 
 showcase:
     title: Showcase
-    intro: I have developed dozens of projects, ranging ==from websites to business management systems, APIs, and payment systems==. Each project has been an opportunity to tackle new challenges and refine my skills. I would be happy to ==showcase them in a dedicated meeting==, presenting the ==solutions implemented==, my ==development approach==, and the ==technologies used== to achieve the required goals.
+    intro: I have developed dozens of projects, ranging from websites to business management systems, APIs, and payment systems. Each project has been an opportunity to tackle new challenges and refine my skills. I would be happy to ==showcase them in a dedicated meeting==, presenting the solutions implemented, my development approach, and the technologies used to achieve the required goals.
     labels:
         project: PROJECT
         role: MY ROLE
@@ -165,7 +165,7 @@ education:
           title: Technical High School specializing in Computer Science
           detail: Grade 51/60 Diploma — I.T.I.S. Berenini
           location: Fidenza, Italy
-          description: During this period, I learned the fundamentals of programming in an era when the internet was not yet widespread. This experience gave me a strong ==foundation in problem-solving== and algorithmic thinking, which I later applied to web development.
+          description: During this period, I learned the fundamentals of programming in an era when the internet was not yet widespread. This experience gave me a strong foundation in problem-solving and algorithmic thinking, which I later applied to web development.
     note:
         title: "Self-taught Web Development:"
         text: in the early 2000s, web development was not yet part of school curricula. For this reason, I embarked on a self-learning journey, independently studying technologies and programming languages to keep up with industry advancements.

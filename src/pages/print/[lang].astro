@@ -247,6 +247,9 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
     letter-spacing: 0.08em;
     text-transform: uppercase;
     break-after: avoid;
+    /* The yellow square is the last thing on the line: mm→px rounding pushed its right edge
+       ~1pt past the printable area, where Chromium clips it. A little room keeps it inside. */
+    padding-right: 0.6mm;
   }
   h2::after {
     content: '';

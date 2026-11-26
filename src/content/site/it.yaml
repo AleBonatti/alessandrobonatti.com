@@ -34,7 +34,7 @@ about:
     statement: un Full Stack Web Developer con ==oltre 25 anni di esperienza== nel settore.
     paragraphs:
         - Ho iniziato la mia carriera nel 1999 come dipendente, ruolo che ho ricoperto per 13 anni, prima di passare alla libera professione e fondare una mia agenzia, che ho gestito con successo per altri 13 anni.
-        - In questo percorso ho maturato una ==solida esperienza nello sviluppo web==, lavorando con tecnologie diverse e affrontando progetti di complessità variabile. Le mie competenze spaziano dal front end al back end, con una ==forte attenzione alla creazione di soluzioni scalabili, manutenibili e performanti==.
+        - In questo percorso ho maturato una solida esperienza nello sviluppo web, lavorando con tecnologie diverse e affrontando progetti di complessità variabile. Le mie competenze spaziano dal front end al back end, con una forte attenzione alla creazione di soluzioni scalabili, manutenibili e performanti.
         - Da quando mi sono trasferito a Malmö, in Svezia, nell’ottobre 2025, lavoro come ==consulente nello sviluppo software==, maturando un’esperienza preziosa all’interno dell’ambiente professionale svedese.
 
 skills:
@@ -52,7 +52,7 @@ skills:
           also: [CSS3, Next.js, Figma, Ottimizzazione S.E.O., Accessibilità e usabilità]
         - letter: B
           title: Web Backend — API
-          description: Nel tempo mi sono appassionato ai framework e alle tecnologie di sviluppo moderne, e oggi il mio focus principale è su ==**TypeScript** e **Node.js**==. Ho inoltre una lunga esperienza con l’==ecosistema PHP/Laravel==, che per diversi anni è stato una parte importante del mio percorso professionale.
+          description: Nel tempo mi sono appassionato ai framework e alle tecnologie di sviluppo moderne, e oggi il mio focus principale è su ==**TypeScript** e **Node.js**==. Ho inoltre una lunga esperienza con l’ecosistema PHP/Laravel, che per diversi anni è stato una parte importante del mio percorso professionale.
           tiles:
               - { name: Node.js, icon: node }
               - { name: TypeScript, icon: typescript }
@@ -84,12 +84,12 @@ experience:
           company: Elva11
           role: Full stack developer
           location: Malmö, Svezia
-          description: Lavoro come ==consulente== su diversi incarichi per clienti, contribuendo a progetti di sviluppo web full stack e adattandomi a tecnologie, team ed esigenze di business differenti.
+          description: Lavoro come consulente su diversi incarichi per clienti, contribuendo a progetti di sviluppo web full stack e adattandomi a tecnologie, team ed esigenze di business differenti.
         - years: 2023 — 2025
           company: e-Project
           role: Full stack developer
           location: Parma, Italia
-          description: Dopo anni alla guida della mia agenzia, ho scelto di tornare a dedicarmi pienamente allo ==sviluppo==, di nuovo in e-Project. Le nuove possibilità offerte dall’AI sono diventate il mio interesse principale.
+          description: Dopo anni alla guida della mia agenzia, ho scelto di tornare a dedicarmi pienamente allo sviluppo, di nuovo in e-Project. Le nuove possibilità offerte dall’AI sono diventate il mio interesse principale.
         - years: 2011 — 2023
           company: Methlab
           role: Socio e co-fondatore
@@ -99,16 +99,16 @@ experience:
           company: e-Project
           role: Full stack developer
           location: Parma, Italia
-          description: Ho iniziato sviluppando semplici siti web per passare gradualmente a progetti più complessi, tra cui gestionali e piattaforme e-commerce. Mi sono concentrato sulla creazione di interfacce intuitive e ==funzionalità avanzate==, lavorando a progetti in settori diversi e migliorando costantemente le mie competenze tecniche.
+          description: Ho iniziato sviluppando semplici siti web per passare gradualmente a progetti più complessi, tra cui gestionali e piattaforme e-commerce. Mi sono concentrato sulla creazione di interfacce intuitive e funzionalità avanzate, lavorando a progetti in settori diversi e migliorando costantemente le mie competenze tecniche.
         - years: 1999 — 2001
           company: FirstPoint
           role: Web developer
           location: Fidenza, Italia
-          description: Il mio primo lavoro nello sviluppo web, dove ho realizzato e mantenuto siti web concentrandomi su HTML, CSS e JavaScript. Ho collaborato con designer e altri sviluppatori per offrire ==soluzioni efficaci e funzionali==, adattandomi alle esigenze dei clienti.
+          description: Il mio primo lavoro nello sviluppo web, dove ho realizzato e mantenuto siti web concentrandomi su HTML, CSS e JavaScript. Ho collaborato con designer e altri sviluppatori per offrire soluzioni efficaci e funzionali, adattandomi alle esigenze dei clienti.
 
 showcase:
     title: Progetti
-    intro: Ho sviluppato decine di progetti, ==dai siti web ai gestionali aziendali, dalle API ai sistemi di pagamento==. Ogni progetto è stato un’occasione per affrontare nuove sfide e affinare le mie competenze. Sarei felice di ==mostrarli in un incontro dedicato==, presentando le ==soluzioni adottate==, il mio ==approccio allo sviluppo== e le ==tecnologie utilizzate== per raggiungere gli obiettivi richiesti.
+    intro: Ho sviluppato decine di progetti, dai siti web ai gestionali aziendali, dalle API ai sistemi di pagamento. Ogni progetto è stato un’occasione per affrontare nuove sfide e affinare le mie competenze. Sarei felice di ==mostrarli in un incontro dedicato==, presentando le soluzioni adottate, il mio approccio allo sviluppo e le tecnologie utilizzate per raggiungere gli obiettivi richiesti.
     labels:
         project: PROGETTO
         role: IL MIO RUOLO
@@ -163,7 +163,7 @@ education:
           title: Istituto Tecnico Industriale ad indirizzo Informatico
           detail: Diploma con 51/60 — I.T.I.S. Berenini
           location: Fidenza, Italia
-          description: In questo periodo ho imparato i fondamenti della programmazione, in un’epoca in cui internet non era ancora diffuso. Questa esperienza mi ha dato una solida ==base nel problem solving== e nel pensiero algoritmico, che ho poi applicato allo sviluppo web.
+          description: In questo periodo ho imparato i fondamenti della programmazione, in un’epoca in cui internet non era ancora diffuso. Questa esperienza mi ha dato una solida base nel problem solving e nel pensiero algoritmico, che ho poi applicato allo sviluppo web.
     note:
         title: "Sviluppo web da autodidatta:"
         text: all’inizio degli anni 2000 lo sviluppo web non faceva ancora parte dei programmi scolastici. Per questo ho intrapreso un percorso di autoformazione, studiando in autonomia tecnologie e linguaggi di programmazione per restare al passo con l’evoluzione del settore.
