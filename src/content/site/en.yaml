@@ -45,25 +45,27 @@ skills:
     groups:
         - letter: A
           title: Web Frontend
-          description: In recent years, I have sought to bridge the gaps that separated me from becoming a complete and independent developer as much as possible by deepening my knowledge of Frontend development and TypeScript, particularly the ==Vue.js and React frameworks alongside Tailwind CSS==. I have experience with SEO-related issues, as well as usability and accessibility.
+          description: "Interfaces in ==React and Vue.js==, typed with TypeScript and styled with Tailwind CSS, from the Manateca web app to Seppia CMS. Built with SEO, accessibility and usability in mind."
           tiles:
               - { name: React, icon: react }
               - { name: Vue.js, icon: vue }
               - { name: TypeScript, icon: typescript }
               - { name: Tailwind CSS, icon: tailwind }
-          also: [CSS3, Next.js, Figma, S.E.O. optimization, Accessibility and Usability]
+              - { name: CSS3, icon: css3 }
+          also: [Next.js, Figma, S.E.O. optimization, Accessibility and Usability]
         - letter: B
           title: Web Backend — API
-          description: Over the years, I became passionate about modern development frameworks and technologies, and today my primary focus is on ==**TypeScript** and **Node.js**==. I also have extensive experience with the PHP/Laravel ecosystem, which has been an important part of my professional journey for several years.
+          description: "APIs and back ends in ==TypeScript and Node.js== with PostgreSQL. Before that, years of PHP and Laravel: custom CMSs, e-commerce with Stripe and PayPal, data integrations between systems."
           tiles:
               - { name: Node.js, icon: node }
-              - { name: TypeScript, icon: typescript }
               - { name: PostgreSQL, icon: postgresql }
               - { name: Laravel, icon: laravel }
-          also: [Fastify, PHP, Drizzle ORM, MySQL, Vercel, Python, MS SQL Server]
+              - { name: PHP, icon: php }
+              - { name: MySQL, icon: mysql }
+          also: [Fastify, Drizzle ORM, Vercel, Python, MS SQL Server]
         - letter: C
           title: Server & Tools
-          description: I can configure a scalable Linux web server based on PHP and MySQL, including a backup system. I have developed and used various types of APIs. I can work independently, but I am also accustomed to working in teams of various sizes.
+          description: "I set up and maintain the Linux servers my projects run on, backups included, with CI/CD and Docker. AI tools such as Claude are part of my daily workflow."
           tiles:
               - { name: Claude AI, icon: claude }
               - { name: CI/CD, icon: cicd }

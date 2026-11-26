@@ -44,25 +44,27 @@ skills:
     groups:
         - letter: A
           title: Webbfrontend
-          description: De senaste åren har jag försökt fylla de luckor som skilde mig från att vara en komplett och självständig utvecklare, genom att fördjupa mina kunskaper inom frontendutveckling och TypeScript, särskilt ==ramverken Vue.js och React tillsammans med Tailwind CSS==. Jag har även erfarenhet av SEO-frågor samt användbarhet och tillgänglighet.
+          description: "Gränssnitt i ==React och Vue.js==, typade med TypeScript och stylade med Tailwind CSS, från Manatecas webbapp till Seppia CMS. Byggda med SEO, tillgänglighet och användbarhet i åtanke."
           tiles:
               - { name: React, icon: react }
               - { name: Vue.js, icon: vue }
               - { name: TypeScript, icon: typescript }
               - { name: Tailwind CSS, icon: tailwind }
-          also: [CSS3, Next.js, Figma, S.E.O.-optimering, Tillgänglighet och användbarhet]
+              - { name: CSS3, icon: css3 }
+          also: [Next.js, Figma, S.E.O.-optimering, Tillgänglighet och användbarhet]
         - letter: B
           title: Webbbackend — API
-          description: Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**TypeScript** och **Node.js**==. Jag har också lång erfarenhet av PHP/Laravel-ekosystemet, som under flera år har varit en viktig del av min yrkesresa.
+          description: "API:er och backends i ==TypeScript och Node.js== med PostgreSQL. Dessförinnan många år med PHP och Laravel: skräddarsydda CMS, e-handel med Stripe och PayPal, dataintegrationer mellan system."
           tiles:
               - { name: Node.js, icon: node }
-              - { name: TypeScript, icon: typescript }
               - { name: PostgreSQL, icon: postgresql }
               - { name: Laravel, icon: laravel }
-          also: [Fastify, PHP, Drizzle ORM, MySQL, Vercel, Python, MS SQL Server]
+              - { name: PHP, icon: php }
+              - { name: MySQL, icon: mysql }
+          also: [Fastify, Drizzle ORM, Vercel, Python, MS SQL Server]
         - letter: C
           title: Server & verktyg
-          description: Jag kan konfigurera en skalbar Linux-webbserver baserad på PHP och MySQL, inklusive ett backupsystem. Jag har utvecklat och använt olika typer av API:er. Jag kan arbeta självständigt, men är också van vid att arbeta i team av olika storlek.
+          description: "Jag sätter upp och förvaltar Linuxservrarna som mina projekt körs på, inklusive backup, med CI/CD och Docker. AI-verktyg som Claude är en del av mitt dagliga arbete."
           tiles:
               - { name: Claude AI, icon: claude }
               - { name: CI/CD, icon: cicd }

@@ -15,53 +15,50 @@ const { skills } = Astro.props.t;
   <div class="container">
     <SectionHeader title={skills.title} />
 
-    {
-      skills.groups.map((group) => (
-        <div class="group">
-          <div class="row">
-            <div class="rv head">
-              {/* Tagline = the first three daily tools, so it always matches the tiles below. */}
-              <div class="mono tags">
-                <span class="letter">{group.letter}</span>
-                {group.tiles.slice(0, 3).map((tile) => tile.name).join(' · ')}
-              </div>
+    {/* Three groups: side by side on wide screens (the whole section fits about one screen), stacked below. */}
+    <div class="groups">
+      {
+        skills.groups.map((group) => (
+          <article class="rv group">
+            <div class="ghead">
+              <span class="mono letter" aria-hidden="true">
+                {group.letter}
+              </span>
               <h3>{group.title}</h3>
             </div>
-            <div class="rv body">
-              <Rich text={group.description} class="desc" />
-              <div class="tiles">
-                {group.tiles.map((tile) => (
-                  <div class="tile">
-                    <span class="ti">
-                      {tile.icon ? (
-                        <Icon name={tile.icon} size={28} />
-                      ) : (
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                          <rect x="7" y="7" width="14" height="14" transform="rotate(45 14 14)" />
-                        </svg>
-                      )}
-                    </span>
-                    <span class="tname">{tile.name}</span>
-                  </div>
-                ))}
-              </div>
-              {group.also.length > 0 && (
-                <div class="also">
-                  <span class="mono also-label" id={`also-${group.letter}`}>
-                    {skills.alsoLabel}
+            <Rich text={group.description} class="desc" />
+            <div class="tiles">
+              {group.tiles.map((tile) => (
+                <div class="tile">
+                  <span class="ti">
+                    {tile.icon ? (
+                      <Icon name={tile.icon} size={28} />
+                    ) : (
+                      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <rect x="7" y="7" width="14" height="14" transform="rotate(45 14 14)" />
+                      </svg>
+                    )}
                   </span>
-                  <ul class="mono chips" aria-labelledby={`also-${group.letter}`}>
-                    {group.also.map((name) => (
-                      <li>{name}</li>
-                    ))}
-                  </ul>
+                  <span class="tname">{tile.name}</span>
                 </div>
-              )}
+              ))}
             </div>
-          </div>
-        </div>
-      ))
-    }
+            {group.also.length > 0 && (
+              <div class="also">
+                <span class="mono also-label" id={`also-${group.letter}`}>
+                  {skills.alsoLabel}
+                </span>
+                <ul class="mono chips" aria-labelledby={`also-${group.letter}`}>
+                  {group.also.map((name) => (
+                    <li>{name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
 
@@ -70,29 +67,45 @@ const { skills } = Astro.props.t;
     background: var(--grey-light);
     border-top: 1px solid var(--line);
   }
-  .group + .group {
-    padding-top: 72px;
-    margin-top: 72px;
-    border-top: 1px solid var(--black);
+  .groups {
+    display: grid;
+    gap: 64px;
   }
-  /* One column: heading, then description + tiles on their own row. */
-  .row {
+  .group {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 28px;
   }
-  .tags {
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 22px;
+  /* From 1200px each column is wide enough for ~40+ characters per line; narrower, stack them.
+     Subgrid: the three columns share the same four rows (title, description, tiles, "Also"),
+     so the tiles and chips start at the same height in every column, sized by the tallest. */
+  @media (min-width: 1200px) {
+    .groups {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(4, auto);
+      gap: 0 40px;
+    }
+    .group {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      align-content: start;
+      row-gap: 28px;
+    }
+    /* The shared tiles row is as tall as the column with the most tiles: keep each column's
+       tiles at their own height, packed at the top, instead of stretching to fill it. */
+    .tiles {
+      align-content: start;
+    }
+  }
+  .ghead {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: var(--grey-dark);
+    gap: 14px;
   }
   .letter {
     display: inline-flex;
+    flex: none;
     align-items: center;
     justify-content: center;
     width: 28px;
@@ -104,37 +117,31 @@ const { skills } = Astro.props.t;
   h3 {
     margin: 0;
     font-weight: 800;
-    font-size: clamp(40px, 4.6vw, 64px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
+    font-size: clamp(26px, 2.4vw, 32px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
   }
-  .body {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-  /* ~70 characters per line: comfortable reading instead of 150+ across the full width. */
+  /* 60ch lands around 70 characters per line in practice (ch is the width of "0"). */
   .desc {
-    max-width: 68ch;
+    max-width: 60ch;
     margin: 0;
-    font-size: 18px;
+    font-size: 17px;
     color: var(--grey-dark);
-    text-wrap: pretty;
   }
   .tiles {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
     gap: 10px;
   }
   .tile {
     background: var(--white);
     border: 1px solid var(--line-2);
-    padding: 22px 18px;
+    padding: 18px 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
-    min-height: 118px;
+    gap: 16px;
+    min-height: 104px;
     box-sizing: border-box;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s var(--ease-out), border-color 0.3s ease;
   }
@@ -148,12 +155,12 @@ const { skills } = Astro.props.t;
     font-size: 15px;
     line-height: 1.25;
   }
-  /* Also used: secondary tools as compact chips, clearly a step below the daily tiles. */
+  /* "Also": secondary tools as compact chips, clearly a step below the daily tiles. */
+  /* Label on its own line, chips below: the same structure in every column, so they align. */
   .also {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 10px 16px;
+    display: grid;
+    align-content: start;
+    gap: 10px;
   }
   .also-label {
     font-size: 12px;
