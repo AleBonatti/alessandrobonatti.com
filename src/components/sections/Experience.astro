@@ -77,15 +77,18 @@ const { experience } = Astro.props.t;
   }
   h3 {
     margin: 0;
-    font-size: clamp(32px, 3.4vw, 48px);
-    line-height: 1;
+    /* Same step as the Skills group titles; the role below is now closer in weight. */
+    font-size: clamp(26px, 2.4vw, 34px);
+    line-height: 1.05;
     letter-spacing: -0.03em;
     font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
   }
   .arrow {
+    width: 0.7em;
+    height: 0.7em;
     color: var(--yellow);
     opacity: 0;
     transform: translateX(-12px);
@@ -101,7 +104,7 @@ const { experience } = Astro.props.t;
     font-size: 15px;
   }
   .role {
-    font-size: 21px;
+    font-size: 22px;
   }
   .sep {
     margin: 0 8px;
