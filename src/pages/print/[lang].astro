@@ -57,9 +57,7 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
       <section>
         <h2 class="mono">{t.about.title}</h2>
         <p class="statement"><span class="serif-i">{t.about.lead}</span> <Rich as="span" text={t.about.statement} /></p>
-        <div class="two-col">
-          {t.about.paragraphs.map((p) => <Rich text={p} />)}
-        </div>
+        <Rich text={t.about.body} class="about-body" />
       </section>
 
       <section>
@@ -67,7 +65,7 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
         {
           t.experience.jobs.map((job) => (
             <div class="entry">
-              <div class="mono when">{job.years}</div>
+              <div class="mono when">{job.current ? `${job.years} — ${t.experience.present}` : job.years}</div>
               <div>
                 <h3>
                   {job.company} <span class="serif-i role">{job.role}</span> <span class="where">· {job.location}</span>
@@ -139,12 +137,11 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
               <div>
                 <h3>{e.title}</h3>
                 <p class="small muted">{e.detail} · {e.location}</p>
-                <Rich text={e.description} />
               </div>
             </div>
           ))
         }
-        <p class="note"><span class="serif-i">{t.education.note.title}</span> {t.education.note.text}</p>
+        <p class="note"><span class="serif-i">{t.education.note.title}</span> <Rich as="span" text={t.education.note.text} /></p>
       </section>
 
       <section>
@@ -281,9 +278,8 @@ const linkedin = profile.social.find((s) => s.id === 'linkedin');
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
-  .two-col {
-    columns: 2;
-    column-gap: 7mm;
+  .cv .about-body {
+    max-width: 150mm;
     color: var(--grey-dark);
   }
   .three-col {

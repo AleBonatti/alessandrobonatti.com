@@ -60,7 +60,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
     gap: 20px;
   }
+  /* The title link is stretched over the whole card (::after below): the card was already
+     styled as one big link on hover, now a click anywhere on it works too. */
   .card {
+    position: relative;
     background: var(--white);
     border: 1px solid var(--black);
     padding: 36px 32px;
@@ -69,8 +72,22 @@ const pad = (n: number) => String(n).padStart(2, '0');
     gap: 26px;
     transition: background-color 0.35s ease, color 0.35s ease, translate 0.35s var(--ease-out);
   }
+  .plink::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  /* Keyboard users get the same state as hover, with the focus ring around the whole card. */
+  .plink:focus-visible {
+    outline: none;
+  }
+  .card:has(.plink:focus-visible) {
+    outline: 2px solid var(--black);
+    outline-offset: 4px;
+  }
   /* `translate` instead of `transform`: see Languages.astro. */
-  .card:hover {
+  .card:hover,
+  .card:has(.plink:focus-visible) {
     background: var(--black);
     color: var(--white);
     translate: 0 -6px;
@@ -84,7 +101,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
   .muted {
     color: var(--grey-mid);
   }
-  .card:hover .muted {
+  .card:hover .muted,
+  .card:has(.plink:focus-visible) .muted {
     color: var(--grey-on-dark);
   }
   .label {
@@ -110,7 +128,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
     line-height: 1.05;
     transition: color 0.3s ease;
   }
-  .card:hover .pname {
+  .card:hover .pname,
+  .card:has(.plink:focus-visible) .pname {
     color: var(--yellow);
   }
   .ar {
@@ -144,7 +163,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
     font-size: 12px;
     transition: border-color 0.3s ease;
   }
-  .card:hover .chip {
+  .card:hover .chip,
+  .card:has(.plink:focus-visible) .chip {
     border-color: #555;
   }
 </style>

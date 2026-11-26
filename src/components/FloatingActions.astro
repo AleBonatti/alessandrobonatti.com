@@ -68,7 +68,8 @@ const { locale, t } = Astro.props;
      where the device reports an unsafe area. */
   .fab {
     position: absolute;
-    right: max(var(--gutter), env(safe-area-inset-right));
+    /* Content edge: the gutter on narrow screens, the centred container's edge on wide ones. */
+    right: max(var(--gutter), calc((100% - var(--container)) / 2), env(safe-area-inset-right));
     bottom: max(24px, env(safe-area-inset-bottom));
     display: flex;
     gap: 8px;
