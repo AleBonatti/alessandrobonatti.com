@@ -20,9 +20,10 @@ const { skills } = Astro.props.t;
         <div class="group">
           <div class="row">
             <div class="rv head">
+              {/* Tagline = the first three daily tools, so it always matches the tiles below. */}
               <div class="mono tags">
                 <span class="letter">{group.letter}</span>
-                {group.tags}
+                {group.tiles.slice(0, 3).map((tile) => tile.name).join(' · ')}
               </div>
               <h3>{group.title}</h3>
             </div>
@@ -44,6 +45,18 @@ const { skills } = Astro.props.t;
                   </div>
                 ))}
               </div>
+              {group.also.length > 0 && (
+                <div class="also">
+                  <span class="mono also-label" id={`also-${group.letter}`}>
+                    {skills.alsoLabel}
+                  </span>
+                  <ul class="mono chips" aria-labelledby={`also-${group.letter}`}>
+                    {group.also.map((name) => (
+                      <li>{name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -100,10 +113,13 @@ const { skills } = Astro.props.t;
     flex-direction: column;
     gap: 32px;
   }
+  /* ~70 characters per line: comfortable reading instead of 150+ across the full width. */
   .desc {
+    max-width: 68ch;
     margin: 0;
     font-size: 18px;
     color: var(--grey-dark);
+    text-wrap: pretty;
   }
   .tiles {
     display: grid;
@@ -131,6 +147,35 @@ const { skills } = Astro.props.t;
     font-weight: 600;
     font-size: 15px;
     line-height: 1.25;
+  }
+  /* Also used: secondary tools as compact chips, clearly a step below the daily tiles. */
+  .also {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 16px;
+  }
+  .also-label {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chips li {
+    padding: 5px 10px;
+    border: 1px solid var(--line-2);
+    background: var(--white);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--grey-dark);
   }
   .tile:hover {
     background: var(--black);

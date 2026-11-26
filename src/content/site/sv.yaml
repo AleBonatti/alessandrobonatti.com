@@ -39,51 +39,36 @@ about:
 
 skills:
     title: Kompetenser
+    alsoLabel: "Även"
     groups:
         - letter: A
-          tags: HTML · CSS · VUEJS
           title: Webbfrontend
-          description: De senaste åren har jag försökt fylla de luckor som skilde mig från att vara en komplett och självständig utvecklare, genom att fördjupa mina kunskaper inom frontendutveckling och Typescript, särskilt ==ramverken Vue.js och React tillsammans med Tailwind CSS==. Jag har även erfarenhet av SEO-frågor samt användbarhet och tillgänglighet.
+          description: De senaste åren har jag försökt fylla de luckor som skilde mig från att vara en komplett och självständig utvecklare, genom att fördjupa mina kunskaper inom frontendutveckling och TypeScript, särskilt ==ramverken Vue.js och React tillsammans med Tailwind CSS==. Jag har även erfarenhet av SEO-frågor samt användbarhet och tillgänglighet.
           tiles:
               - { name: React, icon: react }
-              - { name: VueJs, icon: vue }
-              - { name: Typescript, icon: typescript }
-              - { name: TailwindCss, icon: tailwind }
-              - { name: CSS3, icon: css3 }
-              - { name: Next.js, icon: next }
-              - { name: Figma, icon: figma }
-              - { name: S.E.O.-optimering, icon: seo }
-              - { name: Tillgänglighet och användbarhet, icon: accessibility }
+              - { name: Vue.js, icon: vue }
+              - { name: TypeScript, icon: typescript }
+              - { name: Tailwind CSS, icon: tailwind }
+          also: [CSS3, Next.js, Figma, S.E.O.-optimering, Tillgänglighet och användbarhet]
         - letter: B
-          tags: POSTGRESQL · NODE · TYPESCRIPT
           title: Webbbackend — API
-          description: Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**Typescript** och **Node.js**==, med ==Fastify== för backendutveckling. Jag har också lång erfarenhet av ==PHP/Laravel-ekosystemet==, som under flera år har varit en viktig del av min yrkesresa.
+          description: Med åren har jag blivit passionerad för moderna ramverk och tekniker, och i dag ligger mitt huvudsakliga fokus på ==**TypeScript** och **Node.js**==. Jag har också lång erfarenhet av ==PHP/Laravel-ekosystemet==, som under flera år har varit en viktig del av min yrkesresa.
           tiles:
               - { name: Node.js, icon: node }
-              - { name: Typescript, icon: typescript }
-              - { name: DrizzleOrm, icon: drizzle }
-              - { name: Postgresql, icon: postgresql }
-              - { name: Php, icon: php }
+              - { name: TypeScript, icon: typescript }
+              - { name: PostgreSQL, icon: postgresql }
               - { name: Laravel, icon: laravel }
-              - { name: MySQL, icon: mysql }
-              - { name: Vercel, icon: vercel }
-              - { name: Python, icon: python }
-              - { name: MS SQL Server, icon: mssql }
+          also: [Fastify, PHP, Drizzle ORM, MySQL, Vercel, Python, MS SQL Server]
         - letter: C
-          tags: WEBB · SERVER · DRIFT
           title: Server & verktyg
           description: Jag kan konfigurera en skalbar Linux-webbserver baserad på PHP och MySQL, inklusive ett backupsystem. Jag har utvecklat och använt olika typer av API:er. Jag kan arbeta självständigt, men är också van vid att arbeta i team av olika storlek.
           tiles:
-              - { name: CI / CD, icon: cicd }
-              - { name: Linuxserver, icon: linux }
-              - { name: Digital Ocean, icon: digitalocean }
-              - { name: GitKraken, icon: gitkraken }
-              - { name: GitHub, icon: github }
               - { name: Claude AI, icon: claude }
-              - { name: Aws, icon: aws }
+              - { name: CI/CD, icon: cicd }
+              - { name: GitHub, icon: github }
+              - { name: Linuxserver, icon: linux }
               - { name: Docker, icon: docker }
-              - { name: NPM, icon: npm }
-              - { name: VS Code, icon: vscode }
+          also: [AWS, DigitalOcean, GitKraken, npm, VS Code]
 
 languages:
     title: Språk
@@ -138,33 +123,33 @@ showcase:
         - context: SOM UTVECKLARE PÅ METHLAB
           name: parmafluid.com
           url: https://parmafluid.com
-          description: Företagswebbplats. Skräddarsydd katalogstruktur, dataimport från en gammal MsSql-databas, nyhetsarkiv, eget CMS, innehållshantering på 5 språk, integration med extern nyhetsbrevstjänst.
+          description: Företagswebbplats. Skräddarsydd katalogstruktur, dataimport från en gammal MS SQL Server-databas, nyhetsarkiv, eget CMS, innehållshantering på 5 språk, integration med extern nyhetsbrevstjänst.
           role: Backendutveckling — Server- och driftsättningshantering
-          tech: [Laravel, Mysql]
+          tech: [Laravel, MySQL]
         - context: EGET ARBETE
           name: SeppiaCms
           url: /seppia-cms/
           description: Mitt eget CMS, utvecklat under många år och anpassningsbart till de flesta behov.
           role: UI/UX — Fullstackutveckling — Server- och driftsättningshantering — löpande underhåll
-          tech: [VueJs, TailwindCSS, Laravel, Mysql]
+          tech: [Vue.js, Tailwind CSS, Laravel, MySQL]
         - context: SOM ANSTÄLLD PÅ E-PROJECT
           name: pieffeci.com
           url: https://pieffeci.com
           description: Företagswebbplats. Skräddarsydd katalog; nyheter, certifieringar och formulär; eget CMS.
           role: Backendutveckling — Server- och driftsättningshantering
-          tech: [Laravel, MySql]
+          tech: [Laravel, MySQL]
         - context: SOM UTVECKLARE PÅ METHLAB
           name: lamamita.it
           url: https://lamamita.com
           description: E-handel för B2C och B2B. Onlinebetalningar, skräddarsydd produktsökning och filter, eget CMS, stöd för 4 språk. Skräddarsydd integration av externa dataflöden. Egna system för kundlojalitet och önskelistor.
           role: Backendutveckling — Server- och driftsättningshantering
-          tech: [Laravel, MySql, Betalintegration med Stripe och Paypal]
+          tech: [Laravel, MySQL, Betalintegration med Stripe och PayPal]
         - context: SOM ANSTÄLLD PÅ E-PROJECT
           name: crm.termest.it
           url: https://crm.termest.it
           description: Affärssystem för B2C. API-koppling till företagets webbplatser. Hantering av ordrar och kunder.
           role: Fullstackutveckling — Server- och driftsättningshantering
-          tech: [Tailwind CSS, VueJs, Laravel, MySql, Datahantering via API]
+          tech: [Tailwind CSS, Vue.js, Laravel, MySQL, Datahantering via API]
 
 education:
     title: Utbildning

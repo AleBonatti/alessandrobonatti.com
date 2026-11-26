@@ -26,10 +26,12 @@ const skillTile = z.strictObject({
 
 const skillGroup = z.strictObject({
   letter: z.string().length(1),
-  tags: text,
   title: text,
   description: text,
-  tiles: z.array(skillTile).min(1),
+  /** Daily tools: large tiles. The first three also form the group's tagline. */
+  tiles: z.array(skillTile).min(3),
+  /** Secondary tools ("Also"): compact chips, names only. */
+  also: z.array(text),
 });
 
 const languageCard = z.strictObject({
@@ -111,6 +113,8 @@ export const siteSchema = z.strictObject({
   }),
   skills: z.strictObject({
     title: sectionTitle,
+    /** Label before the "also used" chips. */
+    alsoLabel: text,
     groups: z.array(skillGroup).length(3),
   }),
   languages: z.strictObject({
