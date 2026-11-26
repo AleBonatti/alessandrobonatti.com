@@ -19,7 +19,7 @@ const { locale, t } = Astro.props;
   <div class="inner">
     <div class="rv text">
       <p class="mono kicker">
-        {t.hero.role}<span class="kicker-loc"> <span class="lower">{t.hero.basedIn}</span> {t.hero.location}</span>
+        {t.hero.role}<span class="kicker-loc"> <span class="lower">{t.hero.basedIn}</span> <span class="place">{t.hero.location}</span></span>
       </p>
       <h1>{profile.name.first}<br /><span class="serif-i last">{profile.name.last}</span></h1>
       <p class="summary">{t.hero.summary}</p>
@@ -86,6 +86,10 @@ const { locale, t } = Astro.props;
   }
   .lower {
     text-transform: none;
+  }
+  /* "MALMÖ — SWEDEN" stays on one line: the dash never starts a line on its own. */
+  .place {
+    white-space: nowrap;
   }
   h1 {
     margin: 0;
