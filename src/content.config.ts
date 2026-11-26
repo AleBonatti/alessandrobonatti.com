@@ -42,7 +42,9 @@ const languageCard = z.strictObject({
 });
 
 const job = z.strictObject({
+  /** For the current job just the start year: "— present" is added in each language. */
   years: text,
+  current: z.boolean().optional(),
   company: text,
   role: text,
   location: text,
@@ -64,7 +66,6 @@ const educationItem = z.strictObject({
   title: text,
   detail: text,
   location: text,
-  description: text,
 });
 
 const passion = z.strictObject({
@@ -111,7 +112,8 @@ export const siteSchema = z.strictObject({
     title: sectionTitle,
     lead: text,
     statement: text,
-    paragraphs: z.array(text).min(1),
+    /** One paragraph: the career story in a few concrete sentences. */
+    body: text,
   }),
   skills: z.strictObject({
     title: sectionTitle,
@@ -125,6 +127,8 @@ export const siteSchema = z.strictObject({
   }),
   experience: z.strictObject({
     title: sectionTitle,
+    /** "present" in "2025 — present", for the current job. */
+    present: text,
     jobs: z.array(job).min(1),
   }),
   showcase: z.strictObject({
@@ -136,6 +140,7 @@ export const siteSchema = z.strictObject({
   education: z.strictObject({
     title: sectionTitle,
     items: z.array(educationItem).min(1),
+    /** The self-taught story; `text` may use inline markup (==highlight==). */
     note: z.strictObject({ title: text, text: text }),
   }),
   passions: z.strictObject({

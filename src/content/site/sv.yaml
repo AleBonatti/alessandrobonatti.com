@@ -33,10 +33,7 @@ about:
     title: Om mig
     lead: Hej, jag heter Alessandro,
     statement: en fullstackutvecklare med ==över 25 års erfarenhet== inom branschen.
-    paragraphs:
-        - Jag började min karriär 1999 som anställd, en roll jag hade i 13 år, innan jag gick över till att frilansa och grundade min egen byrå, som jag framgångsrikt drev i ytterligare 13 år.
-        - Under den här resan har jag fått bred erfarenhet av webbutveckling, arbetat med många olika tekniker och tagit mig an projekt av varierande komplexitet. Min kompetens sträcker sig från frontend till backend, med starkt fokus på skalbara, underhållbara och högpresterande lösningar.
-        - Sedan jag flyttade till Malmö i oktober 2025 arbetar jag som ==konsult inom mjukvaruutveckling== och har fått värdefull erfarenhet av den svenska arbetsmiljön.
+    body: "Jag började 1999 som anställd och var 13 år senare med och grundade min egen webbyrå, som jag drev i ytterligare 13 år. I oktober 2025 flyttade jag till Malmö, där jag i dag arbetar som ==konsult inom mjukvaruutveckling==."
 
 skills:
     title: Kompetenser
@@ -44,7 +41,7 @@ skills:
     groups:
         - letter: A
           title: Webbfrontend
-          description: "Gränssnitt i ==React och Vue.js==, typade med TypeScript och stylade med Tailwind CSS, från Manatecas webbapp till Seppia CMS. Byggda med SEO, tillgänglighet och användbarhet i åtanke."
+          description: "Gränssnitt i ==React och Vue.js==, typade med TypeScript och stylade med Tailwind CSS, från Manatecas webbapp till SeppiaCms. Byggda med SEO, tillgänglighet och användbarhet i åtanke."
           tiles:
               - { name: React, icon: react }
               - { name: Vue.js, icon: vue }
@@ -82,8 +79,10 @@ languages:
 
 experience:
     title: Erfarenhet
+    present: nu
     jobs:
-        - years: 2025 — 2026
+        - years: "2025"
+          current: true
           company: Elva11
           role: Fullstackutvecklare
           location: Malmö, Sverige
@@ -161,15 +160,13 @@ education:
           title: Universitetsstudier i kommunikationsvetenskap
           detail: Ej avslutade — Università di Parma
           location: Parma, Italien
-          description: Min passion för den otroliga nya uppfinningen som kallades "internet" fick mig att ==utforska webbutveckling på egen hand==. Fascinerad av dess möjligheter började jag lära mig självständigt och lade grunden för min framtida karriär inom området.
         - years: 1991 — 1996
           title: Tekniskt gymnasium med inriktning på datavetenskap
           detail: Examen med betyg 51/60 — I.T.I.S. Berenini
           location: Fidenza, Italien
-          description: Under den här perioden lärde jag mig grunderna i programmering, i en tid då internet ännu inte var utbrett. Den erfarenheten gav mig en stark grund i problemlösning och algoritmiskt tänkande, som jag senare har tillämpat inom webbutveckling.
     note:
         title: "Självlärd webbutvecklare:"
-        text: i början av 2000-talet ingick webbutveckling ännu inte i skolornas läroplaner. Därför gav jag mig in på en resa av självstudier och lärde mig tekniker och programmeringsspråk på egen hand för att hänga med i branschens utveckling.
+        text: "internet kom medan jag studerade på universitetet, och jag började ==lära mig webbutveckling på egen hand==. I början av 2000-talet lärdes det ännu inte ut i skolorna, så jag fortsatte att studera nya tekniker självständigt."
 
 passions:
     title: Passioner

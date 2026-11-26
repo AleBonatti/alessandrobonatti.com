@@ -17,9 +17,7 @@ const { about } = Astro.props.t;
     <p class="rv statement">
       <span class="serif-i">{about.lead}</span><br /><Fragment set:html={inline(about.statement)} />
     </p>
-    <div class="rv cols">
-      {about.paragraphs.map((p) => <Rich text={p} />)}
-    </div>
+    <Rich text={about.body} class="rv body" />
   </div>
 </section>
 
@@ -32,21 +30,12 @@ const { about } = Astro.props.t;
     letter-spacing: -0.03em;
     font-weight: 700;
   }
-  /* One paragraph per column: 3 side by side, stacked on small screens (no 2+1 orphan in between).
-     A grid instead of CSS multi-column: columns start aligned at the top, no paragraph split mid-way. */
-  .cols {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.1em 56px;
-    color: var(--grey-dark);
-    font-size: 18px;
-  }
-  .cols :global(p) {
+  /* One paragraph at a comfortable reading width (~65 characters per line). */
+  .body {
+    max-width: 56ch;
     margin: 0;
-  }
-  @media (max-width: 860px) {
-    .cols {
-      grid-template-columns: 1fr;
-    }
+    color: var(--grey-dark);
+    font-size: clamp(18px, 1.6vw, 21px);
+    line-height: 1.55;
   }
 </style>

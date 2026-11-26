@@ -17,7 +17,7 @@ const { experience } = Astro.props.t;
       {
         experience.jobs.map((job) => (
           <div class="job rv">
-            <div class="yr mono">{job.years}</div>
+            <div class="yr mono">{job.current ? `${job.years} — ${experience.present}` : job.years}</div>
             <div class="who">
               <h3>
                 {job.company}

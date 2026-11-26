@@ -1,6 +1,6 @@
 ---
 import SectionHeader from '../SectionHeader.astro';
-import Rich from '../Rich.astro';
+import { inline } from '../../lib/inline';
 import type { SiteContent } from '../../content.config';
 
 interface Props {
@@ -22,12 +22,16 @@ const { education } = Astro.props.t;
             <div class="detail">
               {e.detail} <span aria-hidden="true">|</span> {e.location}
             </div>
-            <Rich text={e.description} class="desc" />
           </div>
         ))
       }
     </div>
-    <p class="rv note"><span class="serif-i note-title">{education.note.title}</span> {education.note.text}</p>
+    {/* Full-width rule above, text capped at a reading width below it. */}
+    <div class="rv note">
+      <p class="note-text">
+        <span class="serif-i note-title">{education.note.title}</span> <Fragment set:html={inline(education.note.text)} />
+      </p>
+    </div>
   </div>
 </section>
 
@@ -55,16 +59,15 @@ const { education } = Astro.props.t;
   }
   .detail {
     color: var(--grey-mid);
-    margin-bottom: 18px;
-  }
-  .desc {
-    margin: 0;
-    color: var(--grey-dark);
   }
   .note {
-    margin: 72px 0 0;
+    margin: 64px 0 0;
     padding-top: 32px;
     border-top: 1px solid var(--black);
+  }
+  .note-text {
+    max-width: 60ch;
+    margin: 0;
     font-size: 20px;
     line-height: 1.5;
   }

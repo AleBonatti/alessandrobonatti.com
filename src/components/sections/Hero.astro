@@ -87,7 +87,8 @@ const { locale, t } = Astro.props;
   .lower {
     text-transform: none;
   }
-  /* "MALMÖ — SWEDEN" stays on one line: the dash never starts a line on its own. */
+  /* "based in" and "MALMÖ — SWEDEN" each stay on one line ("con | base a" used to split). */
+  .lower,
   .place {
     white-space: nowrap;
   }
