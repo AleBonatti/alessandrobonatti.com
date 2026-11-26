@@ -141,8 +141,7 @@ showcase:
           role: Backend Development — Server and deploy management
           tech: [Laravel, MySQL]
         - context: AS METHLAB DEVELOPER
-          name: lamamita.it
-          # NOTE: the live site links lamamita.it to lamamita.com: kept as-is, please verify.
+          name: lamamita.com
           url: https://lamamita.com
           description: Company B2C and B2B e-commerce. Online payments, custom product search and filters, ad hoc CMS, 4 languages support. Third party data flow ad hoc integration. Custom user fidelity and wishlist systems.
           role: Backend Development — Server and deploy management

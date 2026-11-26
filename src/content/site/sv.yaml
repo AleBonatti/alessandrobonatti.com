@@ -140,7 +140,7 @@ showcase:
           role: Backendutveckling — Server- och driftsättningshantering
           tech: [Laravel, MySQL]
         - context: SOM UTVECKLARE PÅ METHLAB
-          name: lamamita.it
+          name: lamamita.com
           url: https://lamamita.com
           description: E-handel för B2C och B2B. Onlinebetalningar, skräddarsydd produktsökning och filter, eget CMS, stöd för 4 språk. Skräddarsydd integration av externa dataflöden. Egna system för kundlojalitet och önskelistor.
           role: Backendutveckling — Server- och driftsättningshantering

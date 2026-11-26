@@ -13,7 +13,7 @@ const { about } = Astro.props.t;
 
 <section id="about">
   <div class="container">
-    <SectionHeader num="01" title={about.title} />
+    <SectionHeader title={about.title} />
     <p class="rv statement">
       <span class="serif-i">{about.lead}</span><br /><Fragment set:html={inline(about.statement)} />
     </p>

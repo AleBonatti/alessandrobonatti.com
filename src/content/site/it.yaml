@@ -140,7 +140,7 @@ showcase:
           role: Sviluppo Backend — Gestione server e deploy
           tech: [Laravel, MySQL]
         - context: COME SVILUPPATORE METHLAB
-          name: lamamita.it
+          name: lamamita.com
           url: https://lamamita.com
           description: E-commerce aziendale B2C e B2B. Pagamenti online, ricerca e filtri prodotto personalizzati, CMS ad hoc, supporto per 4 lingue. Integrazione ad hoc di flussi dati di terze parti. Sistemi personalizzati di fidelizzazione e wishlist.
           role: Sviluppo Backend — Gestione server e deploy

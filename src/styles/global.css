@@ -65,9 +65,18 @@ h3,
 p {
   overflow-wrap: break-word;
 }
-:lang(sv) :is(h1, h2, h3),
-:lang(it) :is(h1, h2, h3) {
+/* Only Swedish needs it (long compounds): in Italian it split words like "Scien-ze". */
+:lang(sv) :is(h1, h2, h3) {
   hyphens: auto;
+}
+/* Nicer line breaks: balanced headings, no single word left alone on a paragraph's last line. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
 }
 
 /* ---------- Keyboard focus ----------
@@ -177,6 +186,10 @@ section[id] {
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 4px 4px 0 var(--black);
+}
+/* On black sections a black shadow is invisible: use the yellow accent instead. */
+.dark .btn:hover {
+  box-shadow: 4px 4px 0 var(--yellow);
 }
 .btn-y:hover {
   background: var(--white) !important;
