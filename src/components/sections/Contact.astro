@@ -15,7 +15,8 @@ const PHONE_TAG: Record<(typeof profile.phones)[number]['country'], string> = { 
 
 <section id="contact">
   <div class="container">
-    <p class="mono rv kicker">{contact.title}</p>
+    {/* A real heading (same look): screen-reader users can jump to the contact section. */}
+    <h2 class="mono rv kicker">{contact.title}</h2>
     <div class="mail-box">
       <a class="foot-mail rv" href={`mailto:${profile.email}`}>{profile.email}</a>
     </div>
@@ -55,6 +56,7 @@ const PHONE_TAG: Record<(typeof profile.phones)[number]['country'], string> = { 
   }
   .kicker {
     margin: 0 0 20px;
+    font-weight: 400;
     color: var(--yellow);
     font-size: 14px;
     letter-spacing: 0.16em;

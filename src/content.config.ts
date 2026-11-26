@@ -28,8 +28,8 @@ const skillGroup = z.strictObject({
   letter: z.string().length(1),
   title: text,
   description: text,
-  /** Daily tools: large tiles. The first three also form the group's tagline. */
-  tiles: z.array(skillTile).min(3),
+  /** Main tools: large tiles with icons. */
+  tiles: z.array(skillTile).min(1),
   /** Secondary tools ("Also"): compact chips, names only. */
   also: z.array(text),
 });
