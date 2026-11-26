@@ -1,19 +1,24 @@
 ---
-/** Square social buttons (LinkedIn, GitHub, WhatsApp, Telegram). 52px in the hero, 48px in Say hej!. */
+/** Square social buttons (LinkedIn, GitHub, WhatsApp, Telegram). 52px in the hero, 48px in Say hej!.
+ *  `only` limits them to some ids: the hero shows just the professional profiles. */
 import Icon from './Icon.astro';
 import { profile } from '../data/profile';
 
+type SocialId = (typeof profile.social)[number]['id'];
+
 interface Props {
   size: 'lg' | 'md';
+  only?: readonly SocialId[];
 }
 
-const { size } = Astro.props;
+const { size, only } = Astro.props;
+const links = only ? profile.social.filter((s) => only.includes(s.id)) : profile.social;
 const iconSize = size === 'lg' ? 20 : 18;
 ---
 
 <div class="socials">
   {
-    profile.social.map((s) => (
+    links.map((s) => (
       <a class:list={['soc', `soc--${size}`]} href={s.url} aria-label={s.label} target="_blank" rel="noopener">
         <Icon name={s.id} size={iconSize} />
       </a>

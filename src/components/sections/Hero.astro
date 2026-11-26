@@ -30,7 +30,11 @@ const { locale, t } = Astro.props;
           <span class="cv-short">{t.hero.cvButtonShort}</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
         </a>
-        <SocialLinks size="lg" />
+        {/* The second exit, equal to the CV: jumps to Contact, where every channel is listed
+            (a mailto: link would silently do nothing on devices without a mail app). */}
+        <a class="btn hej" href="#contact">{t.nav.contact}</a>
+        {/* Profiles only; messaging (WhatsApp, Telegram) lives in Contact with email and phones. */}
+        <SocialLinks size="lg" only={['linkedin', 'github']} />
       </div>
     </div>
     <div class="rv photo">
@@ -122,6 +126,25 @@ const { locale, t } = Astro.props;
     font-size: 15px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+  /* Outlined twin of the CV button: same size and type, white outline on black. */
+  .hej {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 26px;
+    box-sizing: border-box;
+    border: 1px solid var(--white);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hej:hover {
+    background: var(--white);
+    color: var(--black);
   }
   /* The long label needs ~400px of button: below 520px it would wrap, so phones get the short one. */
   .cv-short {
