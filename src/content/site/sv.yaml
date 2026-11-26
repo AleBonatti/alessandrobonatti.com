@@ -23,6 +23,7 @@ hero:
     role: Fullstackutvecklare
     basedIn: baserad i
     location: Malmö — Sverige
+    summary: "Över 25 år av att bygga webbprodukter från början till slut: frontend, backend, API:er, betalningar och servrar. Öppen för konsultuppdrag och fasta tjänster."
     cvButton: Ladda ner CV
     cvButtonShort: Ladda ner CV
     portraitAlt: Alessandro Bonatti
@@ -103,7 +104,7 @@ experience:
           company: e-Project
           role: Fullstackutvecklare
           location: Parma, Italien
-          description: Trött på det tuffa frilanslivet i Italien bestämde jag mig för att gå tillbaka till ==heltidsprogrammering==. De nya möjligheterna som AI för med sig har blivit mitt största intresse.
+          description: Efter flera år med min egen byrå valde jag att återigen fokusera helt på ==utveckling==, tillbaka på e-Project. De nya möjligheterna som AI för med sig blev mitt största intresse.
         - years: 2011 — 2023
           company: Methlab
           role: Delägare och medgrundare

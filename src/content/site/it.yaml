@@ -23,6 +23,7 @@ hero:
     role: Full Stack Developer
     basedIn: con base a
     location: Malmö — Svezia
+    summary: "Oltre 25 anni a creare prodotti web dall’inizio alla fine: front end, back end, API, pagamenti e server. Disponibile per consulenze e posizioni a tempo indeterminato."
     cvButton: Scarica il Curriculum Vitae
     cvButtonShort: Scarica il CV
     portraitAlt: Alessandro Bonatti
@@ -103,7 +104,7 @@ experience:
           company: e-Project
           role: Full stack developer
           location: Parma, Italia
-          description: Stanco della dura vita da freelance in Italia, ho deciso di tornare alla ==programmazione a tempo pieno==. Le nuove possibilità offerte dall’AI sono diventate il mio interesse principale.
+          description: Dopo anni alla guida della mia agenzia, ho scelto di tornare a dedicarmi pienamente allo ==sviluppo==, di nuovo in e-Project. Le nuove possibilità offerte dall’AI sono diventate il mio interesse principale.
         - years: 2011 — 2023
           company: Methlab
           role: Socio e co-fondatore

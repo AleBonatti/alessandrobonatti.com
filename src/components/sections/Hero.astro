@@ -22,6 +22,7 @@ const { locale, t } = Astro.props;
         {t.hero.role}<span class="kicker-loc"> <span class="lower">{t.hero.basedIn}</span> {t.hero.location}</span>
       </p>
       <h1>{profile.name.first}<br /><span class="serif-i last">{profile.name.last}</span></h1>
+      <p class="summary">{t.hero.summary}</p>
       <div class="actions">
         <a class="btn btn-y cv" href={cvPdfPath(locale)} download>
           {/* Two labels, one shown at a time: display:none also hides the other from screen readers. */}
@@ -92,12 +93,21 @@ const { locale, t } = Astro.props;
   .last {
     letter-spacing: -0.02em;
   }
+  /* Seniority, scope and availability: readable at a glance without competing with the name. */
+  .summary {
+    max-width: 34em;
+    margin: 28px 0 0;
+    color: var(--grey-on-dark);
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
   .actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 16px;
-    margin-top: 48px;
+    margin-top: 40px;
   }
   .cv {
     display: inline-flex;

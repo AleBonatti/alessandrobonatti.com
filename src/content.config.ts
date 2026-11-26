@@ -95,6 +95,8 @@ export const siteSchema = z.strictObject({
     role: text,
     basedIn: text,
     location: text,
+    /** One line under the name: seniority, scope and availability. */
+    summary: text,
     /** Hero CV button on wide screens. */
     cvButton: text,
     /** Hero CV button on phones, and the accessible name of the floating CV button. */
