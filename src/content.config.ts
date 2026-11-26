@@ -26,10 +26,12 @@ const skillTile = z.strictObject({
 
 const skillGroup = z.strictObject({
   letter: z.string().length(1),
-  tags: text,
   title: text,
   description: text,
-  tiles: z.array(skillTile).min(1),
+  /** Daily tools: large tiles. The first three also form the group's tagline. */
+  tiles: z.array(skillTile).min(3),
+  /** Secondary tools ("Also"): compact chips, names only. */
+  also: z.array(text),
 });
 
 const languageCard = z.strictObject({
@@ -81,6 +83,8 @@ export const siteSchema = z.strictObject({
     menu: text,
     /** Accessible name of the floating "back to top" button. */
     toTop: text,
+    /** Skip link, the first Tab stop of the page. */
+    skip: text,
     about: text,
     skills: text,
     experience: text,
@@ -95,6 +99,8 @@ export const siteSchema = z.strictObject({
     role: text,
     basedIn: text,
     location: text,
+    /** One line under the name: seniority, scope and availability. */
+    summary: text,
     /** Hero CV button on wide screens. */
     cvButton: text,
     /** Hero CV button on phones, and the accessible name of the floating CV button. */
@@ -109,6 +115,8 @@ export const siteSchema = z.strictObject({
   }),
   skills: z.strictObject({
     title: sectionTitle,
+    /** Label before the "also used" chips. */
+    alsoLabel: text,
     groups: z.array(skillGroup).length(3),
   }),
   languages: z.strictObject({
