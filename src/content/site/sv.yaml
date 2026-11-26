@@ -81,8 +81,8 @@ experience:
     title: Erfarenhet
     present: nu
     jobs:
-        - years: "2025"
-          current: true
+        - years: "2025 - 2026"
+          current: false
           company: Elva11
           role: Fullstackutvecklare
           location: Malmö, Sverige
