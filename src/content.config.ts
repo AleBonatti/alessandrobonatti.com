@@ -83,6 +83,8 @@ export const siteSchema = z.strictObject({
     menu: text,
     /** Accessible name of the floating "back to top" button. */
     toTop: text,
+    /** Skip link, the first Tab stop of the page. */
+    skip: text,
     about: text,
     skills: text,
     experience: text,

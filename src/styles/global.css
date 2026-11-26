@@ -70,6 +70,53 @@ p {
   hyphens: auto;
 }
 
+/* ---------- Keyboard focus ----------
+   :focus-visible only shows for keyboard (and similar) navigation, never on mouse clicks.
+   One rule for the whole site; the colour flips to yellow on the black sections, where the
+   browser's default thin blue ring was hard to see. Components with their own ring (the
+   floating buttons) override it. */
+:root {
+  --focus: var(--black);
+}
+.dark,
+#contact,
+footer {
+  --focus: var(--yellow);
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* "Skip to content": the first stop for keyboard users, so they don't tab through the whole
+   header first. Off-screen until focused, then shown top left above everything. */
+.skip {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--black);
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translateY(-200%);
+}
+.skip:focus-visible {
+  transform: none;
+  outline-color: var(--yellow);
+}
+.skip:hover {
+  color: var(--yellow);
+}
+/* The skip link's target only receives focus to move the Tab starting point: no ring around it. */
+#main:focus {
+  outline: none;
+}
+
 /* Anchor targets stop below the sticky header. */
 section[id] {
   scroll-margin-top: var(--header-h);

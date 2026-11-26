@@ -38,9 +38,10 @@ const { locale } = Astro.props;
 const t = await getSiteContent(locale);
 ---
 
-<BaseLayout locale={locale} title={t.meta.title} description={t.meta.description} detectLanguage>
+<BaseLayout locale={locale} title={t.meta.title} description={t.meta.description} detectLanguage skipLabel={t.nav.skip}>
   <Header locale={locale} t={t} />
-  <main>
+  {/* tabindex="-1": the skip link can move keyboard focus here, not just scroll. */}
+  <main id="main" tabindex="-1">
     <Hero locale={locale} t={t} />
     <About t={t} />
     <Skills t={t} />

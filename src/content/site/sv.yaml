@@ -9,6 +9,7 @@ nav:
     label: Sektioner
     menu: Meny
     toTop: Till toppen
+    skip: Hoppa till innehållet
     about: Om mig
     skills: Kompetenser
     experience: Erfarenhet
