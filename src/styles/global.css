@@ -27,8 +27,12 @@
   /* --font-sans / --font-serif / --font-mono are defined by Astro's <Font> component. */
 }
 
-html {
-  scroll-behavior: smooth;
+/* Smooth in-page scrolling, except for visitors who asked their system to reduce motion:
+   they jump straight to the section (a long full-page slide is exactly what that setting avoids). */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

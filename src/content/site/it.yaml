@@ -110,7 +110,7 @@ experience:
 
 showcase:
     title: Progetti
-    intro: Ho sviluppato decine di progetti, dai siti web ai gestionali aziendali, dalle API ai sistemi di pagamento. Ogni progetto è stato un’occasione per affrontare nuove sfide e affinare le mie competenze. Sarei felice di ==mostrarli in un incontro dedicato==, presentando le soluzioni adottate, il mio approccio allo sviluppo e le tecnologie utilizzate per raggiungere gli obiettivi richiesti.
+    intro: "Decine di progetti, dai siti web ai gestionali, dalle API ai sistemi di pagamento: sarei felice di mostrarli in un ==incontro dedicato==."
     labels:
         project: PROGETTO
         role: IL MIO RUOLO
